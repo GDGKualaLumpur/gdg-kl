@@ -1,0 +1,8 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/gdg-app.html",
+  "fragments": [
+    "src/gdg-about.html",
+    "src/gdg-contact.html"
+  ]
+}
