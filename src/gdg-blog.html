@@ -1,0 +1,239 @@
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/marked-element/marked-element.html">
+<dom-module id="gdg-blog">
+    <template>
+        <style>
+        :host {
+            display: block;
+        }
+        
+        section {
+            padding: 40px 80px 80px 80px;
+        }
+        
+        .header {
+            background: var(--app-header-color);
+            color: white;
+        }
+        
+        .header .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .blog {
+            background: white;
+        }
+        
+        .blog {
+            background: #fafafa;
+        }
+        
+        .blog .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .markdown-html p {
+            line-height: 2em;
+            font-weight: 300;
+        }
+        
+        .markdown-html {
+            line-height: 2em;
+            font-weight: 300;
+        }
+        
+        .markdown-html pre {
+            padding: .5em;
+            overflow-x: auto;
+            background: white;
+            font-weight: 400;
+        }
+        
+        .article {
+            margin: 0 auto;
+            max-width: 800px;
+            margin-bottom: 60px;
+        }
+        
+        .article a {
+            color: #00838F;
+            font-weight: 400;
+            font-size: 24px;
+            text-decoration: none;
+        }
+        
+        .article .detail {
+            margin-top: 16px;
+            display: block;
+        }
+        
+        .article .detail img {
+            height: 25px;
+            vertical-align: middle;
+        }
+        
+        .article .detail p {
+            display: inline;
+            font-size: 16px;
+            font-weight: 300;
+        }
+        
+        .article .detail .publisher {
+            color: #006064;
+            font-weight: 400;
+        }
+        
+        @media screen and (max-width:840px) {
+            section {
+                padding: 40px 24px;
+            }
+            .article a {
+                font-size: 20px;
+            }
+            .markdown-html img {
+                width: 95%;
+                height: auto;
+            }
+        }
+        </style>
+        <iron-ajax id="ajax" auto handle-as="json" on-response="ajaxResponse"></iron-ajax>
+        <template is="dom-if" if="{{!showPost}}">
+            <section class="header">
+                <div class="container">
+                    <h2>Blog</h2>
+                    <p>Official blog of Google Developer Group (GDG) Kuala Lumpur</p>
+                </div>
+            </section>
+            <section class="blog">
+                <template is="dom-repeat" items="{{list}}" id="list">
+                    <div class="article">
+                        <a href="/blog/[[dashcase(item.title)]]">[[item.title]]</a>
+                        <div class="detail">
+                            <img src="/images/gdg.png">
+                            <p class="publisher">GDG Kuala Lumpur , </p>
+                            <p> [[timestamp(item.published)]]</p>
+                        </div>
+                    </div>
+                </template>
+            </section>
+        </template>
+        <template is="dom-if" if="{{showPost}}">
+            <section class="header">
+                <div class="container">
+                    <h2>[[post.title]]</h2>
+                    <p>[[timestamp(post.published, post.author.displayName)]]</p>
+                </div>
+            </section>
+            <section class="blog">
+                <div class="content">
+                    <marked-element markdown="[[post.content]]">
+                        <div class="markdown-html"></div>
+                    </marked-element>
+                </div>
+            </section>
+        </template>
+    </template>
+    <script>
+    Polymer({
+        is: 'gdg-blog',
+
+        properties: {
+            showPost: {
+                type: Boolean
+            },
+            postid: {
+                type: String,
+                notify: true,
+                observer: '_postIdChanged'
+            },
+            list: {
+                type: Array,
+                notify: true,
+
+            },
+            nextPageToken: {
+                type: String
+            },
+            apiKey: {
+                type: String,
+                value: "AIzaSyDvmMxa5XU5VomJIE0Au-lgYt6QQuZ3Mwc"
+            }
+
+        },
+
+        _postIdChanged: function() {
+            this.post = [];
+            if (this.postid) {
+                this.$.ajax.url = "https://www.googleapis.com/blogger/v3/blogs/3213900/posts/search";
+                this.$.ajax.params = {
+                    "key": this.apiKey,
+                    "q": this.postid
+                };
+                this.showPost = true;
+
+            } else {
+                this.list = [];
+                this.$.ajax.url = "https://www.googleapis.com/blogger/v2/blogs/3213900/posts";
+                this.$.ajax.params = {
+                    "key": this.apiKey
+                };
+                this.showPost = false;
+            }
+        },
+
+        ready: function() {
+            this._postIdChanged();
+        },
+
+        dashcase: function(text){
+        	return text.replace(/\s+/g, '-').toLowerCase();
+        },
+
+        timestamp: function(unix_timestamp, displayName) {
+            if (unix_timestamp) {
+                MyDate = new Date(unix_timestamp);
+                var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                if (this.postid) {
+                    return 'Posted ' + ('0' + MyDate.getDate()).slice(-2) + ' ' + monthNames[MyDate.getMonth()] + ' ' + MyDate.getFullYear() + '  by '+ displayName;
+                } else {
+                    return ('0' + MyDate.getDate()).slice(-2) + ' ' + monthNames[MyDate.getMonth()] + ' ' + MyDate.getFullYear()
+                }
+
+            }
+
+        },
+
+        ajaxResponse: function(event) {
+            var response = event.detail.response;
+            if (this.postid) {
+            	if (response.items != undefined) {
+                    console.log(response.items[0].author.displayName)
+            		this.post = response.items[0];
+                    document.title = response.items[0].title.charAt(0).toUpperCase() + response.items[0].title.slice(1) + " - GDGKL";
+            	}
+            } else {
+                if (this.list && this.nextPageToken) {
+                    for (var i = 0; i < response.items.length; i++) {
+                        this.push('list', response.items[i])
+                    }
+                } else {
+                    this.list = response.items;
+                }
+                if (response.nextPageToken) {
+                    this.nextPageToken = response.nextPageToken;
+                    //this.nextpage();
+                }
+            }
+        },
+
+        nextpage: function() {
+            this.$.ajax.params = {
+                "key": "AIzaSyDvmMxa5XU5VomJIE0Au-lgYt6QQuZ3Mwc",
+                "pageToken": this.nextPageToken
+            }
+        },
+    });
+    </script>
+</dom-module>

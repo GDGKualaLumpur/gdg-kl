@@ -1,15 +1,123 @@
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <dom-module id="gdg-about">
-	<template>
-		<style>
-			:host {
-				display: block;
-			}
-		</style>
-		
-	</template>
-	<script>
-		Polymer({
-			is: 'gdg-about'
-		});
-	</script>
+    <template>
+        <style>
+        :host {
+            display: block;
+        }
+        
+        .header {
+            background: var(--app-header-color);
+            padding: 40px 80px;
+            color: white;
+        }
+        
+        .header .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .about {
+            @apply(--layout-horizontal);
+            @apply(--layout-wrap);
+            @apply(--layout-start);
+            max-width: 950px;
+            margin: 80px auto;
+        }
+        
+        .member {
+            margin: 16px 8px;
+            background-color: white;
+            width: 300px;
+            border-radius: 2px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .member .content {
+            padding: 0 16px 24px 16px;
+        }
+        
+        .member a {
+            text-decoration: none;
+        }
+        
+        .member .content iron-icon {
+            margin-top: 8px;
+            margin-right: 6px;
+            color: #212121;
+        }
+        
+        .member iron-image {
+            height: auto;
+            height: auto;
+            --iron-image-width: 100%;
+        }
+        
+        @media screen and (max-width: 1299px) {
+            .about {
+                max-width: 632px;
+            }
+        }
+        
+        @media screen and (max-width:840px) {
+            .header {
+                padding: 40px 20px;
+            }
+        }
+        
+        @media screen and (max-width:640px) {
+            .header {
+                padding: 40px 20px;
+            }
+            .about {
+                margin: auto;
+            }
+            .member {
+                margin: 16px;
+                width: 100%;
+            }
+        }
+        </style>
+        <section class="header">
+            <div class="container">
+                <h2>About</h2>
+                <p>Google Developer Group (GDG) Kuala Lumpur is an independent developer & user group that discusses and shares experiences in developing applications and solutions using Google Developer technologies like Android, Google Maps, Google App Engine and beyond.</p>
+                <p>We organize meetups, hackathons, talks & workshops; introducing both developers and non-developers to the Google Developer platform together.</p>
+                <p>GDG Kuala Lumpur as the name suggests, is based in Kuala Lumpur. The warm capital of Malaysia today has a booming startup community and a developer-friendly environment, and we call it home.</p>
+            </div>
+        </section>
+        <section class="about">
+            <iron-ajax auto url="/data/members.json" handle-as="json" last-response="{{members}}"></iron-ajax>
+            <template is="dom-repeat" items="{{members}}">
+                <div class="member">
+                    <iron-image src="[[item.image]]"></iron-image>
+                    <div class="content">
+                        <h3>[[item.name]]</h3>
+                        <p>[[item.position]]</p>
+                        <template is="dom-if" if="[[item.twitter]]">
+                            <a href="[[item.twitter]]">
+                                <iron-icon icon="twitter"></iron-icon>
+                            </a>
+                        </template>
+                        <template is="dom-if" if="[[item.facebook]]">
+                            <a href="[[item.facebook]]">
+                                <iron-icon icon="facebook"></iron-icon>
+                            </a>
+                        </template>
+                        <template is="dom-if" if="[[item.gplus]]">
+                            <a href="[[item.gplus]]">
+                                <iron-icon icon="gplus"></iron-icon>
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </section>
+    </template>
+    <script>
+    Polymer({
+        is: 'gdg-about'
+    });
+    </script>
 </dom-module>

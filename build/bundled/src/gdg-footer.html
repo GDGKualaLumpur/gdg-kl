@@ -1,0 +1,52 @@
+<html><head><meta charset="UTF-8"><link rel="import" href="gdg-app.html"></head><body><dom-module id="gdg-footer">
+    <template>
+        <style>:host{display:block;}.social{height:64px;background:#006064;text-align:center;line-height:64px;}.social .item{margin:0 20px;text-decoration:none;color:white;font-weight:500;font-size:14px;}.social .item span{margin-left:4px;}.social .item iron-icon{vertical-align:middle;}.gDev{height:100%;background:#263238;color:white;}.gDev .flex{@apply (--layout-horizontal);height:100%;}.gDev .flex div{padding:24px;@apply (--layout-flex);}.gDev .flex .google{background:#37424b;justify-content:flex-start;align-items:stretch;align-content:stretch;}.gDev .flex .google img{max-width:260px;margin-bottom:6px;}.gDev .flex a{margin:8px 2px;font-size:14px;display:block;color:#cfd8dc;text-decoration:none;}.gDev .flex .title{margin:0 0 24px 0;}.gDev .flex a:hover{color:white;}.credit{color:white;background:#455a64;padding:24px 24px;font-size:13px;}.credit p{margin:0;color:white;}@media screen and (max-width:840px){.social .item span{display:none;}.gDev{height:100%;}.gDev .flex{display:block;}}</style>
+        <footer class="social">
+            <a class="item" href="">
+                <iron-icon icon="facebook"></iron-icon>
+                <span>Facebook</span>
+            </a>
+            <a class="item" href="">
+                <iron-icon icon="facebook"></iron-icon>
+                <span>Facebook Group</span>
+            </a>
+            <a class="item" href="">
+                <iron-icon icon="twitter"></iron-icon>
+                <span>Twitter</span>
+            </a>
+            <a class="item" href="">
+                <iron-icon icon="gplus"></iron-icon>
+                <span>Google +</span>
+            </a>
+        </footer>
+        <footer class="gDev">
+            <div class="flex">
+                <div>
+                    <p class="title">GDG Kuala Lumpur</p>
+                    <a href="https://developers.google.com/groups/chapter/106366117871957399001/">Join the Community</a>
+                    <a href="https://developers.google.com/">Code of Conduct</a>
+                    <a href="">Catch a bug?</a>
+                </div>
+                <div>
+                    <p class="title">For partners</p>
+                    <a href="https://developers.google.com/">Partnership Proposition</a>
+                    <a href="">Media Kit</a>
+                </div>
+                <div></div>
+                <div class="google">
+                    <img src="https://developers.google.com/_static/23ecca3dc9/images/redesign-14/logo-color-knockout.svg">
+                    <a href="https://developers.google.com/">Website</a>
+                    <a href="https://developers.googleblog.com/">Blog</a>
+                    <a href="https://plus.google.com/+GoogleDevelopers">Google +</a>
+                    <a href="https://twitter.com/googledevs">Twitter</a>
+                    <a href="https://www.youtube.com/user/GoogleDevelopers">YouTube</a>
+                </div>
+            </div>
+        </footer>
+        <footer class="credit">
+            <p>© 2016 GDG Kuala Lumpur / Designed and Created by Henry Lim / GitHub</p>
+        </footer>
+    </template>
+    <script>Polymer({is:"gdg-footer"});</script>
+</dom-module>
+</body></html>

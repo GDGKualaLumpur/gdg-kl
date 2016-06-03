@@ -1,0 +1,66 @@
+<html><head><link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="gdg-icons.html">
+<link rel="import" href="gdg-footer.html">
+</head><body><dom-module id="gdg-app">
+    <template>
+        <style>:host{display:block;--app-primary-color:#fff;--app-secondary-color:black;--app-header-color:#0097a7;}app-header{background-color:var(--app-primary-color);color:#000;}app-header paper-icon-button{--paper-icon-button-ink-color:#000;}app-toolbar a{text-decoration:none;font-size:20px;color:black;padding-left:8px;}app-toolbar a *{vertical-align:middle;}app-toolbar img{height:36px;}.drawer-list{margin:0 20px;}.drawer-list a{outline:none;display:block;line-height:40px;text-decoration:none;color:var(--app-secondary-color);border-bottom:1px solid #eaedef;padding:4px 4px 4px 30px;}.drawer-list a.iron-selected{color:black;font-weight:bold;border-left:4px solid #009688;padding:4px 4px 4px 26px;}.drawer-list a.subroute{padding-left:32px;}app-toolbar paper-icon-button{display:none;}nav{height:64px;padding:0 8px;display:block;}.sections-tabs a{display:inline-block;padding:24px 8px 0 8px;height:100%;box-sizing:border-box;font-size:16px;color:#6b6b6b;border-bottom:4px solid #fff;-webkit-transition:border 100ms ease-out;-moz-transition:border 100ms ease-out;-o-transition:border 100ms ease-out;transition:border 100ms ease-out;}.sections-tabs a.iron-selected{border-bottom:4px solid #dc4a3d;}@media screen and (max-width:840px){app-toolbar paper-icon-button{display:block;}nav{display:none;}}</style>
+        <app-location route="{{route}}"></app-location>
+        <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+        <app-route route="{{subroute}}" pattern="/:id" data="{{subrouteData}}"></app-route>
+        <app-drawer-layout force-narrow="">
+            
+            <app-drawer swipe-open="">
+                <app-toolbar><img src="/images/gdg.png" class="app-logo"></app-toolbar>
+                <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+                    <a href="/home/" name="home" drawer-toggle="">Home</a>
+                    <a href="/event/" name="event" drawer-toggle="">Event</a>
+                    <a href="/blog/" name="blog" drawer-toggle="">Blog</a>
+                    <a href="/about/" name="about" drawer-toggle="">About</a>
+                    <a href="/contact/" name="contact" drawer-toggle="">Contact</a>
+                </iron-selector>
+            </app-drawer>
+            
+            <app-header-layout>
+                <app-header reveals="" shadow="">
+                    <app-toolbar>
+                        <paper-icon-button icon="menu" drawer-toggle=""></paper-icon-button>
+                        <a href="/home/">
+                            <img src="/images/gdg.png" class="app-logo">
+                            <span>GDG Kuala Lumpur</span>
+                        </a>
+                        <div title=""></div>
+                        <nav>
+                            <iron-selector selected="[[page]]" attr-for-selected="name" class="sections-tabs">
+                                <a href="/event/" name="event">Event</a>
+                                <a href="/blog/" name="blog">Blog</a>
+                                <a href="/about/" name="about">About</a>
+                                <a href="/contact/" name="contact">Contact</a>
+                            </iron-selector>
+                        </nav>
+                    </app-toolbar>
+                </app-header>
+                <iron-pages role="main" selected="[[page]]" attr-for-selected="name">
+                    <gdg-home name="home"></gdg-home>
+                    <gdg-blog name="blog" postid="{{subrouteData.id}}" id="blog"></gdg-blog>
+                    <gdg-about name="about"></gdg-about>
+                    <gdg-contact name="contact"></gdg-contact>
+                    <gdg-event name="event"></gdg-event>
+                </iron-pages>
+                <gdg-footer></gdg-footer>
+            </app-header-layout>
+        </app-drawer-layout>
+    </template>
+    <script>Polymer({is:"gdg-app",properties:{page:{type:String,reflectToAttribute:!0,observer:"_pageChanged"}},observers:["_routePageChanged(routeData.page)"],_routePageChanged:function(e){Polymer.AppLayout.scroll(0,0),this.page=e||"home",document.title=this.page.charAt(0).toUpperCase()+this.page.slice(1)+" - GDGKL"},_pageChanged:function(e){this.importHref(this.resolveUrl("gdg-"+e+".html"),null,null,!0)}});</script>
+</dom-module>
+</body></html>

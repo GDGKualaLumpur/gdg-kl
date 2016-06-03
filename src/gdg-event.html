@@ -1,15 +1,141 @@
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/marked-element/marked-element.html">
 <dom-module id="gdg-event">
-	<template>
-		<style>
-			:host {
-				display: block;
-			}
-		</style>
-		
-	</template>
-	<script>
-		Polymer({
-			is: 'gdg-event'
-		});
-	</script>
+    <template>
+        <style>
+        :host {
+            display: block;
+            background: white
+        }
+        
+        .header {
+            background: var(--app-header-color);
+            padding: 40px 80px;
+            color: white;
+        }
+        
+        .header .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .event {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .event h3 {
+            margin-top: 24px;
+            font-weight: 400;
+        }
+        
+        .event .detail {
+            margin-bottom: 40px;
+        }
+        
+        .event .detail a {
+            color: #00838F;
+            font-size: 24px;
+            text-decoration: none;
+        }
+        
+        .event .past .detail a {
+            color: #616161;
+        }
+        
+        .event .detail .date {
+            margin: 6px 0;
+        }
+        
+        .event .detail .info {
+            font-weight: 300;
+        }
+        
+        @media screen and (max-width:840px) {
+            .header {
+                padding: 40px 20px;
+            }
+        }
+        </style>
+        <iron-ajax auto url="/data/events.json" handle-as="json" on-response="_eventData"></iron-ajax>
+        <section class="header">
+            <div class="container">
+                <h2>Event</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan pretium efficitur. Nam tincidunt molestie urna id malesuada. </p>
+            </div>
+        </section>
+        <section class="event">
+            <template is="dom-if" if="{{upcomingDom}}">
+                <div class="upcoming">
+                    <h3>Upcoming Event</h3>
+                    <template is="dom-repeat" items="{{upcoming}}">
+                        <div class="detail">
+                            <a>[[item.title]]</a>
+                            <p class="date">[[item.date]], [[item.location]]</p>
+                            <marked-element class="info" markdown="[[item.description]]"></marked-element>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template is="dom-if" if="{{pastDom}}">
+                <div class="past">
+                    <h3>Past Event</h3>
+                    <template is="dom-repeat" items="{{past}}">
+                        <div class="detail">
+                            <a>[[item.title]]</a>
+                            <p class="date">[[item.date]], [[item.location]]</p>
+                            <marked-element class="info" markdown="[[item.description]]"></marked-element>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </section>
+    </template>
+    <script>
+    Polymer({
+        is: 'gdg-event',
+
+        properties: {
+            upcoming: {
+                type: Array,
+                notify: true,
+                value: []
+            },
+            past: {
+                type: Array,
+                notify: true,
+                value: []
+            },
+            upcomingDom: {
+                type: Boolean,
+                value: false
+            },
+            pastDom: {
+                type: Boolean,
+                value: false
+            }            
+        },
+
+        _eventData: function(event) {
+            var data = event.detail.response.reverse();
+            for (var i = 0; i < data.length; i++) {
+                var test = new Date(data[i].start)
+                data[i].date = test.toLocaleString('en-us', { day: "numeric", month: "short" , year: "numeric"});
+                data[i].description = data[i].description.replace(/<(?:.|\n)*?>/gm, '').replace(/\r?\n|\r/g, '');
+                if (data[i].temporalRelation == "past") {
+                    this.push('past', data[i])
+                } else {
+                    this.push('upcoming', data[i])
+                }
+            }
+            if(this.upcoming.length){
+                this.upcomingDom = true;
+            }
+            if(this.past.length){
+                this.pastDom = true;
+            }
+        },
+    });
+    </script>
 </dom-module>
