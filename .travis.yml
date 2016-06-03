@@ -16,7 +16,7 @@ before_script:
 before_install:
 - openssl aes-256-cbc -K $encrypted_e27920ef8557_key -iv $encrypted_e27920ef8557_iv
   -in client-secret.json.enc -out client-secret.json -d
-- gcloud auth activate-service-account --key-file client-secret.json
+- gcloud auth activate-service-account gdg-kl@appspot.gserviceaccount.com --key-file client-secret.json
 install:
 - gcloud config set project gdg-kl
 - gcloud preview app deploy
