@@ -13,3 +13,10 @@ before_script:
 - npm install -g bower polylint web-component-tester polymer-cli
 - bower install
 script: polymer build
+deploy:
+  provider: gae
+  keyfile: client-secret.json
+  project: gdg-kl
+before_install:
+- openssl aes-256-cbc -K $encrypted_e27920ef8557_key -iv $encrypted_e27920ef8557_iv
+  -in client-secret.json.enc -out client-secret.json -d
