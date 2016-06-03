@@ -14,7 +14,9 @@ before_script:
 - bower install
 - polymer build
 before_install:
-- openssl aes-256-cbc -K $encrypted_e27920ef8557_key -iv $encrypted_e27920ef8557_iv -in client-secret.json.enc -out client-secret.json -d
+- openssl aes-256-cbc -K $encrypted_e27920ef8557_key -iv $encrypted_e27920ef8557_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
+- tar -xzf credentials.tar.gz
+- mkdir -p lib
 - gcloud auth activate-service-account --key-file client-secret.json
 install:
 - gcloud config set project gdg-kl
