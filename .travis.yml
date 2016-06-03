@@ -10,9 +10,9 @@ addons:
     packages:
     - google-chrome-stable
 before_script:
-- npm install -g bower polylint web-component-tester polymer-cli
+- npm install -g bower polymer-cli
 - bower install
-script: polymer build
+- polymer build
 deploy:
   provider: gae
   keyfile: client-secret.json
