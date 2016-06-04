@@ -19,6 +19,7 @@ before_install:
 - mkdir -p lib
 deploy:
   provider: gae
+  skip_cleanup: true
   keyfile: client-secret.json
   project: gdg-kl
   version: 1
