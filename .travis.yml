@@ -21,3 +21,4 @@ deploy:
   provider: gae
   keyfile: client-secret.json
   project: gdg-kl
+  version: 1
