@@ -2,6 +2,8 @@ runtime: python27
 api_version: 1
 threadsafe: yes
 
+default_expiration: "7d"
+
 handlers:
 - url: /bower_components
   static_dir: build/bundled/bower_components
@@ -14,6 +16,8 @@ handlers:
 - url: /src
   static_dir: build/bundled/src
   secure: always
+  http_headers:
+    Vary: Accept-Encoding  
 
 - url: /data
   static_dir: build/bundled/data
@@ -33,3 +37,6 @@ handlers:
   static_files: build/bundled/index.html
   upload: build/bundled/index.html
   secure: always    
+  http_headers:
+    Vary: Accept-Encoding  
+  
