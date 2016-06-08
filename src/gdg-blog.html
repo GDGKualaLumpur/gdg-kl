@@ -5,32 +5,17 @@
         <style>
         :host {
             display: block;
-        }
-        
-        section {
-            padding: 40px 80px 80px 80px;
+            background-color: #eee;
         }
         
         .header {
+            padding: 40px 80px;
             background: var(--app-header-color);
             color: white;
         }
         
         .header .container {
             max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .blog {
-            background: white;
-        }
-        
-        .blog {
-            background: #fafafa;
-        }
-        
-        .blog .content {
-            max-width: 800px;
             margin: 0 auto;
         }
         
@@ -51,16 +36,40 @@
             font-weight: 400;
         }
         
+        .blog {
+            padding: 48px 0;
+            margin: 0px auto;
+            max-width: 900px;
+        }
+
+        .blog .content{
+            padding: 24px 36px;
+            border-radius: 2px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+            background-color: white;
+        }
+        
         .article {
-            margin: 0 auto;
-            max-width: 800px;
-            margin-bottom: 60px;
+            display: block;
+            border-radius: 2px;
+            border-bottom: 1px solid #E0E0E0;
+            padding: 24px 36px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+            background: white;
+            text-decoration: none;
+        }
+
+        .article h3{
+            margin: 0;
+            color: #00838F;
+            font-weight: 400;
+            font-size: 20px;
         }
         
         .article a {
             color: #00838F;
             font-weight: 400;
-            font-size: 24px;
+            font-size: 20px;
             text-decoration: none;
         }
         
@@ -75,6 +84,7 @@
         }
         
         .article .detail p {
+            color: #00838F;
             display: inline;
             font-size: 16px;
             font-weight: 300;
@@ -86,11 +96,34 @@
         }
         
         @media screen and (max-width:840px) {
+            .header{
+                padding: 40px 20px;
+            }
             section {
                 padding: 40px 24px;
             }
+            .blog{
+                padding: 0;
+            }
+            .blog .content{
+                padding: 24px;
+            }
+            .article{
+                padding: 18px 24px;
+                box-shadow: none;
+                border-bottom: none;
+            }
             .article a {
                 font-size: 20px;
+            }
+            .article h3{
+                font-size: 18px;
+            }
+            .article .detail{
+                margin-top: 8px;
+            }
+            .markdown-html p{
+                line-height: 1.8em;
             }
             .markdown-html img {
                 width: 95%;
@@ -108,14 +141,14 @@
             </section>
             <section class="blog">
                 <template is="dom-repeat" items="{{list}}" id="list">
-                    <div class="article">
-                        <a href="/blog/[[dashcase(item.title)]]">[[item.title]]</a>
+                    <a href="/blog/[[dashcase(item.title)]]" class="article">
+                        <h3>[[item.title]]</h3>
                         <div class="detail">
                             <img src="/images/gdg.png">
                             <p class="publisher">GDG Kuala Lumpur , </p>
                             <p> [[timestamp(item.published)]]</p>
                         </div>
-                    </div>
+                    </a>
                 </template>
             </section>
         </template>
@@ -187,8 +220,8 @@
             this._postIdChanged();
         },
 
-        dashcase: function(text){
-        	return text.replace(/\s+/g, '-').toLowerCase();
+        dashcase: function(text) {
+            return text.replace(/\s+/g, '-').toLowerCase();
         },
 
         timestamp: function(unix_timestamp, displayName) {
@@ -196,7 +229,7 @@
                 MyDate = new Date(unix_timestamp);
                 var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 if (this.postid) {
-                    return 'Posted ' + ('0' + MyDate.getDate()).slice(-2) + ' ' + monthNames[MyDate.getMonth()] + ' ' + MyDate.getFullYear() + '  by '+ displayName;
+                    return 'Posted ' + ('0' + MyDate.getDate()).slice(-2) + ' ' + monthNames[MyDate.getMonth()] + ' ' + MyDate.getFullYear() + '  by ' + displayName;
                 } else {
                     return ('0' + MyDate.getDate()).slice(-2) + ' ' + monthNames[MyDate.getMonth()] + ' ' + MyDate.getFullYear()
                 }
@@ -208,11 +241,11 @@
         ajaxResponse: function(event) {
             var response = event.detail.response;
             if (this.postid) {
-            	if (response.items != undefined) {
+                if (response.items != undefined) {
                     console.log(response.items[0].author.displayName)
-            		this.post = response.items[0];
+                    this.post = response.items[0];
                     document.title = response.items[0].title.charAt(0).toUpperCase() + response.items[0].title.slice(1) + " - GDGKL";
-            	}
+                }
             } else {
                 if (this.list && this.nextPageToken) {
                     for (var i = 0; i < response.items.length; i++) {

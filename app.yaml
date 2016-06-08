@@ -5,6 +5,11 @@ threadsafe: yes
 default_expiration: "7d"
 
 handlers:
+
+
+- url: /cron/.*
+  script: home.app
+
 - url: /bower_components
   static_dir: build/bundled/bower_components
   secure: always
