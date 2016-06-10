@@ -48,9 +48,6 @@
             margin: 6px 0;
         }
         
-        .event .detail .info {
-            font-weight: 300;
-        }
         
         @media screen and (max-width:840px) {
             .header {
@@ -58,7 +55,7 @@
             }
         }
         </style>
-        <iron-ajax auto url="/data/events.json" handle-as="json" on-response="_eventData"></iron-ajax>
+        <iron-ajax auto url="https://gdg-kl.firebaseio.com/data.json" handle-as="json" on-response="_eventData"></iron-ajax>
         <section class="header">
             <div class="container">
                 <h2>Event</h2>
@@ -72,8 +69,7 @@
                     <template is="dom-repeat" items="{{upcoming}}">
                         <div class="detail">
                             <a>[[item.title]]</a>
-                            <p class="date">[[item.date]], [[item.location]]</p>
-                            <marked-element class="info" markdown="[[item.description]]"></marked-element>
+                            <p class="date">[[item.start]], [[item.location]]</p>
                         </div>
                     </template>
                 </div>
@@ -84,8 +80,7 @@
                     <template is="dom-repeat" items="{{past}}">
                         <div class="detail">
                             <a>[[item.title]]</a>
-                            <p class="date">[[item.date]], [[item.location]]</p>
-                            <marked-element class="info" markdown="[[item.description]]"></marked-element>
+                            <p class="date">[[item.start]], [[item.location]]</p>
                         </div>
                     </template>
                 </div>
@@ -118,17 +113,21 @@
         },
 
         _eventData: function(event) {
-            var data = event.detail.response.reverse();
-            for (var i = 0; i < data.length; i++) {
-                var test = new Date(data[i].start)
-                data[i].date = test.toLocaleString('en-us', { day: "numeric", month: "short" , year: "numeric"});
-                data[i].description = data[i].description.replace(/<(?:.|\n)*?>/gm, '').replace(/\r?\n|\r/g, '');
-                if (data[i].temporalRelation == "past") {
-                    this.push('past', data[i])
-                } else {
-                    this.push('upcoming', data[i])
-                }
-            }
+            data = event.detail.response;
+            console.log(data.future);
+            this.past = data.past.reverse();
+            this.upcoming = data.future.reverse();
+            // var data = event.detail.response.reverse();
+            // for (var i = 0; i < data.length; i++) {
+            //     var test = new Date(data[i].start)
+            //     data[i].date = test.toLocaleString('en-us', { day: "numeric", month: "short" , year: "numeric"});
+            //     data[i].description = data[i].description.replace(/<(?:.|\n)*?>/gm, '').replace(/\r?\n|\r/g, '');
+            //     if (data[i].temporalRelation == "past") {
+            //         this.push('past', data[i])
+            //     } else {
+            //         this.push('upcoming', data[i])
+            //     }
+            // }
             if(this.upcoming.length){
                 this.upcomingDom = true;
             }

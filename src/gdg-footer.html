@@ -1,5 +1,8 @@
 <link rel="import" href="gdg-icons.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu-light.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
 <dom-module id="gdg-footer">
     <template>
         <style>
@@ -37,6 +40,8 @@
         }
         
         .gDev .flex {
+            margin: 0 auto;
+            max-width: 960px;
             @apply(--layout-horizontal);
             height: 100%;
         }
@@ -77,13 +82,39 @@
         .credit {
             color: white;
             background: #455a64;
-            padding: 24px 24px;
+            padding: 0px 24px 16px 24px;
             font-size: 13px;
         }
         
+        .credit .container {
+            @apply(--layout-horizontal);
+            @apply(--layout-center);
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        
         .credit p {
+            @apply(--layout-flex);
+            @apply(--layout-center);
             margin: 0;
+            padding-top: 24px;
             color: white;
+        }
+        
+        .credit paper-dropdown-menu-light {
+            @apply(--layout-flex);
+            @apply(--layout-center);
+            max-width: 200px;
+        }
+        
+        .credit paper-menu-button {
+            .paper-menu-button {
+                padding: 0;
+            }
+        }
+        
+        .credit paper-item {
+            width: 100px;
         }
         
         @media screen and (max-width:840px) {
@@ -120,33 +151,62 @@
             <div class="flex">
                 <div>
                     <p class="title">GDG Kuala Lumpur</p>
-                    <a href="https://developers.google.com/groups/chapter/106366117871957399001/">Join the Community</a>
-                    <a href="https://developers.google.com/">Code of Conduct</a>
-                    <a href="">Catch a bug?</a>
+                    <a href="https://developers.google.com/groups/chapter/106366117871957399001/">{{localize('jtc')}}</a>
+                    <a href="https://developers.google.com/">{{localize('coc')}}</a>
+                    <a href="">{{localize('cab')}}</a>
                 </div>
                 <div>
-                    <p class="title">For partners</p>
-                    <a href="https://developers.google.com/">Partnership Proposition</a>
-                    <a href="">Media Kit</a>
+                    <p class="title">{{localize('partner')}}</p>
+                    <a href="https://developers.google.com/">{{localize('proposition')}}</a>
+                    <a href="">{{localize('media')}}</a>
                 </div>
                 <div></div>
                 <div class="google">
                     <img src="https://developers.google.com/_static/23ecca3dc9/images/redesign-14/logo-color-knockout.svg">
-                    <a href="https://developers.google.com/">Website</a>
-                    <a href="https://developers.googleblog.com/">Blog</a>
+                    <a href="https://developers.google.com/">{{localize('website')}}</a>
+                    <a href="https://developers.googleblog.com/">{{localize('blog')}}</a>
                     <a href="https://plus.google.com/+GoogleDevelopers">Google +</a>
-                    <a href="https://twitter.com/googledevs">Twitter</a>
+                    <a href="https://twitter.com/googledevs">{{localize('twitter')}}</a>
                     <a href="https://www.youtube.com/user/GoogleDevelopers">YouTube</a>
                 </div>
             </div>
         </footer>
         <footer class="credit">
-            <p>© 2016 GDG Kuala Lumpur / Designed and Created by Henry Lim / GitHub</p>
+            <div class="container">
+                <p>© 2016 GDG Kuala Lumpur / Designed and Created by Henry Lim / GitHub</p>
+                <paper-dropdown-menu-light vertical-align="bottom" horizontal-align="right">
+                    <paper-listbox class="dropdown-content" attr-for-selected="value" selected="{{language}}">
+                        <paper-item value="en">English</paper-item>
+                        <paper-item value="my">Malay</paper-item>
+                        <paper-item value="zh-cn">简体中文</paper-item>
+                        <paper-item value="zh-tw">繁體中文</paper-item>
+                    </paper-listbox>
+                </paper-dropdown-menu-light>
+            </div>
         </footer>
     </template>
     <script>
     Polymer({
-        is: 'gdg-footer'
+        is: 'gdg-footer',
+        behaviors: [
+            Polymer.AppLocalizeBehavior
+        ],
+        properties: {
+            language: {
+                type: String,
+                value: "en",
+                observer: "_langChanged"
+            }
+        },
+
+        _langChanged: function() {
+            this.fire('langChanged', {
+                lang: this.language
+            })
+        },
+        attached: function() {
+            this.loadResources(this.resolveUrl('/data/locales.json'));
+        },
     });
     </script>
 </dom-module>

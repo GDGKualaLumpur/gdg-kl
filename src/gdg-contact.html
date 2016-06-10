@@ -66,71 +66,45 @@
         </style>
         <section class="header">
             <div class="container">
-                <h2>Contact</h2>
-                <p>Would you like to become a sponsor? Do you have general questions? </p>
+                <h2>{{localize('contact')}}</h2>
+                <p>{{localize('contactdesc')}}</p>
             </div>
         </section>
         <section class="contact">
             <div class="container">
-                <h3>Have questions? </h3>
-                <p>Fill out the form and one of our core team members will be in contact with you shortly. </p>
-                <paper-button raised>Contact Us</paper-button>   
-                <!--<div class="form">
-                    <div flex class="flex">
-                        <paper-input type="text" label="Name" name="entry.1050541850" id="entry_1050541850" required></paper-input>
-                        <paper-input type="email" label="Email" name="entry.985295895" id="entry_985295895" required></paper-input>
-                    </div>
-                    <paper-input type="text" label="Subject" name="entry.1662593154" id="entry_1662593154" required></paper-input>
-                    <paper-textarea value="{{textValue::input}}" type="text" label="Your Message" name="entry.2105275403" id="entry_2105275403" required></paper-textarea>
-                </div>
-                <paper-button on-tap="submitForm" raised>Submit</paper-button> -->
+                <h3>{{localize('havequestion')}}</h3>
+                <p>{{localize('fillform')}}</p>
+                <paper-button raised>{{localize('contactus')}}</paper-button>
             </div>
         </section>
         <section class="contact">
             <div class="container">
-                <h3>Want to sponsor Google Developer Group Kuala Lumpur?</h3>
-                <p>Please fill out the linked form and we will get in touch with you to set up your sponsorship. If you have any questions, feel free to email JT : <a href="">jt@gdg.my</a></p>
-                <paper-button raised>Media Kit</paper-button>
-                <paper-button raised>Sponsor Kit</paper-button>
+                <h3>{{localize('wantsponsor')}}</h3>
+                <p>{{localize('sponsorcontact')}}</p>
+                <paper-button raised>{{localize('media')}}</paper-button>
+                <paper-button raised>{{localize('proposition')}}</paper-button>
             </div>
         </section>
     </template>
     <script>
     Polymer({
         is: 'gdg-contact',
+        behaviors: [
+            Polymer.AppLocalizeBehavior
+        ],
         properties: {
             textValue: {
                 type: String,
                 value: '',
                 notify: true
+            },
+            language: {
+                type: String,
             }
         },
-        // submitForm: function() {
-        //     console.log("submit");
-
-        //     var gformUrl = 'https://docs.google.com/forms/d/1Y28gE75CLTTT-fWM3nCKt7OHbpzEPBENZ0LRzW1M6ts/formResponse';
-
-        //     var gformData = {
-        //         'entry.1050541850': this.$.entry_1050541850.value,
-        //         'entry.985295895': this.$.entry_985295895.value,
-        //         'entry.1662593154': this.$.entry_1662593154.value,
-        //         'entry.2105275403': this.$.entry_2105275403.value
-        //     };
-
-        //     console.log(gformData);
-        //     var xhr = new XMLHttpRequest();
-        //     xhr.open('POST', gformUrl, true);
-        //     xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded; charset=UTF-8');
-
-        //     var formData = '';
-        //     for (var key in gformData) {
-        //         formData += encodeURIComponent(key) + '=' + encodeURIComponent(gformData[key]) + '&';
-        //     }
-        //     xhr.onreadystatechange = function(){
-        //         console.log(xhr.status)
-        //     }
-        //     xhr.send(formData.substr(0, formData.length - 1));
-        // }
+        attached: function() {
+            this.loadResources(this.resolveUrl('/data/locales.json'));
+        },
     })
     </script>
 </dom-module>

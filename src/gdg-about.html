@@ -81,10 +81,8 @@
         </style>
         <section class="header">
             <div class="container">
-                <h2>About</h2>
-                <p>Google Developer Group (GDG) Kuala Lumpur is an independent developer & user group that discusses and shares experiences in developing applications and solutions using Google Developer technologies like Android, Google Maps, Google App Engine and beyond.</p>
-                <p>We organize meetups, hackathons, talks & workshops; introducing both developers and non-developers to the Google Developer platform together.</p>
-                <p>GDG Kuala Lumpur as the name suggests, is based in Kuala Lumpur. The warm capital of Malaysia today has a booming startup community and a developer-friendly environment, and we call it home.</p>
+                <h2>{{localize('about')}}</h2>
+                <p>{{localize('intro')}}</p>
             </div>
         </section>
         <section class="about">
@@ -117,7 +115,18 @@
     </template>
     <script>
     Polymer({
-        is: 'gdg-about'
+        is: 'gdg-about',
+        behaviors: [
+            Polymer.AppLocalizeBehavior
+        ],        
+        properties: {
+            language: {
+                type: String,
+            }
+        },
+        attached: function() {
+            this.loadResources(this.resolveUrl('/data/locales.json'));
+        },        
     });
     </script>
 </dom-module>

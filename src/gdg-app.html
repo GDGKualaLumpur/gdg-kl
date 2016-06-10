@@ -1,12 +1,3 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
@@ -18,7 +9,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-location/iron-location.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="gdg-icons.html">
 <link rel="import" href="gdg-footer.html">
 <dom-module id="gdg-app">
@@ -27,23 +20,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         :host {
             display: block;
             --app-primary-color: #fff;
-            --app-secondary-color: black;
+            --app-secondary-color: #000;
             --app-header-color: #0097a7;
+            font-family: 'Roboto', sans-serif;
         }
         
         app-header {
             background-color: var(--app-primary-color);
-            color: #000;
+            color: var(--app-secondary-color);
         }
         
         app-header paper-icon-button {
-            --paper-icon-button-ink-color: #000;
+            --paper-icon-button-ink-color: var(--app-secondary-color);
+        }
+        
+        app-toolbar {
+            max-width: 960px;
+            margin: 0 auto;
         }
         
         app-toolbar a {
             text-decoration: none;
             font-size: 20px;
-            color: black;
+            color: var(--app-secondary-color);
             padding-left: 8px;
         }
         
@@ -62,7 +61,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         .drawer-list a {
             outline: none;
             display: block;
-            /*padding: 0 16px;*/
             line-height: 40px;
             text-decoration: none;
             color: var(--app-secondary-color);
@@ -71,7 +69,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
         
         .drawer-list a.iron-selected {
-            color: black;
+            color: var(--app-secondary-color);
             font-weight: bold;
             border-left: 4px solid #009688;
             padding: 4px 4px 4px 26px;
@@ -108,6 +106,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         .sections-tabs a.iron-selected {
             border-bottom: 4px solid #dc4a3d;
         }
+        
         @media screen and (max-width:840px) {
             app-toolbar paper-icon-button {
                 display: block;
@@ -117,49 +116,48 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
         }
         </style>
+        <iron-location id="location"></iron-location>
         <app-location route="{{route}}"></app-location>
         <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
         <app-route route="{{subroute}}" pattern="/:id" data="{{subrouteData}}"></app-route>
         <app-drawer-layout force-narrow>
-            <!-- Drawer content -->
             <app-drawer swipe-open>
                 <app-toolbar><img src="/images/gdg.png" class="app-logo"></app-toolbar>
                 <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-                    <a href="/home/" name="home" drawer-toggle>Home</a>
-                    <a href="/event/" name="event" drawer-toggle>Event</a>
-                    <a href="/blog/" name="blog" drawer-toggle>Blog</a>
-                    <a href="/about/" name="about" drawer-toggle>About</a>
-                    <a href="/contact/" name="contact" drawer-toggle>Contact</a>
+                    <a href="/home/[[urlQuery]]" name="home" drawer-toggle>{{localize('home')}}</a>
+                    <a href="/event/[[urlQuery]]" name="event" drawer-toggle>{{localize('event')}}</a>
+                    <a href="/blog/[[urlQuery]]" name="blog" drawer-toggle>{{localize('blog')}}</a>
+                    <a href="/about/[[urlQuery]]" name="about" drawer-toggle>{{localize('about')}}</a>
+                    <a href="/contact/[[urlQuery]]" name="contact" drawer-toggle>{{localize('contact')}}</a>
                 </iron-selector>
             </app-drawer>
-            <!-- Main content -->
             <app-header-layout>
                 <app-header reveals shadow>
                     <app-toolbar>
                         <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-                        <a href="/home/">
+                        <a href="/home/[[urlQuery]]">
                             <img src="/images/gdg.png" class="app-logo">
                             <span>GDG Kuala Lumpur</span>
                         </a>
                         <div title></div>
                         <nav>
                             <iron-selector selected="[[page]]" attr-for-selected="name" class="sections-tabs">
-                                <a href="/event/" name="event">Event</a>
-                                <a href="/blog/" name="blog">Blog</a>
-                                <a href="/about/" name="about">About</a>
-                                <a href="/contact/" name="contact">Contact</a>
+                                <a href="/event/[[urlQuery]]" name="event">{{localize('event')}}</a>
+                                <a href="/blog/[[urlQuery]]" name="blog">{{localize('blog')}}</a>
+                                <a href="/about/[[urlQuery]]" name="about">{{localize('about')}}</a>
+                                <a href="/contact/[[urlQuery]]" name="contact">{{localize('contact')}}</a>
                             </iron-selector>
                         </nav>
                     </app-toolbar>
                 </app-header>
                 <iron-pages role="main" selected="[[page]]" attr-for-selected="name">
-                    <gdg-home name="home"></gdg-home>
-                    <gdg-blog name="blog" postid="{{subrouteData.id}}" id="blog"></gdg-blog>
-                    <gdg-about name="about"></gdg-about>
-                    <gdg-contact name="contact"></gdg-contact>
-                    <gdg-event name="event"></gdg-event>
+                    <gdg-home name="home" language="{{language}}"></gdg-home>
+                    <gdg-blog name="blog" language="{{language}}" postid="{{subrouteData.id}}" id="blog"></gdg-blog>
+                    <gdg-about name="about" language="{{language}}"></gdg-about>
+                    <gdg-contact name="contact" language="{{language}}"></gdg-contact>
+                    <gdg-event name="event" language="{{language}}"></gdg-event>
                 </iron-pages>
-                <gdg-footer></gdg-footer>
+                <gdg-footer language="{{language}}"></gdg-footer>
             </app-header-layout>
         </app-drawer-layout>
     </template>
@@ -175,22 +173,60 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 reflectToAttribute: true,
                 observer: '_pageChanged'
             },
+
+            language: {
+                type: String,
+                notify: true
+            },
+            urlQuery: {
+                type: String,
+                notify: true
+            }
         },
 
         observers: [
             '_routePageChanged(routeData.page)'
         ],
 
+        behaviors: [
+            Polymer.AppLocalizeBehavior
+        ],
+        attached: function() {
+            this.loadResources(this.resolveUrl('/data/locales.json'));
+        },
+        ready: function() {
+            this.addEventListener('langChanged', this.langChanged);
+            switch (this.$.location.query) {
+                case "hl=my":
+                    this.language = "my";
+                    break;
+                case "hl=zh-cn":
+                    this.language = "zh-cn";
+                    break;
+                case "hl=zh-tw":
+                    this.language = "zh-tw";
+                    break;
+                default:
+                    this.language = "en";
+            }
+        },
+
         _routePageChanged: function(page) {
-            Polymer.AppLayout.scroll(0,0);
+            console.log(this.urlQuery);
+            Polymer.AppLayout.scroll(0, 0);
             this.page = page || 'home';
             document.title = this.page.charAt(0).toUpperCase() + this.page.slice(1) + " - GDGKL";
         },
 
         _pageChanged: function(page) {
-            // load page import on demand.
             this.importHref(
                 this.resolveUrl('gdg-' + page + '.html'), null, null, true);
+        },
+
+        langChanged: function(event) {
+            this.$.location.query = "hl=" + event.detail.lang;
+            this.language = event.detail.lang;
+            this.urlQuery = "?" + this.$.location.query;
         }
     });
     </script>

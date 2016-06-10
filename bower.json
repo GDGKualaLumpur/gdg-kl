@@ -26,7 +26,11 @@
     "paper-card": "PolymerElements/paper-card#^1.1.1",
     "iron-jsonp-library": "PolymerElements/iron-jsonp-library#^1.0.4",
     "byutv-jsonp": "^1.2.0",
-    "iron-form": "PolymerElements/iron-form#^1.0.16"
+    "iron-form": "PolymerElements/iron-form#^1.0.16",
+    "app-localize-behavior": "PolymerElements/app-localize-behavior#^0.9.1",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^1.2.1",
+    "paper-listbox": "polymerelements/paper-listbox#^1.1.2",
+    "paper-item": "PolymerElements/paper-item#^1.2.1"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

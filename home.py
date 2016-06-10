@@ -23,14 +23,14 @@ class MainPage(webapp2.RequestHandler):
 		firebase_key = key
 
 		opener = urllib2.build_opener(urllib2.HTTPHandler)
-		url = 'https://gdg-kl.firebaseio.com/past.json?auth=' + firebase_key
+		url = 'https://gdg-kl.firebaseio.com/data/past.json?auth=' + firebase_key
 		request = urllib2.Request(url, data = json.dumps(past) )
 		request.add_header('content-type', 'application/json')
 		request.get_method = lambda: 'PUT'
 		url = opener.open(request)		
 
 		opener = urllib2.build_opener(urllib2.HTTPHandler)
-		url = 'https://gdg-kl.firebaseio.com/future.json?auth=' + firebase_key
+		url = 'https://gdg-kl.firebaseio.com/data/future.json?auth=' + firebase_key
 		request = urllib2.Request(url, data = json.dumps(future) )
 		request.add_header('content-type', 'application/json')
 		request.get_method = lambda: 'PUT'
@@ -38,7 +38,7 @@ class MainPage(webapp2.RequestHandler):
 
 		time = {'time': str(datetime.datetime.now())}
 		opener = urllib2.build_opener(urllib2.HTTPHandler)
-		url = 'https://gdg-kl.firebaseio.com/time.json?auth=' + firebase_key
+		url = 'https://gdg-kl.firebaseio.com/data/time.json?auth=' + firebase_key
 		request = urllib2.Request(url, data = json.dumps(time) )
 		request.add_header('content-type', 'application/json')
 		request.get_method = lambda: 'PUT'
