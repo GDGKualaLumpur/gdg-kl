@@ -11,36 +11,38 @@ handlers:
   script: home.app
 
 - url: /bower_components
-  static_dir: build/bundled/bower_components
+  static_dir: build/unbundled/bower_components
   secure: always
 
 - url: /images
-  static_dir: build/bundled/images
+  static_dir: build/unbundled/images
   secure: always
 
 - url: /src
-  static_dir: build/bundled/src
+  static_dir: build/unbundled/src
   secure: always
   http_headers:
     Vary: Accept-Encoding  
 
 - url: /data
-  static_dir: build/bundled/data
+  static_dir: build/unbundled/data
   secure: always  
+  http_headers:
+    Vary: Accept-Encoding    
 
 - url: /service-worker.js
-  static_files: build/bundled/service-worker.js
-  upload: build/bundled/service-worker.js
+  static_files: build/unbundled/service-worker.js
+  upload: build/unbundled/service-worker.js
   secure: always
 
 - url: /manifest.json
-  static_files: build/bundled/manifest.json
-  upload: build/bundled/manifest.json
+  static_files: build/unbundled/manifest.json
+  upload: build/unbundled/manifest.json
   secure: always
 
 - url: /.*
-  static_files: build/bundled/index.html
-  upload: build/bundled/index.html
+  static_files: build/unbundled/index.html
+  upload: build/unbundled/index.html
   secure: always    
   http_headers:
     Vary: Accept-Encoding  
