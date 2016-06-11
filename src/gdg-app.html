@@ -121,7 +121,7 @@
         <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
         <app-route route="{{subroute}}" pattern="/:id" data="{{subrouteData}}"></app-route>
         <app-drawer-layout force-narrow>
-            <app-drawer swipe-open>
+            <app-drawer>
                 <app-toolbar><img src="/images/gdg.png" class="app-logo"></app-toolbar>
                 <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
                     <a href="/home/[[urlQuery]]" name="home" drawer-toggle>{{localize('home')}}</a>
@@ -239,7 +239,6 @@
         },
 
         langChanged: function(event) {
-            console.log(event.detail.lang)
             this.$.location.query = "hl=" + event.detail.lang;
             this.language = event.detail.lang;
             this.urlQuery = "?" + this.$.location.query;

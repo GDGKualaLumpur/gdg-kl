@@ -62,16 +62,20 @@
         
         .article h3 {
             margin: 0;
-            color: #00838F;
+            color: #000;
             font-weight: 400;
             font-size: 20px;
         }
         
         .article a {
-            color: #00838F;
             font-weight: 400;
             font-size: 20px;
             text-decoration: none;
+        }
+        
+        .article .detail span {
+            display: block;
+            margin-top: 8px;
         }
         
         .article .detail {
@@ -85,15 +89,20 @@
         }
         
         .article .detail p {
-            color: #00838F;
+            color: #212121;
             display: inline;
             font-size: 16px;
             font-weight: 300;
+            margin-left: 4px;
         }
         
         .article .detail .publisher {
             color: #006064;
             font-weight: 400;
+        }
+        
+        .article .detail .cal {
+            color: #F44336;
         }
         
         .overlay {
@@ -117,15 +126,13 @@
                 padding: 40px 24px;
             }
             .blog {
-                padding: 0;
+                padding: 20px;
             }
             .blog .content {
                 padding: 24px;
             }
             .article {
                 padding: 18px 24px;
-                box-shadow: none;
-                border-bottom: none;
             }
             .article a {
                 font-size: 20px;
@@ -158,9 +165,14 @@
                     <a href="/blog/[[dashcase(item.title)]]" class="article">
                         <h3>[[item.title]]</h3>
                         <div class="detail">
-                            <img src="/images/gdg.png">
-                            <p class="publisher">GDG Kuala Lumpur , </p>
-                            <p> [[timestamp(item.published)]]</p>
+                            <span>
+                                <img src="/images/gdg.png">
+                                <p>Published by [[item.author.displayName]]</p>
+                            </span>
+                            <span>
+                                <iron-icon icon="cal" class="cal"></iron-icon>
+                                <p>Posted on [[timestamp(item.published)]]</p>
+                            </span>
                         </div>
                     </a>
                 </template>
@@ -177,7 +189,7 @@
                 </div>
             </section>
             <section class="blog">
-                <div class="content">
+                <div class="content" hidden$="[[isLoading]]">
                     <marked-element markdown="[[post.content]]">
                         <div class="markdown-html"></div>
                     </marked-element>

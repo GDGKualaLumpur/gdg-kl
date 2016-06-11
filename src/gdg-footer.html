@@ -105,6 +105,7 @@
             @apply(--layout-flex);
             @apply(--layout-center);
             max-width: 200px;
+            --paper-dropdown-menu-color: white;
         }
         
         .credit paper-menu-button {
@@ -126,6 +127,16 @@
             }
             .gDev .flex {
                 display: block;
+            }
+            .gDev .flex .empty{
+                padding: 0;
+            }
+            .credit .container{
+                flex-direction: column-reverse;
+                align-items: baseline;
+            }
+            .credit p {
+                padding-top: 4px;
             }
         }
         </style>
@@ -160,7 +171,7 @@
                     <a href="https://developers.google.com/">{{localize('proposition')}}</a>
                     <a href="">{{localize('media')}}</a>
                 </div>
-                <div></div>
+                <div class="empty"></div>
                 <div class="google">
                     <img src="https://developers.google.com/_static/23ecca3dc9/images/redesign-14/logo-color-knockout.svg">
                     <a href="https://developers.google.com/">{{localize('website')}}</a>
