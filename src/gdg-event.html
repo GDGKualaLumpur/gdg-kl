@@ -1,11 +1,11 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <dom-module id="gdg-event">
     <template>
         <style>
         :host {
             display: block;
-            background: white
         }
         
         .header {
@@ -24,13 +24,13 @@
             margin: 0 auto;
             padding: 40px 20px;
         }
-        
+/*        
         .event h3 {
             margin-top: 24px;
             font-weight: 400;
-        }
+        }*/
         
-        .event .detail {
+/*        .event .detail {
             margin-bottom: 40px;
         }
         
@@ -47,15 +47,102 @@
         .event .detail .date {
             margin: 6px 0;
         }
+        */
+        .overlay {
+            margin: 96px 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
         
+        .overlay[hidden] {
+            display: none;
+        }
+
+
+
+
+        .article {
+            display: block;
+            border-radius: 2px;
+            border-bottom: 1px solid #E0E0E0;
+            padding: 24px 36px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+            background: white;
+            text-decoration: none;
+        }
+        
+        .article h3 {
+            margin: 0;
+            color: #000;
+            font-weight: 400;
+            font-size: 20px;
+        }
+        
+        .article a {
+            color: #00838F;
+            font-weight: 400;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        
+        .article .detail {
+            margin-top: 16px;
+            display: block;
+        }
+        .article .detail iron-icon{
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        .article .detail .cal{
+            color: #F44336;
+        }
+
+        .article .detail .location{
+            color: #0f9d58;
+        }
+        
+        .article .detail span{
+            display: block;
+            margin-top: 8px;
+        }
+        .article .detail p {
+            color: #212121;
+            font-size: 16px;
+            font-weight: 300;
+            margin: 4px 0;
+            display: inline;
+        }
+        
+        .article .detail .publisher {
+            color: #006064;
+            font-weight: 400;
+        }
+
+
         
         @media screen and (max-width:840px) {
             .header {
                 padding: 40px 20px;
             }
+            .article {
+                padding: 18px 24px;
+            }
+            .article a {
+                font-size: 20px;
+            }
+            .article h3 {
+                font-size: 18px;
+            }
+            .article .detail {
+                margin-top: 8px;
+            }            
         }
         </style>
-        <iron-ajax auto url="https://gdg-kl.firebaseio.com/data.json" handle-as="json" on-response="_eventData"></iron-ajax>
+        <iron-ajax auto url="https://gdg-kl.firebaseio.com/data.json" handle-as="json" on-response="_eventData" loading="{{isLoading}}"></iron-ajax>
         <section class="header">
             <div class="container">
                 <h2>Event</h2>
@@ -63,14 +150,26 @@
             </div>
         </section>
         <section class="event">
+            <div class="overlay" hidden$="[[!isLoading]]">
+                <paper-spinner active="[[isLoading]]"></paper-spinner>
+            </div>
             <template is="dom-if" if="{{upcomingDom}}">
                 <div class="upcoming">
                     <h3>Upcoming Event</h3>
                     <template is="dom-repeat" items="{{upcoming}}">
-                        <div class="detail">
-                            <a>[[item.title]]</a>
-                            <p class="date">[[item.start]], [[item.location]]</p>
-                        </div>
+                        <a href="https://developers.google.com[[item.link]]" class="article">
+                            <h3>[[item.title]]</h3>
+                            <div class="detail">
+                                <span>
+                                    <iron-icon icon="cal" class="cal"></iron-icon>
+                                    <p>[[item.start]]</p>
+                                </span>
+                                <span>
+                                    <iron-icon icon="location" class="location"></iron-icon>
+                                    <p>[[item.location]]</p>
+                                </span>
+                            </div>
+                        </a>
                     </template>
                 </div>
             </template>
@@ -78,10 +177,19 @@
                 <div class="past">
                     <h3>Past Event</h3>
                     <template is="dom-repeat" items="{{past}}">
-                        <div class="detail">
-                            <a>[[item.title]]</a>
-                            <p class="date">[[item.start]], [[item.location]]</p>
-                        </div>
+                        <a href="https://developers.google.com[[item.link]]" class="article">
+                            <h3>[[item.title]]</h3>
+                            <div class="detail">
+                                <span>
+                                    <iron-icon icon="cal" class="cal"></iron-icon>
+                                    <p>[[item.start]]</p>
+                                </span>
+                                <span>
+                                    <iron-icon icon="location" class="location"></iron-icon>
+                                    <p>[[item.location]]</p>
+                                </span>
+                            </div>
+                        </a>                 
                     </template>
                 </div>
             </template>
@@ -109,7 +217,7 @@
             pastDom: {
                 type: Boolean,
                 value: false
-            }            
+            }
         },
 
         _eventData: function(event) {
@@ -128,10 +236,10 @@
             //         this.push('upcoming', data[i])
             //     }
             // }
-            if(this.upcoming.length){
+            if (this.upcoming.length) {
                 this.upcomingDom = true;
             }
-            if(this.past.length){
+            if (this.past.length) {
                 this.pastDom = true;
             }
         },

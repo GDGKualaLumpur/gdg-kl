@@ -194,25 +194,40 @@
         attached: function() {
             this.loadResources(this.resolveUrl('/data/locales.json'));
         },
+        getCookie: function(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length == 2) return parts.pop().split(";").shift();
+        },
         ready: function() {
             this.addEventListener('langChanged', this.langChanged);
-            switch (this.$.location.query) {
-                case "hl=my":
-                    this.language = "my";
-                    break;
-                case "hl=zh-cn":
-                    this.language = "zh-cn";
-                    break;
-                case "hl=zh-tw":
-                    this.language = "zh-tw";
-                    break;
-                default:
-                    this.language = "en";
+            query = this.$.location.query.split("&");
+            for (i = 0; i < query.length; i++) {
+                if (query[i].indexOf('hl=') > -1) {
+                    lang = query[i].replace("hl=", "");
+                    document.cookie = "lang=" + lang + ";path=/";
+                    switch (lang) {
+                        case "my":
+                            this.language = "my";
+                            break;
+                        case "zh-cn":
+                            this.language = "zh-cn";
+                            break;
+                        case "zh-tw":
+                            this.language = "zh-tw";
+                            break;
+                        default:
+                            this.language = "en";
+                    }
+                }
+                else{
+                    this.language = this.getCookie('lang') || "en";
+                }
             }
+
         },
 
         _routePageChanged: function(page) {
-            console.log(this.urlQuery);
             Polymer.AppLayout.scroll(0, 0);
             this.page = page || 'home';
             document.title = this.page.charAt(0).toUpperCase() + this.page.slice(1) + " - GDGKL";
@@ -224,9 +239,11 @@
         },
 
         langChanged: function(event) {
+            console.log(event.detail.lang)
             this.$.location.query = "hl=" + event.detail.lang;
             this.language = event.detail.lang;
             this.urlQuery = "?" + this.$.location.query;
+            document.cookie = "lang=" + event.detail.lang + ";path=/";
         }
     });
     </script>

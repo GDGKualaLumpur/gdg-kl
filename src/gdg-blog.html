@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 <dom-module id="gdg-blog">
     <template>
         <style>
@@ -41,8 +42,8 @@
             margin: 0px auto;
             max-width: 900px;
         }
-
-        .blog .content{
+        
+        .blog .content {
             padding: 24px 36px;
             border-radius: 2px;
             box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
@@ -58,8 +59,8 @@
             background: white;
             text-decoration: none;
         }
-
-        .article h3{
+        
+        .article h3 {
             margin: 0;
             color: #00838F;
             font-weight: 400;
@@ -95,20 +96,33 @@
             font-weight: 400;
         }
         
+        .overlay {
+            margin: 96px 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .overlay[hidden] {
+            display: none;
+        }
+        
         @media screen and (max-width:840px) {
-            .header{
+            .header {
                 padding: 40px 20px;
             }
             section {
                 padding: 40px 24px;
             }
-            .blog{
+            .blog {
                 padding: 0;
             }
-            .blog .content{
+            .blog .content {
                 padding: 24px;
             }
-            .article{
+            .article {
                 padding: 18px 24px;
                 box-shadow: none;
                 border-bottom: none;
@@ -116,13 +130,13 @@
             .article a {
                 font-size: 20px;
             }
-            .article h3{
+            .article h3 {
                 font-size: 18px;
             }
-            .article .detail{
+            .article .detail {
                 margin-top: 8px;
             }
-            .markdown-html p{
+            .markdown-html p {
                 line-height: 1.8em;
             }
             .markdown-html img {
@@ -131,7 +145,7 @@
             }
         }
         </style>
-        <iron-ajax id="ajax" auto handle-as="json" on-response="ajaxResponse"></iron-ajax>
+        <iron-ajax id="ajax" auto handle-as="json" on-response="ajaxResponse" loading="{{isLoading}}"></iron-ajax>
         <template is="dom-if" if="{{!showPost}}">
             <section class="header">
                 <div class="container">
@@ -150,6 +164,9 @@
                         </div>
                     </a>
                 </template>
+                <div class="overlay" hidden$="[[!isLoading]]">
+                    <paper-spinner active="[[isLoading]]"></paper-spinner>
+                </div>
             </section>
         </template>
         <template is="dom-if" if="{{showPost}}">
@@ -164,6 +181,9 @@
                     <marked-element markdown="[[post.content]]">
                         <div class="markdown-html"></div>
                     </marked-element>
+                </div>
+                <div class="overlay" hidden$="[[!isLoading]]">
+                    <paper-spinner active="[[isLoading]]"></paper-spinner>
                 </div>
             </section>
         </template>
@@ -256,7 +276,7 @@
                 }
                 if (response.nextPageToken) {
                     this.nextPageToken = response.nextPageToken;
-                    //this.nextpage();
+                    // this.nextpage();
                 }
             }
         },
