@@ -1,24 +1,24 @@
 {
-  "name": "My App",
-  "short_name": "My App",
+  "name": "GDG Kuala Lumpur",
+  "short_name": "GDGKL",
     "icons": [{
-      "src": "images/app-icon-32.png",
-      "type": "image/png",
+      "src": "images/gdg.svg",
+      "type": "image/svg",
       "sizes": "32x32"
     }, {
-      "src": "images/app-icon.svg",
+      "src": "images/gdg.svg",
       "sizes": "128x128",
       "type": "image/svg"
     }, {
-      "src": "images/app-icon-144.png",
+      "src": "images/gdg_icon_144.png",
       "sizes": "144x144",
       "type": "image/png"
     }, {
-      "src": "images/app-icon.svg",
+      "src": "images/gdg.svg",
       "sizes": "192x192",
       "type": "image/svg"
     },{
-      "src": "images/app-icon.svg",
+      "src": "images/gdg.svg",
       "sizes": "384x384",
       "type": "image/svg"
     }],

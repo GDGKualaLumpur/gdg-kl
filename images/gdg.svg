@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" width="192" height="192" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style id="style3437">
+    .st0{clip-path:url(#XMLID_26_);} .st1{clip-path:url(#XMLID_27_);fill:#FFC107;} .st2{clip-path:url(#XMLID_27_);fill:#0F9D58;} .st3{opacity:0.2;clip-path:url(#XMLID_27_);fill:#BF360C;} .st4{opacity:0.2;clip-path:url(#XMLID_27_);fill:#263238;} .st5{opacity:0.2;clip-path:url(#XMLID_27_);fill:#FFFFFF;} .st6{clip-path:url(#XMLID_27_);fill:url(#XMLID_31_);} .st7{clip-path:url(#XMLID_27_);fill:url(#XMLID_32_);} .st8{clip-path:url(#XMLID_27_);} .st9{fill:#4285F4;} .st10{clip-path:url(#XMLID_27_);fill:#DB4437;} .st11{opacity:0.2;clip-path:url(#XMLID_27_);fill:#1A237E;} .st12{opacity:0.2;clip-path:url(#XMLID_27_);fill:#3E2723;} .st13{clip-path:url(#XMLID_27_);fill:url(#XMLID_33_);}
+  </style>
+  <g id="XMLID_1_" transform="matrix(1.45 0 0 1.45 -41.98 -42.47)">
+    <defs id="defs3440">
+      <path id="XMLID_2_" d="M0 0h192v192H0z"/>
+    </defs>
+    <clipPath id="XMLID_26_">
+      <use id="use3444" width="100%" height="100%" xlink:href="#XMLID_2_" overflow="visible"/>
+    </clipPath>
+    <g id="XMLID_24_" class="st0" clip-path="url(#XMLID_26_)">
+      <g id="XMLID_11_">
+        <defs id="defs3448">
+          <path id="XMLID_28_" d="M134.39 90l-33.54-58H56l37.02 64L56 160h44.85l33.54-58c2.15-3.71 2.15-8.29 0-12z"/>
+        </defs>
+        <clipPath id="XMLID_27_">
+          <use id="use3452" width="100%" height="100%" xlink:href="#XMLID_28_" overflow="visible"/>
+        </clipPath>
+        <path id="XMLID_30_" fill="#ffc107" d="M115.15 134.27l-10.63-18.39L79 160h21.85l14.59-25.23z" class="st1" clip-path="url(#XMLID_27_)"/>
+        <path id="path3455" fill="#0f9d58" d="M93.02 96l11.5 19.88L79 160H56z" class="st2" clip-path="url(#XMLID_27_)"/>
+        <path id="path3457" fill="#bf360c" d="M100.85 159H79.58l-.58 1h21.85l14.59-25.23-.29-.5z" class="st3" clip-path="url(#XMLID_27_)" opacity=".2"/>
+        <path id="path3459" fill="#263238" d="M56.58 159l-.58 1h23l.58-1z" class="st4" clip-path="url(#XMLID_27_)" opacity=".2"/>
+        <path id="path3461" fill="#fff" d="M56 160h.58l36.73-63.5-.29-.5z" class="st5" clip-path="url(#XMLID_27_)" opacity=".2"/>
+        <radialGradient id="XMLID_31_" cx="115.277" cy="134.37399" r="44.264" gradientUnits="userSpaceOnUse">
+          <stop id="stop3464" offset="0" stop-color="#BF360C" stop-opacity=".2"/>
+          <stop id="stop3466" offset="1" stop-color="#BF360C" stop-opacity=".02"/>
+        </radialGradient>
+        <path id="XMLID_37_" fill="url(#XMLID_31_)" d="M115.44 134.77l-10.92-18.89-2.68 4.63z" class="st6" clip-path="url(#XMLID_27_)"/>
+        <radialGradient id="XMLID_32_" cx="115.151" cy="134.65401" r="44.623001" gradientUnits="userSpaceOnUse">
+          <stop id="stop3470" offset="0" stop-color="#263238" stop-opacity=".2"/>
+          <stop id="stop3472" offset="1" stop-color="#263238" stop-opacity=".02"/>
+        </radialGradient>
+        <path id="XMLID_57_" fill="url(#XMLID_32_)" d="M101.84 120.51l2.68-4.63L93.02 96l-5.49 9.5z" class="st7" clip-path="url(#XMLID_27_)"/>
+        <g id="XMLID_29_" class="st8" clip-path="url(#XMLID_27_)">
+          <g id="XMLID_61_">
+            <path id="XMLID_67_" fill="#4285f4" d="M79 32H56l59.44 102.77 11.49-19.87.01-.02z" class="st9"/>
+          </g>
+        </g>
+        <path id="path3479" fill="#db4437" d="M134.39 102c2.15-3.71 2.15-8.29 0-12l-33.54-58H79l47.94 82.88 7.45-12.88z" class="st10" clip-path="url(#XMLID_27_)"/>
+        <path id="path3481" fill="#1a237e" d="M126.94 114.88l-.29-.49-11.21 19.38L56.58 32H56l59.44 102.77 11.49-19.87z" class="st11" clip-path="url(#XMLID_27_)" opacity=".2"/>
+        <path id="path3483" fill="#fff" d="M100.85 33l33.54 58c.99 1.71 1.5 3.6 1.58 5.5.09-2.24-.42-4.5-1.58-6.5l-33.54-58H56l.58 1h44.27z" class="st5" clip-path="url(#XMLID_27_)" opacity=".2"/>
+        <path id="XMLID_20_" fill="#3e2723" d="M126.94 114.88l7.45-12.88c1.16-2 1.67-4.26 1.58-6.5-.08 1.9-.59 3.79-1.58 5.5l-7.74 13.39.29.49z" class="st12" clip-path="url(#XMLID_27_)" opacity=".2"/>
+        <radialGradient id="XMLID_33_" cx="55" cy="33" r="134.35001" gradientUnits="userSpaceOnUse">
+          <stop id="stop3487" offset="0" stop-color="#FFF" stop-opacity=".1"/>
+          <stop id="stop3489" offset="1" stop-color="#FFF" stop-opacity="0"/>
+        </radialGradient>
+        <path id="XMLID_23_" fill="url(#XMLID_33_)" d="M134.39 90l-33.54-58H56l37.02 64L56 160h44.85l33.54-58c2.15-3.71 2.15-8.29 0-12z" class="st13" clip-path="url(#XMLID_27_)"/>
+      </g>
+    </g>
+  </g>
+</svg>
