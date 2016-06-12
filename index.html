@@ -43,9 +43,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     // import elements and hide splash screen once it's done
     Polymer.Base.importHref('/src/elements.html', function() {
         var splash = document.getElementById('splash');
-        // splash.style.opacity = 0;
+        splash.style.opacity = 0;
         splash.addEventListener('transitionend', function() {
-            // splash.parentElement.removeChild(splash);
+            splash.parentElement.removeChild(splash);
         });
 
     }, null, true);    
