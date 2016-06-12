@@ -6,44 +6,38 @@ default_expiration: "7d"
 
 handlers:
 
-
 - url: /cron/.*
   script: home.app
 
 - url: /bower_components
   static_dir: build/unbundled/bower_components
-  secure: always
-
+  http_headers:
+    Vary: Accept-Encoding   
+      
 - url: /images
   static_dir: build/unbundled/images
-  secure: always
 
 - url: /src
   static_dir: build/unbundled/src
-  secure: always
   http_headers:
     Vary: Accept-Encoding  
 
 - url: /data
   static_dir: build/unbundled/data
-  secure: always  
   http_headers:
     Vary: Accept-Encoding    
 
 - url: /service-worker.js
   static_files: build/unbundled/service-worker.js
   upload: build/unbundled/service-worker.js
-  secure: always
 
 - url: /manifest.json
   static_files: build/unbundled/manifest.json
   upload: build/unbundled/manifest.json
-  secure: always
 
 - url: /.*
   static_files: build/unbundled/index.html
   upload: build/unbundled/index.html
-  secure: always    
   http_headers:
     Vary: Accept-Encoding  
   
