@@ -16,9 +16,12 @@ class MainPage(webapp2.RequestHandler):
 
 		for info in data:
 			if info['temporalRelation'] == 'future':
-				future.append(info)
+				item = {'start': info['start'], 'location': info['location'], 'title': info['title'], 'link': info['link']}
+				future.append(item)
 			if info['temporalRelation'] == 'past':
-				past.append(info)
+				item = {'start': info['start'], 'location': info['location'], 'title': info['title'], 'link': info['link']}
+				past.append(item)
+
 
 		firebase_key = key
 

@@ -8,6 +8,8 @@
     "src/gdg-event.html",
     "src/gdg-footer.html",
     "src/gdg-home.html",
-    "src/gdg-icons.html"
+    "src/gdg-icons.html",
+    "data/locales.json",
+    "data/members.json"
   ]
 }

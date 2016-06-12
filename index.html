@@ -7,66 +7,85 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
-
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
-
-  <title>GDG Kuala Lumpur</title>
-
-  <link rel="shortcut icon" sizes="32x32" href="/images/gdgkl.png">
-  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">  
-
-  <meta name="theme-color" content="#0097a7">
-  <link rel="manifest" href="/manifest.json">
-
-  <script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <title>GDG Kuala Lumpur</title>
+    <link rel="shortcut icon" sizes="32x32" href="/images/gdgkl.png">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#0097a7">
+    <link rel="manifest" href="/manifest.json">
+    <!--     <script>
     // setup Polymer options
-    window.Polymer = {lazyRegister: true, dom: 'shadow'};
-
+    window.Polymer = {
+        lazyRegister: true,
+        dom: 'shadow'
+    };
+    </script> -->
+    <link rel="import" href="../bower_components/polymer/polymer.html">
+    <script>
     // load webcomponents polyfills
     (function() {
-      if ('registerElement' in document
-          && 'import' in document.createElement('link')
-          && 'content' in document.createElement('template')) {
-        // browser has web components
-      } else {
-        // polyfill web components
-        var e = document.createElement('script');
-        e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
-        document.head.appendChild(e);
-      }
+        if ('registerElement' in document && 'import' in document.createElement('link') && 'content' in document.createElement('template')) {
+            // browser has web components
+        } else {
+            // polyfill web components
+            var e = document.createElement('script');
+            e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+            document.head.appendChild(e);
+        }
     })();
+
+    // import elements and hide splash screen once it's done
+    Polymer.Base.importHref('/src/elements.html', function() {
+        var splash = document.getElementById('splash');
+        splash.style.opacity = 0;
+        splash.addEventListener('transitionend', function() {
+            splash.parentElement.removeChild(splash);
+        });
+
+    }, null, true);    
 
     // load pre-caching service worker
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js');
-      });
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/service-worker.js');
+        });
     }
 
-  </script>
 
-  <link rel="import" href="/src/gdg-app.html">
-
-  <style>
-
+    </script>
+    <style>
     body {
-      margin: 0;
-      font-family: 'Roboto', 'Noto', sans-serif;
-      line-height: 1.5;
-      min-height: 100vh;
-      background-color: #eee;
+        margin: 0;
+        font-family: 'Roboto', 'Noto', sans-serif;
+        line-height: 1.5;
+        min-height: 100vh;
+        background-color: #eee;
     }
-  </style>
-
+    
+    #splash {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: opacity 300ms cubic-bezier(0, 0, 0.2, 1);
+        will-change: opacity;
+        background: url(/images/gdg.svg) no-repeat 50% 50%;
+        background-size: 100px;
+        background-color: #ECEFF1;
+    }
+    </style>
 </head>
+
 <body>
-
-  <gdg-app></gdg-app>
-
+    <gdg-app></gdg-app>
+    <div id="splash" style="opacity: 1"></div>
 </body>
+
 </html>
