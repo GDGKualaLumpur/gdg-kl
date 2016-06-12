@@ -1,24 +1,10 @@
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="shared-app-style.html">
 <dom-module id="gdg-contact">
     <template>
-        <style>
+        <style include="shared-app-style">
         :host {
             display: block;
-        }
-        
-        .header {
-            background: var(--app-header-color);
-            padding: 40px 80px;
-            color: white;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
         }
         
         .contact {
@@ -34,31 +20,12 @@
             margin: 12px 0 36px 0;
         }
         
-        .flex {
-            @apply(--layout-horizontal);
-        }
-        
-        paper-input {
-            margin: 0 12px;
-        }
-        
-        .flex paper-input {
-            @apply(--layout-flex);
-        }
-        
-        .form paper-textarea {
-            margin: 0 12px;
-        }
-        
         paper-button {
             background: #4285F4;
             color: white;
         }
         
         @media screen and (max-width:840px) {
-            .header {
-                padding: 40px 20px;
-            }
             .contact {
                 margin: 6px auto;
             }

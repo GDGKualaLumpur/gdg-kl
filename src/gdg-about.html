@@ -1,23 +1,13 @@
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-app-style.html">
 <dom-module id="gdg-about">
     <template>
-        <style>
+        <style include="shared-app-style">
         :host {
             display: block;
         }
-        
-        .header {
-            background: var(--app-header-color);
-            padding: 40px 80px;
-            color: white;
-        }
-        
-        .header .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
+
         .about {
             @apply(--layout-horizontal);
             @apply(--layout-wrap);
@@ -60,16 +50,8 @@
             }
         }
         
-        @media screen and (max-width:840px) {
-            .header {
-                padding: 40px 20px;
-            }
-        }
-        
+
         @media screen and (max-width:640px) {
-            .header {
-                padding: 40px 20px;
-            }
             .about {
                 margin: auto;
             }

@@ -1,22 +1,12 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="shared-app-style.html">
 <dom-module id="gdg-event">
     <template>
-        <style>
+        <style include="shared-app-style">
         :host {
             display: block;
-        }
-        
-        .header {
-            background: var(--app-header-color);
-            padding: 40px 80px;
-            color: white;
-        }
-        
-        .header .container {
-            max-width: 900px;
-            margin: 0 auto;
         }
         
         .event {
@@ -30,104 +20,16 @@
             font-weight: 400;
         }
         
-        .overlay {
-            margin: 96px 0;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .overlay[hidden] {
-            display: none;
-        }
-        
-        .article {
-            display: block;
-            border-radius: 2px;
-            border-bottom: 1px solid #E0E0E0;
-            padding: 24px 36px;
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-            background: white;
-            text-decoration: none;
-        }
-        
-        .article h4 {
-            margin: 0;
-            color: #000;
-            font-weight: 400;
-            font-size: 20px;
-        }
-        
-        .article a {
-            color: #00838F;
-            font-weight: 400;
-            font-size: 20px;
-            text-decoration: none;
-        }
-        
-        .article .detail {
-            margin-top: 16px;
-            display: block;
-        }
-        
-        .article .detail iron-icon {
-            vertical-align: middle;
-            margin-right: 4px;
-        }
-        
-        .article .detail .cal {
-            color: #F44336;
-        }
-        
-        .article .detail .location {
-            color: #0f9d58;
-        }
-        
-        .article .detail span {
-            display: block;
-            margin-top: 8px;
-        }
-        
-        .article .detail p {
-            color: #212121;
-            font-size: 16px;
-            font-weight: 300;
-            margin: 4px 0;
-            display: inline;
-        }
-        
-        .article .detail .publisher {
-            color: #006064;
-            font-weight: 400;
-        }
-        
         @media screen and (max-width:840px) {
-            .header {
-                padding: 40px 20px;
-            }
-            .event h3{
+            .event h3 {
                 margin: 16px 12px
-            }
-            .article {
-                padding: 18px 24px;
-            }
-            .article a {
-                font-size: 20px;
-            }
-            .article h4 {
-                font-size: 18px;
-            }
-            .article .detail {
-                margin-top: 8px;
             }
         }
         </style>
         <iron-ajax auto url="https://gdg-kl.firebaseio.com/data.json" handle-as="json" on-response="_eventData" loading="{{isLoading}}"></iron-ajax>
         <section class="header">
             <div class="container">
-                <h2>Event</h2>
+                <h2>{{localize('event')}}</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan pretium efficitur. Nam tincidunt molestie urna id malesuada. </p>
             </div>
         </section>
@@ -139,7 +41,7 @@
                 <div class="upcoming">
                     <h3>Upcoming Event</h3>
                     <template is="dom-repeat" items="{{upcoming}}">
-                        <a href="https://developers.google.com[[item.link]]" class="article">
+                        <a href="https://developers.google.com[[item.link]]" target="_blank" class="article">
                             <h4>[[item.title]]</h4>
                             <div class="detail">
                                 <span>
@@ -181,6 +83,11 @@
     Polymer({
         is: 'gdg-event',
 
+        behaviors: [
+            Polymer.AppLocalizeBehavior
+        ],
+
+
         properties: {
             upcoming: {
                 type: Array,
@@ -199,31 +106,26 @@
             pastDom: {
                 type: Boolean,
                 value: false
+            },
+            language: {
+                type: String,
             }
         },
 
         _eventData: function(event) {
             data = event.detail.response;
-            console.log(data.future);
             this.past = data.past.reverse();
             this.upcoming = data.future.reverse();
-            // var data = event.detail.response.reverse();
-            // for (var i = 0; i < data.length; i++) {
-            //     var test = new Date(data[i].start)
-            //     data[i].date = test.toLocaleString('en-us', { day: "numeric", month: "short" , year: "numeric"});
-            //     data[i].description = data[i].description.replace(/<(?:.|\n)*?>/gm, '').replace(/\r?\n|\r/g, '');
-            //     if (data[i].temporalRelation == "past") {
-            //         this.push('past', data[i])
-            //     } else {
-            //         this.push('upcoming', data[i])
-            //     }
-            // }
             if (this.upcoming.length) {
                 this.upcomingDom = true;
             }
             if (this.past.length) {
                 this.pastDom = true;
             }
+        },
+
+        attached: function() {
+            this.loadResources(this.resolveUrl('/data/locales.json'));
         },
     });
     </script>

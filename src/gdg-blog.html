@@ -1,23 +1,26 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="shared-app-style.html">
 <dom-module id="gdg-blog">
     <template>
-        <style>
+        <style include="shared-app-style">
         :host {
             display: block;
             background-color: #eee;
         }
         
-        .header {
-            padding: 40px 80px;
-            background: var(--app-header-color);
-            color: white;
+        .blog {
+            padding: 48px 0;
+            margin: 0px auto;
+            max-width: 900px;
         }
         
-        .header .container {
-            max-width: 900px;
-            margin: 0 auto;
+        .blog .content {
+            padding: 24px 36px;
+            border-radius: 2px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+            background-color: white;
         }
         
         .markdown-html p {
@@ -37,91 +40,7 @@
             font-weight: 400;
         }
         
-        .blog {
-            padding: 48px 0;
-            margin: 0px auto;
-            max-width: 900px;
-        }
-        
-        .blog .content {
-            padding: 24px 36px;
-            border-radius: 2px;
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-            background-color: white;
-        }
-        
-        .article {
-            display: block;
-            border-radius: 2px;
-            border-bottom: 1px solid #E0E0E0;
-            padding: 24px 36px;
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-            background: white;
-            text-decoration: none;
-        }
-        
-        .article h3 {
-            margin: 0;
-            color: #000;
-            font-weight: 400;
-            font-size: 20px;
-        }
-        
-        .article a {
-            font-weight: 400;
-            font-size: 20px;
-            text-decoration: none;
-        }
-        
-        .article .detail span {
-            display: block;
-            margin-top: 8px;
-        }
-        
-        .article .detail {
-            margin-top: 16px;
-            display: block;
-        }
-        
-        .article .detail img {
-            height: 25px;
-            vertical-align: middle;
-        }
-        
-        .article .detail p {
-            color: #212121;
-            display: inline;
-            font-size: 16px;
-            font-weight: 300;
-            margin-left: 4px;
-        }
-        
-        .article .detail .publisher {
-            color: #006064;
-            font-weight: 400;
-        }
-        
-        .article .detail .cal {
-            color: #F44336;
-        }
-        
-        .overlay {
-            margin: 96px 0;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .overlay[hidden] {
-            display: none;
-        }
-        
         @media screen and (max-width:840px) {
-            .header {
-                padding: 40px 20px;
-            }
             section {
                 padding: 40px 24px;
             }
@@ -130,18 +49,6 @@
             }
             .blog .content {
                 padding: 24px;
-            }
-            .article {
-                padding: 18px 24px;
-            }
-            .article a {
-                font-size: 20px;
-            }
-            .article h3 {
-                font-size: 18px;
-            }
-            .article .detail {
-                margin-top: 8px;
             }
             .markdown-html p {
                 line-height: 1.8em;
@@ -156,22 +63,22 @@
         <template is="dom-if" if="{{!showPost}}">
             <section class="header">
                 <div class="container">
-                    <h2>Blog</h2>
-                    <p>Official blog of Google Developer Group (GDG) Kuala Lumpur</p>
+                    <h2>{{localize('blog')}}</h2>
+                    <p>{{localize('blogdesc')}}</p>
                 </div>
             </section>
             <section class="blog">
                 <template is="dom-repeat" items="{{list}}" id="list">
                     <a href="/blog/[[dashcase(item.title)]]" class="article">
-                        <h3>[[item.title]]</h3>
+                        <h4>[[item.title]]</h4>
                         <div class="detail">
                             <span>
                                 <img src="/images/gdg.png">
-                                <p>Published by [[item.author.displayName]]</p>
+                                <p>{{localize('publishedby')}} [[item.author.displayName]]</p>
                             </span>
                             <span>
                                 <iron-icon icon="cal" class="cal"></iron-icon>
-                                <p>Posted on [[timestamp(item.published)]]</p>
+                                <p>{{localize('postedon')}} [[timestamp(item.published)]]</p>
                             </span>
                         </div>
                     </a>
@@ -204,6 +111,10 @@
     Polymer({
         is: 'gdg-blog',
 
+        behaviors: [
+            Polymer.AppLocalizeBehavior
+        ],
+
         properties: {
             showPost: {
                 type: Boolean
@@ -224,8 +135,10 @@
             apiKey: {
                 type: String,
                 value: "AIzaSyDvmMxa5XU5VomJIE0Au-lgYt6QQuZ3Mwc"
+            },
+            language: {
+                type: String,
             }
-
         },
 
         _postIdChanged: function() {
@@ -250,6 +163,10 @@
 
         ready: function() {
             this._postIdChanged();
+        },
+
+        attached: function() {
+            this.loadResources(this.resolveUrl('/data/locales.json'));
         },
 
         dashcase: function(text) {
