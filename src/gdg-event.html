@@ -27,9 +27,8 @@
             }
         }
         </style>
-        <iron-ajax auto url="https://gdg-kl.firebaseio.com/data.json" handle-as="json" on-response="_eventData" loading="{{isLoading}}"></iron-ajax>
-        <app-indexeddb-mirror key="events" data="{{eventData}}" persisted-data="{{persistedData}}">
-        </app-indexeddb-mirror>
+        <iron-ajax auto url="https://gdg-kl.firebaseio.com/data.json" handle-as="json" last-response="{{eventData}}" loading="{{isLoading}}"></iron-ajax>
+        <app-indexeddb-mirror key="{{indexeddbkey}}" data="{{eventData}}" persisted-data="{{persistedData}}"></app-indexeddb-mirror>
         <section class="header">
             <div class="container">
                 <h2>{{localize('event')}}</h2>
@@ -90,16 +89,16 @@
             Polymer.AppLocalizeBehavior
         ],
 
-
         properties: {
             eventData: {
                 type: Array,
                 notify: true,
+                observer: "_onEventDataChanged"
             },
             persistedData: {
                 type: Array,
                 notify: true,
-                value: []
+                observer: "_onPersistedDataChanged"
             },
             upcomingDom: {
                 type: Boolean,
@@ -114,16 +113,18 @@
             }
         },
 
-        _eventData: function(event) {
-            data = event.detail.response;
-            data.past = data.past.reverse();
-            this.eventData = data;
-            if (this.eventData.future.length){
+        _onEventDataChanged: function(){
+            if (this.eventData){
+                this.eventData.past = this.eventData.past.reverse();    
+            }
+        },
+        _onPersistedDataChanged: function(){
+            if (this.persistedData.future.length){
                 this.upcomingDom = true;
             }
-            if (this.eventData.past.length){
+            if (this.persistedData.past.length){
                 this.pastDom = true;
-            }
+            }            
         },
 
         timestamp: function(unix_timestamp){
@@ -133,6 +134,7 @@
         },
 
         attached: function() {
+            this.indexeddbkey = "events";
             this.loadResources(this.resolveUrl('/data/locales.json'));
         },
     });
