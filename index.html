@@ -43,7 +43,7 @@
 </head>
 
 <body>
-    <gdg-app></gdg-app>
+    <gdg-app id="gdg"></gdg-app>
     <div id="splash" style="opacity: 1"></div>
     <script>
     (function() {
@@ -63,8 +63,8 @@
             var splash = document.getElementById('splash');
             splash.style.opacity = 0;
             splash.addEventListener('transitionend', function() {
-                console.log("remove splash")
                 splash.parentElement.removeChild(splash);
+                serviceWorker();
             });
         };
 
@@ -73,6 +73,31 @@
             onImportLoaded();
         } else {
             link.addEventListener('load', onImportLoaded);
+        }
+    }
+
+    function serviceWorker() {
+        var app = document.querySelector('gdg-app');
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js').then(function(reg) {
+                reg.onupdatefound = function() {
+                    var installingWorker = reg.installing;
+                    installingWorker.onstatechange = function() {
+                        switch (installingWorker.state) {
+                            case 'installed':
+                                if (navigator.serviceWorker.controller) {
+                                    app.showToast('update');
+                                } else {
+                                    app.showToast('offline');
+                                }
+                                break;
+                            case 'redundant':
+                                app.showToast('redundant');
+                                break;
+                        }
+                    }
+                }
+            });
         }
     }
     </script>

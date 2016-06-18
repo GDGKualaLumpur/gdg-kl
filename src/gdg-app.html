@@ -136,7 +136,8 @@
             nav {
                 display: none;
             }
-            #toast, #toast_button{
+            #toast,
+            #toast_button {
                 width: 100%;
                 min-width: 0;
                 border-radius: 0;
@@ -146,14 +147,13 @@
                 display: flex;
                 padding: 8px 24px;
             }
-
         }
         </style>
-        <paper-toast id="toast"></paper-toast>
+        <paper-toast id="toast" duration="5000"></paper-toast>
         <paper-toast id="toast_button" duration="8000">
             <div class="flexchild"></div>
             <paper-button class="yellow-button" onClick="window.location.reload()">Refresh</paper-button>
-        </paper-toast>        
+        </paper-toast>
         <iron-location id="location"></iron-location>
         <app-location route="{{route}}"></app-location>
         <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
@@ -237,33 +237,21 @@
             var parts = value.split("; " + name + "=");
             if (parts.length == 2) return parts.pop().split(";").shift();
         },
-        initSW: function() {
-            if ('serviceWorker' in navigator) {
-               var toast = this.$.toast;
-               var toast_button = this.$.toast_button;
-                navigator.serviceWorker.register('/service-worker.js').then(function(reg) {
-                    reg.onupdatefound = function() {
-                        var installingWorker = reg.installing;
-                        installingWorker.onstatechange = function() {
-                            switch (installingWorker.state) {
-                                case 'installed':
-                                    if (navigator.serviceWorker.controller) {
-                                        toast_button.text = "New content available. Refresh the page for the latest content.";
-                                        toast_button.toggle();
-                                    } else {
-                                        toast.text = "Caching complete. Future visits will work offline.";
-                                        toast.toggle();
-                                    }
-                                    break;
-                                case 'redundant':
-                                    toast.text = "The installing service worker became redundant.";
-                                    toast.toggle();
-                                    break;
-                            }
-                        }
-                    }
-                });
+        showToast: function(msg) {
+            var toast = this.$.toast;
+            switch (msg) {
+                case 'offline':
+                    toast.text = "Caching complete. Future visits will work offline.";
+                    break;
+                case 'update':
+                    toast = this.$.toast_button;
+                    toast.text = "New content available. Refresh the page for the latest content.";
+                    break;
+                case 'redundant':
+                    toast.text = "The installing service worker became redundant.";
+                    break;
             }
+            toast.toggle();
         },
         ready: function() {
             this.addEventListener('langChanged', this.langChanged);
@@ -289,7 +277,6 @@
                     this.language = this.getCookie('lang') || "en";
                 }
             }
-            this.initSW();
         },
 
         _routePageChanged: function(page) {
