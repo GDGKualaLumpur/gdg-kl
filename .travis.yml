@@ -20,6 +20,8 @@ before_install:
 - tar -xzf credentials.tar.gz
 - mkdir -p lib
 # Here we use the decrypted service account credentials to authenticate the command line tool
+- gcloud config set component_manager/fixed_sdk_version 98.0.0
+- gcloud components update
 - gcloud auth activate-service-account --key-file client-secret.json
 # [END auth]
 install:
