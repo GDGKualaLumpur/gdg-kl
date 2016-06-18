@@ -20,7 +20,10 @@ before_install:
 - tar -xzf credentials.tar.gz
 - mkdir -p lib
 # Here we use the decrypted service account credentials to authenticate the command line tool
-- curl https://sdk.cloud.google.com | bash
+- curl -o /tmp/google-cloud-sdk-98.0.0-linux-x86_64.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-98.0.0-linux-x86_64.tar.gz 
+- tar xzf /tmp/google-cloud-sdk-98.0.0-linux-x86_64.tar.gz -C /tmp
+- source '/tmp/google-cloud-sdk/path.bash.inc'
+- which gcloud
 - gcloud version
 - gcloud auth activate-service-account --key-file client-secret.json
 # [END auth]
