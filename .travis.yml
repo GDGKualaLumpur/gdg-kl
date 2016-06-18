@@ -32,4 +32,4 @@ install:
 - gcloud config set project gdg-kl
 # Install the Python dependencies
 script:
-- gcloud preview app deploy
+- gcloud -q preview app deploy --version=1 --project=gdg-kl app.yaml
