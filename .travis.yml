@@ -1,5 +1,7 @@
-language: node_js
-node_js: stable
+language: python
+python:
+  - "2.7"
+  - "3.4"
 dist: trusty
 sudo: required
 addons:
