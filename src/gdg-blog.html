@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 <link rel="import" href="shared-app-style.html">
 <dom-module id="gdg-blog">
     <template>
@@ -60,6 +61,8 @@
         }
         </style>
         <iron-ajax id="ajax" auto handle-as="json" on-response="ajaxResponse" loading="{{isLoading}}"></iron-ajax>
+        <app-indexeddb-mirror key="{{indexeddbkey}}" data="{{blogData}}" persisted-data="{{persistedData}}">
+        <app-indexeddb-mirror key="{{indexeddbkey}}" data="{{blogPost}}" persisted-data="{{persistedPost}}">
         <template is="dom-if" if="{{!showPost}}">
             <section class="header">
                 <div class="container">
@@ -68,7 +71,7 @@
                 </div>
             </section>
             <section class="blog">
-                <template is="dom-repeat" items="{{list}}" id="list">
+                <template is="dom-repeat" items="{{persistedData}}" id="list">
                     <a href="/blog/[[dashcase(item.title)]]" class="article">
                         <h4>[[item.title]]</h4>
                         <div class="detail">
@@ -91,13 +94,13 @@
         <template is="dom-if" if="{{showPost}}">
             <section class="header">
                 <div class="container">
-                    <h2>[[post.title]]</h2>
-                    <p>[[timestamp(post.published, post.author.displayName)]]</p>
+                    <h2>[[persistedPost.title]]</h2>
+                    <p>[[timestamp(persistedPost.published, persistedPost.author.displayName)]]</p>
                 </div>
             </section>
             <section class="blog">
                 <div class="content" hidden$="[[isLoading]]">
-                    <marked-element markdown="[[post.content]]">
+                    <marked-element markdown="[[persistedPost.content]]">
                         <div class="markdown-html"></div>
                     </marked-element>
                 </div>
@@ -124,7 +127,7 @@
                 notify: true,
                 observer: '_postIdChanged'
             },
-            list: {
+            persistedData: {
                 type: Array,
                 notify: true,
 
@@ -138,12 +141,17 @@
             },
             language: {
                 type: String,
+            },
+            indexeddbkey: {
+                type: String,
+                notify: true
             }
         },
 
         _postIdChanged: function() {
             this.post = [];
             if (this.postid) {
+                this.indexeddbkey = "blog/" + this.postid;
                 this.$.ajax.url = "https://www.googleapis.com/blogger/v3/blogs/3213900/posts/search";
                 this.$.ajax.params = {
                     "key": this.apiKey,
@@ -152,7 +160,8 @@
                 this.showPost = true;
 
             } else {
-                this.list = [];
+                this.indexeddbkey = "blog";
+                this.blogData = [];
                 this.$.ajax.url = "https://www.googleapis.com/blogger/v2/blogs/3213900/posts";
                 this.$.ajax.params = {
                     "key": this.apiKey
@@ -191,17 +200,16 @@
             var response = event.detail.response;
             if (this.postid) {
                 if (response.items != undefined) {
-                    console.log(response.items[0].author.displayName)
-                    this.post = response.items[0];
+                    this.blogPost = response.items[0];
                     document.title = response.items[0].title.charAt(0).toUpperCase() + response.items[0].title.slice(1) + " - GDGKL";
                 }
             } else {
                 if (this.list && this.nextPageToken) {
                     for (var i = 0; i < response.items.length; i++) {
-                        this.push('list', response.items[i])
+                        this.push('blogData.list', response.items[i])
                     }
                 } else {
-                    this.list = response.items;
+                    this.blogData = response.items;
                 }
                 if (response.nextPageToken) {
                     this.nextPageToken = response.nextPageToken;

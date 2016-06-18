@@ -1,3 +1,27 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-location/iron-location.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<!-- <link rel="import" href="/src/gdg-icons.html"> -->
+<!-- <link rel="import" href="gdg-about.html">
+<link rel="import" href="gdg-blog.html">
+<link rel="import" href="gdg-contact.html">
+<link rel="import" href="gdg-event.html">
+<link rel="import" href="gdg-home.html"> -->
+<link rel="import" href="gdg-footer.html">
+<link rel="import" href="gdg-icons.html">
 <dom-module id="gdg-app">
     <template>
         <style>
@@ -90,6 +114,21 @@
             border-bottom: 4px solid #dc4a3d;
         }
         
+        .yellow-button {
+            text-transform: none;
+            color: #eeff41;
+        }
+        
+        .flexchild {
+            @apply(--layout-flex);
+        }
+        
+        #toast_button {
+            display: flex;
+            align-items: center;
+            padding: 8px 24px;
+        }
+        
         @media screen and (max-width:840px) {
             app-toolbar paper-icon-button {
                 display: block;
@@ -97,8 +136,24 @@
             nav {
                 display: none;
             }
+            #toast, #toast_button{
+                width: 100%;
+                min-width: 0;
+                border-radius: 0;
+                margin: 0;
+            }
+            #toast_button {
+                display: flex;
+                padding: 8px 24px;
+            }
+
         }
         </style>
+        <paper-toast id="toast"></paper-toast>
+        <paper-toast id="toast_button">
+            <div class="flexchild"></div>
+            <paper-button class="yellow-button" onClick="window.location.reload()">Refresh</paper-button>
+        </paper-toast>        
         <iron-location id="location"></iron-location>
         <app-location route="{{route}}"></app-location>
         <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
@@ -182,6 +237,34 @@
             var parts = value.split("; " + name + "=");
             if (parts.length == 2) return parts.pop().split(";").shift();
         },
+        initSW: function() {
+            if ('serviceWorker' in navigator) {
+               var toast = this.$.toast;
+               var toast_button = this.$.toast_button;
+                navigator.serviceWorker.register('/service-worker.js').then(function(reg) {
+                    reg.onupdatefound = function() {
+                        var installingWorker = reg.installing;
+                        installingWorker.onstatechange = function() {
+                            switch (installingWorker.state) {
+                                case 'installed':
+                                    if (navigator.serviceWorker.controller) {
+                                        toast_button.text = "New content available. Refresh the page for the latest content.";
+                                        toast_button.toggle();
+                                    } else {
+                                        toast.text = "Caching complete. Future visits will work offline.";
+                                        toast.toggle();
+                                    }
+                                    break;
+                                case 'redundant':
+                                    toast.text = "The installing service worker became redundant.";
+                                    toast.toggle();
+                                    break;
+                            }
+                        }
+                    }
+                });
+            }
+        },
         ready: function() {
             this.addEventListener('langChanged', this.langChanged);
             query = this.$.location.query.split("&");
@@ -202,12 +285,11 @@
                         default:
                             this.language = "en";
                     }
-                }
-                else{
+                } else {
                     this.language = this.getCookie('lang') || "en";
                 }
             }
-
+            this.initSW();
         },
 
         _routePageChanged: function(page) {
@@ -217,8 +299,8 @@
         },
 
         _pageChanged: function(page) {
-            // this.importHref(
-            //     this.resolveUrl('gdg-' + page + '.html'), null, null, true);
+            this.importHref(
+                this.resolveUrl('gdg-' + page + '.html'), null, null, true);
         },
 
         langChanged: function(event) {

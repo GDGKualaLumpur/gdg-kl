@@ -1,12 +1,3 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 <!doctype html>
 <html lang="en">
 
@@ -19,45 +10,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <meta name="theme-color" content="#0097a7">
     <link rel="manifest" href="/manifest.json">
-    <!--     <script>
-    // setup Polymer options
+    <!--TODO: meta tag and lang tag-->
+    <link rel="import" id="bundle" href="/src/gdg-app.html" async>
+    <script>
     window.Polymer = {
         lazyRegister: true,
         dom: 'shadow'
     };
-    </script> -->
-    <link rel="import" href="../bower_components/polymer/polymer.html">
-    <script>
-    // load webcomponents polyfills
-    (function() {
-        if ('registerElement' in document && 'import' in document.createElement('link') && 'content' in document.createElement('template')) {
-            // browser has web components
-        } else {
-            // polyfill web components
-            var e = document.createElement('script');
-            e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
-            document.head.appendChild(e);
-        }
-    })();
-
-    // import elements and hide splash screen once it's done
-    Polymer.Base.importHref('/src/elements.html', function() {
-        var splash = document.getElementById('splash');
-        splash.style.opacity = 0;
-        splash.addEventListener('transitionend', function() {
-            splash.parentElement.removeChild(splash);
-        });
-
-    }, null, true);    
-
-    // load pre-caching service worker
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/service-worker.js');
-        });
-    }
-
-
     </script>
     <style>
     body {
@@ -86,6 +45,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body>
     <gdg-app></gdg-app>
     <div id="splash" style="opacity: 1"></div>
+    <script>
+    (function() {
+        if ('registerElement' in document && 'import' in document.createElement('link') && 'content' in document.createElement('template')) {
+            finishLazyLoading();
+        } else {
+            var e = document.createElement('script');
+            e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+            document.head.appendChild(e);
+            finishLazyLoading();
+        }
+    })();
+
+
+    function finishLazyLoading() {
+        var onImportLoaded = function() {
+            var splash = document.getElementById('splash');
+            splash.style.opacity = 0;
+            splash.addEventListener('transitionend', function() {
+                console.log("remove splash")
+                splash.parentElement.removeChild(splash);
+            });
+        };
+
+        var link = document.querySelector('#bundle');
+        if (link.import && link.import.readyState === 'complete') {
+            onImportLoaded();
+        } else {
+            link.addEventListener('load', onImportLoaded);
+        }
+    }
+    </script>
 </body>
 
 </html>

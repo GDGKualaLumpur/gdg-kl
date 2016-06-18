@@ -10,6 +10,19 @@
     "src/gdg-home.html",
     "src/gdg-icons.html",
     "data/locales.json",
-    "data/members.json"
+    "data/members.json",
+    "images/gdg.svg",
+    "images/gdgkl_white.png",
+    "images/chrome.png",
+    "images/android.png",
+    "images/polymer.png",
+    "images/firebase.png",
+    "images/gcp.png",
+    "images/cover.jpg",
+    "images/1.jpg",
+    "images/2.jpg",
+    "images/3.jpg",
+    "images/pwa_summit.png",
+    "images/gdg.png"
   ]
 }

@@ -1,6 +1,7 @@
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 <link rel="import" href="shared-app-style.html">
 <dom-module id="gdg-event">
     <template>
@@ -27,10 +28,12 @@
         }
         </style>
         <iron-ajax auto url="https://gdg-kl.firebaseio.com/data.json" handle-as="json" on-response="_eventData" loading="{{isLoading}}"></iron-ajax>
+        <app-indexeddb-mirror key="events" data="{{eventData}}" persisted-data="{{persistedData}}">
+        </app-indexeddb-mirror>
         <section class="header">
             <div class="container">
                 <h2>{{localize('event')}}</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan pretium efficitur. Nam tincidunt molestie urna id malesuada. </p>
+                <p>{{localize('eventdesc')}}</p>
             </div>
         </section>
         <section class="event">
@@ -40,13 +43,13 @@
             <template is="dom-if" if="{{upcomingDom}}">
                 <div class="upcoming">
                     <h3>Upcoming Event</h3>
-                    <template is="dom-repeat" items="{{upcoming}}">
+                    <template is="dom-repeat" items="{{persistedData.future}}">
                         <a href="https://developers.google.com[[item.link]]" target="_blank" class="article">
                             <h4>[[item.title]]</h4>
                             <div class="detail">
                                 <span>
                                     <iron-icon icon="cal" class="cal"></iron-icon>
-                                    <p>[[item.start]]</p>
+                                    <p>[[timestamp(item.start)]]</p>
                                 </span>
                                 <span>
                                     <iron-icon icon="location" class="location"></iron-icon>
@@ -60,13 +63,13 @@
             <template is="dom-if" if="{{pastDom}}">
                 <div class="past">
                     <h3>Past Event</h3>
-                    <template is="dom-repeat" items="{{past}}">
+                    <template is="dom-repeat" items="{{persistedData.past}}">
                         <a href="https://developers.google.com[[item.link]]" class="article">
                             <h4>[[item.title]]</h4>
                             <div class="detail">
                                 <span>
                                     <iron-icon icon="cal" class="cal"></iron-icon>
-                                    <p>[[item.start]]</p>
+                                    <p>[[timestamp(item.start)]]</p>
                                 </span>
                                 <span>
                                     <iron-icon icon="location" class="location"></iron-icon>
@@ -89,12 +92,11 @@
 
 
         properties: {
-            upcoming: {
+            eventData: {
                 type: Array,
                 notify: true,
-                value: []
             },
-            past: {
+            persistedData: {
                 type: Array,
                 notify: true,
                 value: []
@@ -114,14 +116,20 @@
 
         _eventData: function(event) {
             data = event.detail.response;
-            this.past = data.past.reverse();
-            this.upcoming = data.future.reverse();
-            if (this.upcoming.length) {
+            data.past = data.past.reverse();
+            this.eventData = data;
+            if (this.eventData.future.length){
                 this.upcomingDom = true;
             }
-            if (this.past.length) {
+            if (this.eventData.past.length){
                 this.pastDom = true;
             }
+        },
+
+        timestamp: function(unix_timestamp){
+            MyDate = new Date(unix_timestamp);
+            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            return ('0' + MyDate.getDate()).slice(-2) + ' ' + monthNames[MyDate.getMonth()] + ' ' + MyDate.getFullYear();
         },
 
         attached: function() {
