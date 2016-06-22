@@ -12,6 +12,7 @@
     <link rel="manifest" href="/manifest.json">
     <!--TODO: meta tag and lang tag-->
     <link rel="import" id="bundle" href="/src/gdg-app.html" async>
+    <script type="text/javascript" src="/bower_components/webcomponentsjs/webcomponents-lite.min.js" async></script>
     <script>
     window.Polymer = {
         lazyRegister: true,
@@ -46,26 +47,29 @@
     <gdg-app id="gdg"></gdg-app>
     <div id="splash" style="opacity: 1"></div>
     <script>
-    (function() {
-        if ('registerElement' in document && 'import' in document.createElement('link') && 'content' in document.createElement('template')) {
-            finishLazyLoading();
-        } else {
-            var e = document.createElement('script');
-            e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
-            document.head.appendChild(e);
-            finishLazyLoading();
-        }
-    })();
+    // (function() {
+    //     if ('registerElement' in document && 'import' in document.createElement('link') && 'content' in document.createElement('template')) {
+    //         finishLazyLoading();
+    //     } else {
+    //         var e = document.createElement('script');
+    //         e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+    //         document.head.appendChild(e);
+    //         finishLazyLoading();
+    //     }
+    // })();
 
 
     function finishLazyLoading() {
         var onImportLoaded = function() {
             var splash = document.getElementById('splash');
-            splash.style.opacity = 0;
-            splash.addEventListener('transitionend', function() {
-                splash.parentElement.removeChild(splash);
-                serviceWorker();
-            });
+            // splash.style.opacity = 0;
+            splash.parentElement.removeChild(splash);
+            serviceWorker();
+
+            // something wrong with firefox -> transitionend
+            // splash.addEventListener('transitionend', function() {
+            //     console.log("transitionend")
+            // });
         };
 
         var link = document.querySelector('#bundle');
@@ -100,6 +104,8 @@
             });
         }
     }
+
+    finishLazyLoading();
     </script>
 </body>
 
