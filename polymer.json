@@ -2,27 +2,29 @@
   "entrypoint": "index.html",
   "shell": "src/gdg-app.html",
   "fragments": [
-    "src/gdg-about.html",
-    "src/gdg-blog.html",
-    "src/gdg-contact.html",
-    "src/gdg-event.html",
-    "src/gdg-footer.html",
     "src/gdg-home.html",
-    "src/gdg-icons.html",
-    "data/locales.json",
-    "data/members.json",
-    "images/gdg.svg",
-    "images/gdgkl_white.png",
-    "images/chrome.png",
-    "images/android.png",
-    "images/polymer.png",
-    "images/firebase.png",
-    "images/gcp.png",
-    "images/cover.jpg",
-    "images/1.jpg",
-    "images/2.jpg",
-    "images/3.jpg",
-    "images/pwa_summit.png",
-    "images/gdg.png"
-  ]
+    "src/gdg-about.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+  "extraDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/*.js"
+  ],
+  "lint": {
+    "rules": ["polymer-2"]
+  },
+  "builds": [{
+    "name": "firebase",
+    "bundle": false,
+    "js": {"minify": true, "compile": true},
+    "css": {"minify": true},
+    "html": {"minify": true},
+    "addPushManifest": true,
+    "insertPrefetchLinks": true,
+    "addServiceWorker": true
+  }]
 }

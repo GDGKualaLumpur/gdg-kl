@@ -1,114 +1,84 @@
-<link rel="import" href="../bower_components/iron-image/iron-image.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="shared-app-style.html">
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
 <dom-module id="gdg-about">
-    <template>
-        <style include="shared-app-style">
-        :host {
-            display: block;
-        }
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+      }
 
-        .about {
-            @apply(--layout-horizontal);
-            @apply(--layout-wrap);
-            @apply(--layout-start);
-            max-width: 950px;
-            margin: 40px auto;
-        }
-        
-        .member {
-            margin: 16px 8px;
-            background-color: white;
-            width: 300px;
-            border-radius: 2px;
-            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-        }
-        
-        .member .content {
-            padding: 0 16px 24px 16px;
-        }
-        
-        .member a {
-            text-decoration: none;
-        }
-        
-        .member .content iron-icon {
-            margin-top: 8px;
-            margin-right: 6px;
-            color: #212121;
-        }
-        
-        .member iron-image {
-            height: auto;
-            width: 100%;
-            --iron-image-width: 100%;
-        }
-        
-        @media screen and (max-width: 1299px) {
-            .about {
-                max-width: 632px;
-            }
-        }
-        
+      h1 {
+        color: #212121;
+        font-weight: 400;
+        margin-bottom: 48px;
+      }
 
-        @media screen and (max-width:640px) {
-            .about {
-                margin: auto;
-            }
-            .member {
-                margin: 16px;
-                width: 100%;
-            }
+      p {
+        font-size: 18px;
+        color: #616161;
+        line-height: 34px;
+        font-weight: 400;
+      }
+
+      .text {
+        width: 80%;
+        max-width: 720px;
+      }
+
+      .image {
+        width: 100%;
+        margin-bottom: 24px;
+      }
+
+      @media screen and (max-width: 960px) {
+        h1,
+        .text {
+          width: 90%;
+          padding: 0 24px;
+          box-sizing: border-box;
         }
-        </style>
-        <section class="header">
-            <div class="container">
-                <h2>{{localize('about')}}</h2>
-                <p>{{localize('intro')}}</p>
-            </div>
-        </section>
-        <section class="about">
-            <iron-ajax auto url="/data/members.json" handle-as="json" last-response="{{members}}"></iron-ajax>
-            <template is="dom-repeat" items="{{members}}">
-                <div class="member">
-                    <iron-image src="[[item.image]]"></iron-image>
-                    <div class="content">
-                        <h3>[[item.name]]</h3>
-                        <p>[[item.position]]</p>
-                        <template is="dom-if" if="[[item.twitter]]">
-                            <a href="[[item.twitter]]">
-                                <iron-icon icon="twitter"></iron-icon>
-                            </a>
-                        </template>
-                        <template is="dom-if" if="[[item.facebook]]">
-                            <a href="[[item.facebook]]">
-                                <iron-icon icon="facebook"></iron-icon>
-                            </a>
-                        </template>
-                        <template is="dom-if" if="[[item.gplus]]">
-                            <a href="[[item.gplus]]">
-                                <iron-icon icon="gplus"></iron-icon>
-                            </a>
-                        </template>
-                    </div>
-                </div>
-            </template>
-        </section>
-    </template>
-    <script>
-    Polymer({
-        is: 'gdg-about',
-        behaviors: [
-            Polymer.AppLocalizeBehavior
-        ],        
-        properties: {
-            language: {
-                type: String,
-            }
-        },
-        attached: function() {
-            this.loadResources(this.resolveUrl('/data/locales.json'));
-        },        
-    });
-    </script>
+        .image {
+          margin-bottom: 16px;
+        }
+        h1 {
+          font-size: 24px;
+          margin: 24px 0;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <h1>About GDG Kuala Lumpur</h1>
+      <img class="image" src="../images/about.jpg">
+      <div class="text">
+        <p>Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences
+          developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and many
+          more.
+        </p>
+        <p>We organize meetups, hackathons, talks &amp; workshops introducing developers and non-developers to the Google Developer
+          platform.
+        </p>
+        <p>We're based in Kuala Lumpur, Malaysia - the heart of South East Asia.</p>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class GdgAbout extends Polymer.Element {
+      static get is() { return 'gdg-about'; }
+    }
+
+    window.customElements.define(GdgAbout.is, GdgAbout);
+  </script>
 </dom-module>

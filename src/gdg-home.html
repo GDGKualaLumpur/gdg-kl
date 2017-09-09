@@ -1,281 +1,58 @@
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/iron-image/iron-image.html">
-<link rel="import" href="../bower_components/iron-location/iron-location.html">
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="gdg-card.html">
+
 <dom-module id="gdg-home">
-    <template>
-        <style>
-        :host {
-            display: block;
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+      }
+
+      .container .row a{
+        width: 100%;
+        display: flex;
+        margin: 8px 2px;
+      }
+
+      @media screen and (max-width: 960px){
+        .container .row{
+          flex-direction: column
         }
-        
-        a {
-            text-decoration: none;
+        .container .row a{
+          margin: 0 0 8px 0;
         }
-        
-        section {
-            padding: 48px 12px;
-        }
-        
-        .white {
-            background: white;
-        }
-        
-        .header {
-            background: #37474F;
-            padding: 60px 80px;
-            color: white;
-        }
-        
-        .header .container {
-            max-width: 960px;
-            margin: 36px auto;
-        }
-        
-        .header h2 {
-            margin: 12px 0 0 24px;
-            font-weight: 300;
-            font-size: 20px;
-        }
-        
-        .header img {
-            width: 640px;
-        }
-        
-        section h3 {
-            max-width: 960px;
-            margin: 12px 0 24px 0;
-            font-weight: 400;
-            text-align: center;
-            font-size: 1.5em;
-        }
-        
-        .event .flex .image img {
-            width: 90%;
-        }
-        
-        .flex {
-            max-width: 960px;
-            margin: 0 auto;
-            @apply(--layout-horizontal);
-        }
-        
-        .flex div {
-            margin: 12px;
-            @apply(--layout-flex);
-        }
-        
-        .flex .text {
-            line-height: 30px;
-        }
-        
-        .image iron-image {
-            --iron-image-width: 100%;
-            --iron-image-placeholder: {
-                background-size: cover;
-            }
-        }
-        
-        .tech {
-            max-width: 960px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .tech img {
-            height: 64px;
-            margin: 24px 12px;
-        }
-        
-        paper-button {
-            background: #006064;
-            color: white;
-        }
-        
-        .photos {
-            padding: 0;
-            height: 500px;
-            @apply(--layout-horizontal);
-        }
-        
-        .photos iron-image {
-            background-color: lightgray;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .photos .big {
-            @apply(--layout-flex-2);
-            position: relative;
-        }
-        
-        .photos .vertical {
-            @apply(--layout-flex);
-            @apply(--layout-vertical);
-        }
-        
-        .photos .vertical .content {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            display: inline-block;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .photocover {
-            vertical-align: middle;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, .3);
-            opacity: 0;
-            -webkit-transition: opacity 0.2s;
-            text-align: center;
-            line-height: 500px;
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: 300;
-        }
-        
-        .photocover:hover {
-            cursor: pointer;
-            opacity: 1;
-        }
-        
-        .content .photocover {
-            line-height: 250px;
-        }
-        
-        @media screen and (max-width:840px) {
-            section,
-            .header {
-                padding: 40px 10px;
-            }
-            section h3 {
-                font-size: 18px;
-            }
-            .header img {
-                width: 100%;
-            }
-            .home .flex {
-                flex-direction: column-reverse;
-            }
-            .event .flex {
-                flex-direction: column;
-            }
-            .event .flex .image img {
-                width: 100%;
-            }
-            .tech img {
-                height: 32px;
-            }
-        }
-        
-        @media screen and (max-width:640px) {
-            .header .container {
-                max-width: 95%;
-            }
-            section h3 {
-                margin: 12px 0 0 12px;
-                ;
-            }
-            .photos {
-                height: 400px;
-                @apply(--layout-vertical);
-            }
-            .photos .big {
-                max-height: 200px;
-                @apply(--layout-flex);
-            }
-            .photos .vertical {
-                @apply(--layout-horizontal);
-            }
-            .photocover,
-            .content .photocover {
-                line-height: 200px;
-                font-size: 16px;
-            }
-            .photos iron-image {
-                height: 200px;
-            }
-        }
-        </style>
-        <section class="header">
-            <div class="container">
-                <img src="/images/gdgkl_white.png"></img>
-                <h2>{{localize('greeting')}}</h2>
-            </div>
-        </section>
-        <section class="home white">
-            <div class="flex">
-                <div class="text">
-                    <p>{{localize('intro')}}</p>
-                </div>
-                <div class="image">
-                    <iron-image src="/images/cover.jpg" fade preload></iron-image>
-                </div>
-            </div>
-        </section>
-        <section class="tech">
-            <h3>Lorem ipsum</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec nunc vel augue facilisis dapibus. Curabitur pellentesque, purus et suscipit malesuada, orci massa tincidunt leo, eu blandit neque augue in nisi.</p>
-            <div class="icons">
-                <img src="/images/chrome.png">
-                <img src="/images/android.png">
-                <img src="/images/polymer.png">
-                <img src="/images/firebase.png">
-                <img src="/images/gcp.png">
-            </div>
-        </section>
-        <section class="photos">
-            <div class="big">
-                <iron-image sizing="cover" src="/images/1.jpg" fade preload></iron-image>
-                <a href="https://google.com" class="photocover">Click here to view more photos</a>
-            </div>
-            <div class="vertical">
-                <div class="content">
-                    <iron-image sizing="cover" src="/images/2.jpg" fade preload></iron-image>
-                    <a href="https://google.com" class="photocover">Click here to view more photos</a>
-                </div>
-                <div class="content">
-                    <iron-image sizing="cover" src="/images/3.jpg" fade preload></iron-image>
-                    <a href="https://google.com" class="photocover">Click here to view more photos</a>
-                </div>
-            </div>
-        </section>
-        <section class="event white">
-            <h3>Progressive Web Apps Summit 2016 Viewing Party</h3>
-            <div class="flex">
-                <div class="image">
-                    <iron-image src="/images/pwa_summit.png" fade preload></iron-image>
-                </div>
-                <div class="text">
-                    <p>Google Developer Group Kuala Lumpur are pleased to announce that we will be hosting the Progressive Web App Dev Summit 2016 Live Viewing Party at Google Malaysia on 20 June 2016.</p>
-                    <a href="http://peatix.com/event/173850">
-                        <paper-button raised>More Info</paper-button>
-                    </a>
-                </div>
-            </div>
-        </section>
-    </template>
-    <script>
-    Polymer({
-        is: 'gdg-home',
-        behaviors: [
-            Polymer.AppLocalizeBehavior
-        ],
-        properties: {
-            language: {
-                type: String
-            }
-        },
-        attached: function() {
-            this.loadResources(this.resolveUrl('/data/locales.json'));
-        },
-    });
-    </script>
+      }
+    </style>
+
+    <div class="container">
+
+      <div class="row">
+        <a href="https://gdgkl-slack.herokuapp.com" target="_blank" rel="noopener"><gdg-card color="#EA2A95" header="Come join the GDG Kuala Lumpur Slack Community!" subtitle="The GDG Kuala Lumpur Slack community is a great place to learn Google technologies like Android, Firebase, Polymer, Angular and more from Google Developer Experts and other developers."></gdg-card></a>
+      </div>
+      <div class="row">
+        <a href="https://meetup.com/GDGKualaLumpur" target="_blank" rel="noopener"><gdg-card color="#cf3552" header="Hello Meetup" subtitle="GDG Kuala Lumpur is now on Meetup.com. Join us and become the member of GDG Kuala Lumpur on Meetup now!"></gdg-card></a>
+        <a href="https://ioxkl17.firebaseapp.com/" target="_blank" rel="noopener"><gdg-card color="#5370f6" header="Google I/O Extended 2017 Kuala Lumpur" subtitle="Google I/O Extended 2017 brings out the best Google technologies all the way from Mountain View to Kuala Lumpur. See you next year!"></gdg-card></a>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    class GdgHome extends Polymer.Element {
+      static get is() { return 'gdg-home'; }
+    }
+
+    window.customElements.define(GdgHome.is, GdgHome);
+  </script>
 </dom-module>

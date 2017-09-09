@@ -1,0 +1,102 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gdg-card">
+  <template>
+    <style include="shared-styles">
+       :host {
+        display: block;
+        width: 100%;
+      }
+
+      .card {
+        box-sizing: border-box;
+        border-radius: 2px;
+        cursor: pointer;
+        padding: 24px 32px;
+        transition: 150ms box-shadow ease-in-out;
+      }
+
+      .card:hover {
+        box-shadow: 0 3px 3px -2px rgba(0, 0, 0, .2), 0 3px 4px 0 rgba(0, 0, 0, .14), 0 1px 8px 0 rgba(0, 0, 0, .12);
+      }
+
+      .image {
+        height: 420px;
+        width: 100%;
+        margin-bottom: 12px;
+      }
+
+      .text {
+        box-sizing: border-box;
+        margin: 24px 0;
+      }
+
+      .title {
+        color: #424242;
+        font-size: 24px;
+        margin: 12px 0;
+        width: 90%;
+        max-width: 720px;
+      }
+
+      .subtitle {
+        color: #757575;
+        font-size: 16px;
+        font-weight: 400;
+        width: 80%;
+        max-width: 720px;
+      }
+
+      @media screen and (max-width: 960px) {
+        .image {
+          height: 280px;
+        }
+        .card {
+          padding: 0 0 8px 0;
+        }
+
+        .card:hover {
+          box-shadow: none;
+        }
+
+        .text {
+          padding: 0 16px;
+        }
+
+        .title {
+          width: 100%;
+        }
+
+        .subtitle {
+          width: 90%;
+        }
+      }
+    </style>
+
+    <div class="card">
+      <div class="image" style$="background-color: [[color]]"></div>
+      <div class="text">
+        <div class="title">[[header]]</div>
+        <div class="subtitle">[[subtitle]]</div>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    class GdgCard extends Polymer.Element {
+      static get is() { return 'gdg-card'; }
+
+      static get properties() {
+        return {
+          header: String,
+          subtitle: String,
+          color: String
+        }
+      }
+    }
+
+    window.customElements.define(GdgCard.is, GdgCard);
+  </script>
+</dom-module>

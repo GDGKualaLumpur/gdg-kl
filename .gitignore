@@ -1,6 +1,4 @@
-bower_components
-old
-client-secret.json
-api_key.py
-credentials.tar.gz
-build
+bower_components/
+build/
+node_modules/
+.DS_Store

@@ -1,35 +1,14 @@
-language: python
-dist: trusty
-sudo: required
-addons:
-  firefox: latest
-  apt:
-    sources:
-    - google-chrome
-    packages:
-    - google-chrome-stable
+language: node_js
+node_js: 7
+cache:
+  directories:
+  - node_modules
+  - bower_components
+  - "${NVM_PATH}_modules"
 before_script:
-- npm install -g bower polymer-cli
+- npm install -g bower polymer-cli firebase-tools
 - bower install
+script: 
 - polymer build
-before_install:
-# [START auth]
-# Decrypt the credentials we added to the repo using the key we added with the Travis command line tool    
-- openssl aes-256-cbc -K $encrypted_e27920ef8557_key -iv $encrypted_e27920ef8557_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
-# If the SDK is not already cached, download it and unpack it
-- tar -xzf credentials.tar.gz
-- mkdir -p lib
-# Here we use the decrypted service account credentials to authenticate the command line tool
-- curl -o /tmp/google-cloud-sdk-98.0.0-linux-x86_64.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-98.0.0-linux-x86_64.tar.gz 
-- tar xzf /tmp/google-cloud-sdk-98.0.0-linux-x86_64.tar.gz -C /tmp
-- source '/tmp/google-cloud-sdk/path.bash.inc'
-- which gcloud
-- gcloud version
-- gcloud auth activate-service-account --key-file client-secret.json
-# [END auth]
-install:
-# Set the correct project to deploy to
-- gcloud config set project gdg-kl
-# Install the Python dependencies
-script:
-- gcloud -q preview app deploy --version=1 --project=gdg-kl app.yaml
+after_success:
+- firebase deploy --token $FIREBASE_TOKEN --non-interactive --only hosting

@@ -1,112 +1,102 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <meta name="generator" content="Polymer Starter Kit">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
     <title>GDG Kuala Lumpur</title>
-    <link rel="shortcut icon" sizes="32x32" href="/images/gdgkl.png">
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <meta name="theme-color" content="#0097a7">
-    <link rel="manifest" href="/manifest.json">
-    <!--TODO: meta tag and lang tag-->
-    <link rel="import" id="bundle" href="/src/gdg-app.html" async>
-    <script type="text/javascript" src="/bower_components/webcomponentsjs/webcomponents-lite.min.js" async></script>
+    <meta name="description" content="My App description">
+
+    <!--
+      The `<base>` tag below is present to support two advanced deployment options:
+      1) Differential serving. 2) Serving from a non-root path.
+
+      Instead of manually editing the `<base>` tag yourself, you should generally either:
+      a) Add a `basePath` property to the build configuration in your `polymer.json`.
+      b) Use the `--base-path` command-line option for `polymer build`.
+
+      Note: If you intend to serve from a non-root path, see [polymer-root-path] below.
+    -->
+    <base href="/">
+
+    <link rel="shortcut icon" sizes="32x32" href="images/favicon/favicon-32.png">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- See https://goo.gl/qRE0vM -->
+    <meta name="theme-color" content="#4285f4">
+
+    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and many more.">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and many more.">
+
+    <!-- Homescreen icons -->
+    <link rel="apple-touch-icon" href="images/manifest/homescreen-48.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/homescreen-72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/homescreen-96.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/homescreen-144.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/homescreen-192.png">
+
+    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/manifest/homescreen-144.png">
+    <meta name="msapplication-TileColor" content="#4285f4">
+    <meta name="msapplication-tap-highlight" content="no">
+
     <script>
-    window.Polymer = {
-        lazyRegister: true,
-        dom: 'shadow'
-    };
+      /**
+      * [polymer-root-path]
+      *
+      * By default, we set `Polymer.rootPath` to the server root path (`/`).
+      * Leave this line unchanged if you intend to serve your app from the root
+      * path (e.g., with URLs like `my.domain/` and `my.domain/view1`).
+      *
+      * If you intend to serve your app from a non-root path (e.g., with URLs
+      * like `my.domain/my-app/` and `my.domain/my-app/view1`), edit this line
+      * to indicate the path from which you'll be serving, including leading
+      * and trailing slashes (e.g., `/my-app/`).
+      */
+      window.Polymer = {rootPath: '/'};
     </script>
+
+    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <!-- Load your application shell -->
+    <link rel="import" href="src/gdg-app.html">
+
+    <!-- Add any global styles for body, document, etc. -->
     <style>
-    body {
+      body {
         margin: 0;
         font-family: 'Roboto', 'Noto', sans-serif;
         line-height: 1.5;
         min-height: 100vh;
-        background-color: #eee;
-    }
-    
-    #splash {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        transition: opacity 300ms cubic-bezier(0, 0, 0.2, 1);
-        will-change: opacity;
-        background: url(/images/gdg.svg) no-repeat 50% 50%;
-        background-size: 100px;
-        background-color: #ECEFF1;
-    }
+        background-color: #ffffff;
+      }
     </style>
-</head>
-
-<body>
-    <gdg-app id="gdg"></gdg-app>
-    <div id="splash" style="opacity: 1"></div>
-    <script>
-    // (function() {
-    //     if ('registerElement' in document && 'import' in document.createElement('link') && 'content' in document.createElement('template')) {
-    //         finishLazyLoading();
-    //     } else {
-    //         var e = document.createElement('script');
-    //         e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
-    //         document.head.appendChild(e);
-    //         finishLazyLoading();
-    //     }
-    // })();
-
-
-    function finishLazyLoading() {
-        var onImportLoaded = function() {
-            var splash = document.getElementById('splash');
-            // splash.style.opacity = 0;
-            splash.parentElement.removeChild(splash);
-            serviceWorker();
-
-            // something wrong with firefox -> transitionend
-            // splash.addEventListener('transitionend', function() {
-            //     console.log("transitionend")
-            // });
-        };
-
-        var link = document.querySelector('#bundle');
-        if (link.import && link.import.readyState === 'complete') {
-            onImportLoaded();
-        } else {
-            link.addEventListener('load', onImportLoaded);
-        }
-    }
-
-    function serviceWorker() {
-        var app = document.querySelector('gdg-app');
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js').then(function(reg) {
-                reg.onupdatefound = function() {
-                    var installingWorker = reg.installing;
-                    installingWorker.onstatechange = function() {
-                        switch (installingWorker.state) {
-                            case 'installed':
-                                if (navigator.serviceWorker.controller) {
-                                    app.showToast('update');
-                                } else {
-                                    app.showToast('offline');
-                                }
-                                break;
-                            case 'redundant':
-                                app.showToast('redundant');
-                                break;
-                        }
-                    }
-                }
-            });
-        }
-    }
-
-    finishLazyLoading();
-    </script>
-</body>
-
+  </head>
+  <body unresolved>
+    <gdg-app></gdg-app>
+    <noscript>
+      Please enable JavaScript to view this website.
+    </noscript>
+    <!-- Built with love using Polymer Starter Kit -->
+  </body>
 </html>
