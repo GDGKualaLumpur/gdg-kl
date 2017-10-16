@@ -2,7 +2,7 @@
   "name": "GDG Kuala Lumpur",
   "short_name": "GDGKL",
   "description": "Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and many more.",
-  "start_url": "./?homescreen=1",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#ffffff",
   "background_color": "#ffffff",

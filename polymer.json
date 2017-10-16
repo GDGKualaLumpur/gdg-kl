@@ -3,7 +3,8 @@
   "shell": "src/gdg-app.html",
   "fragments": [
     "src/gdg-home.html",
-    "src/gdg-about.html"
+    "src/gdg-about.html",
+    "src/gdg-events.html"
   ],
   "sources": [
     "src/**/*",

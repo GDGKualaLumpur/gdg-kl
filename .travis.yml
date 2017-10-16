@@ -12,3 +12,6 @@ script:
 - polymer build
 after_success:
 - firebase deploy --token $FIREBASE_TOKEN --non-interactive --only hosting
+branches:
+  only:
+    - master

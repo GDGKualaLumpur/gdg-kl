@@ -12,7 +12,6 @@
       .card {
         box-sizing: border-box;
         border-radius: 2px;
-        cursor: pointer;
         padding: 24px 32px;
         transition: 150ms box-shadow ease-in-out;
       }
@@ -22,6 +21,8 @@
       }
 
       .image {
+        background-position: center center;
+        background-size: cover;
         height: 420px;
         width: 100%;
         margin-bottom: 12px;
@@ -75,7 +76,7 @@
     </style>
 
     <div class="card">
-      <div class="image" style$="background-color: [[color]]"></div>
+      <div class="image" style$="background-color: [[color]]; background-image: url('../images/[[image]]')"></div>
       <div class="text">
         <div class="title">[[header]]</div>
         <div class="subtitle">[[subtitle]]</div>
@@ -92,7 +93,8 @@
         return {
           header: String,
           subtitle: String,
-          color: String
+          color: String,
+          image: String
         }
       }
     }
