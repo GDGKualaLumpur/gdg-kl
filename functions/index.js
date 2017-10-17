@@ -28,9 +28,9 @@ exports.test = functions.https.onRequest(
                 <meta property="og:title" content="${event_title}">
                 <meta property="og:site_name" content="GDG Kuala Lumpur">
                 <meta property="og:type" content="website">
-                <meta property="og:url" content="https://0f6cd8f0.ngrok.io/events/${req.params.eventid}">
+                <meta property="og:url" content="https://gdg-kl-dev.firebaseapp.com/events/${req.params.eventid}">
                 <meta property="og:description" content="Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and many more.">
-                <meta property="og:image" content="https://0f6cd8f0.ngrok.io/images/gdgkl.jpg">
+                <meta property="og:image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
                 <meta property="og:image:type" content="image/jpeg" />
             
                 <!-- Twitter meta data -->
@@ -38,7 +38,7 @@ exports.test = functions.https.onRequest(
                 <meta name="twitter:creator" content="@gdgkl">
                 <meta name="twitter:title" content="${event_title}">
                 <meta name="twitter:description" content="Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and many more.">
-                <meta name="twitter:image" content="https://0f6cd8f0.ngrok.io/images/gdgkl.jpg">
+                <meta name="twitter:image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
               </head>
               <body>
                 <h1>${event_title}</h1>

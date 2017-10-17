@@ -18,11 +18,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display: block;
             }
 
-            .container{
+            .container {
                 max-width: 1000px;
             }
 
-            paper-icon-button{
+            paper-icon-button {
                 margin-bottom: 12px;
                 color: rgba(0, 0, 0, .5);
             }
@@ -108,7 +108,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 user-select: none;
             }
 
-            .info .card .button {
+            .info .card .button,
+            .button {
                 cursor: pointer;
                 background: #4285F4;
                 color: white;
@@ -148,10 +149,53 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 color: rgba(0, 0, 0, .7);
                 font-weight: 400;
             }
+
+            .mobile {
+                display: none;
+            }
+
+            @media screen and (max-width: 960px) {
+                paper-icon-button {
+                    position: absolute;
+                    margin: 10px 16px;
+                    color: white;
+                }
+                .event .cover {
+                    height: 250px;
+                }
+                .event .content {
+                    flex-direction: column;
+                }
+                .event .details {
+                    padding: 24px 42px 32px 24px;
+                    box-sizing: border-box;
+                }
+                .event .info {
+                    display: none;
+                }
+                
+                .info.mobile {
+                    display: flex;
+                }
+                .info .card {
+                    padding-bottom: 96px;
+                }
+                .info .item {
+                    padding: 12px 24px 0 24px;
+                }
+                .button.mobile {
+                    display: flex;
+                    margin: -64px 24px 64px 24px;
+                    position: sticky;
+                    bottom: 24px;
+                }
+            }
         </style>
 
         <div class="container">
-            <a href="../events/"><paper-icon-button icon="gdg-icons:arrow-back"></paper-icon-button></a>
+            <a href="../events/">
+                <paper-icon-button icon="gdg-icons:arrow-back"></paper-icon-button>
+            </a>
             <div class="event card">
                 <div class="cover"></div>
                 <div class="content">
@@ -198,6 +242,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     </div>
                 </div>
             </div>
+            <div class="info mobile">
+                <div class="card">
+                    <div class="item">
+                        <div class="title">WHEN</div>
+                        <div class="text">Sat, Oct 7, 2017</div>
+                        <div class="subtext">2:00PM - 7:00PM</div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="item">
+                        <div class="title">WHERE</div>
+                        <div class="text">Google Malaysia</div>
+                        <div class="subtext">Axiata Tower (Quill 7), 9, Jalan Stesen Sentral 5, Kuala Lumpur Sentral, 50470 Kuala Lumpur, Wilayah
+                            Persekutuan Kuala Lumpur Malaysia</div>
+                    </div>
+                </div>
+            </div>
+            <div class="button mobile">Register</div>
         </div>
     </template>
 
