@@ -1,0 +1,78 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="gdg-events-home.html">
+<link rel="import" href="gdg-events-details.html">
+
+<dom-module id="gdg-events">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+        background: #fafafa;
+        border-bottom: 1px solid #cfcfcf;
+      }
+
+    </style>
+
+    <app-route route="{{route}}" pattern="/events/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+    <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="home">
+      <gdg-events-home name="home" id="home"></gdg-events-home>
+      <gdg-events-details name="details" id="details"></gdg-events-details>
+    </iron-pages>
+
+  </template>
+
+  <script>
+    class GdgEvents extends Polymer.LegacyElementMixin(Polymer.Element) {
+      static get is() { return 'gdg-events'; }
+
+      static get observers() {
+        return [
+          '_routePageChanged(routeData.page)'
+        ];
+      }
+
+      _routePageChanged(page) {
+        if (page === undefined || page.length <= 0) {
+          this.page = 'home';
+          this.$.home.loadData(page);
+        }
+        else {
+          this.page = 'details'
+          this.$.details.loadData(page);
+        }
+      }
+
+      // loadData(page) {
+      //   if (this.page == 'home') {
+          
+      //   }
+      //   else {
+      //     console.log('get data from details page:', page)
+      //     var dbRef = this.db.collection('events').doc(page);
+      //     dbRef.get().then((doc) => {
+      //       if (doc.exists) {
+      //         console.log("Document data:", doc.data());
+      //         dbRef.collection('details').doc('test').get().then((doc) => {
+      //           console.log("Document data:", doc.data());
+      //         })
+      //       }
+      //     })
+      //   }
+      // }
+    }
+
+    window.customElements.define(GdgEvents.is, GdgEvents);
+  </script>
+</dom-module>

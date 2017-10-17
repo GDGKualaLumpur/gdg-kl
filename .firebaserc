@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "gdg-kl"
+    "default": "gdg-kl",
+    "development": "gdg-kl-dev"
   }
 }

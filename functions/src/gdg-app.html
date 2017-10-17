@@ -254,10 +254,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <img id="drawer_logo" src="../images/gdgkl_short.svg">
         </app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="home" href="[[rootPath]]home">HOME</a>
-          <a name="events" href="[[rootPath]]events">EVENTS</a>
-          <a name="about" href="[[rootPath]]about">ABOUT</a>
-          <!-- <a name="about" href="[[rootPath]]settings">SETTINGS</a> -->
+          <a name="home" href="[[rootPath]]home/">HOME</a>
+          <a name="events" href="[[rootPath]]events/">EVENTS</a>
+          <a name="about" href="[[rootPath]]about/">ABOUT</a>
+          <a name="settings" href="[[rootPath]]settings/">SETTINGS</a>
         </iron-selector>
       </app-drawer>
 
@@ -277,10 +277,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </div>
             <img id="bottom_toolbar_logo_mobile" src="../images/gdgkl_full.svg">
             <iron-selector selected="[[page]]" attr-for-selected="name" role="navigation">
-              <a name="home" href="[[rootPath]]home">HOME</a>
-              <a name="events" href="[[rootPath]]events">EVENTS</a>
-              <a name="about" href="[[rootPath]]about">ABOUT</a>
-              <!-- <a name="about" href="[[rootPath]]settings">SETTINGS</a> -->
+              <a name="home" href="[[rootPath]]home/">HOME</a>
+              <a name="events" href="[[rootPath]]events/">EVENTS</a>
+              <a name="about" href="[[rootPath]]about/">ABOUT</a>
+              <a name="settings" href="[[rootPath]]settings/">SETTINGS</a>
             </iron-selector>
             <div main-title></div>
           </app-toolbar>
@@ -288,8 +288,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="home" role="main">
           <gdg-home name="home"></gdg-home>
-          <gdg-events name="events"></gdg-events>
+          <gdg-events route="{{route}}" name="events"></gdg-events>
           <gdg-about name="about"></gdg-about>
+          <gdg-settings name="settings"></gdg-settings>
         </iron-pages>
 
         <div class="subfooter">
@@ -364,7 +365,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         document.title = {
           home: "GDG Kuala Lumpur",
           about: "About - GDG Kuala Lumpur",
-          events: "Events - GDG Kuala Lumpur"
+          events: "Events - GDG Kuala Lumpur",
+          settings: "Settings - GDG Kuala Lumpur"
         }[this.page] || 'GDG Kuala Lumpur'
 
         // Close a non-persistent drawer when the page & route are changed.
@@ -440,12 +442,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         super.ready();
 
         var config = {
-          apiKey: "AIzaSyD_B8LAxG-1IlfrlZwN5HAbncuwHrCZxU8",
-          authDomain: "gdg-kl.firebaseapp.com",
-          databaseURL: "https://gdg-kl.firebaseio.com",
-          projectId: "gdg-kl",
-          storageBucket: "gdg-kl.appspot.com",
-          messagingSenderId: "824291119922"
+          apiKey: "AIzaSyC6Wf7HE3cSKMpyI6f_XLmqfkY8qbR8sSg",
+          authDomain: "gdg-kl-dev.firebaseapp.com",
+          databaseURL: "https://gdg-kl-dev.firebaseio.com",
+          projectId: "gdg-kl-dev",
+          storageBucket: "gdg-kl-dev.appspot.com",
+          messagingSenderId: "315553708723"
         };
 
         firebase.initializeApp(config);

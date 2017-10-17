@@ -3,8 +3,12 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "build/firebase",
+    "public": "functions/build/firebase",
     "rewrites": [
+      {
+        "source": "/events/**",
+        "function": "test"
+      },
       {
         "source": "!/__/**",
         "destination": "/index.html"

@@ -1,0 +1,145 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gdg-settings">
+  <template>
+    <style include="shared-styles">
+      :host {
+        padding-top: 36px;
+        display: block;
+        background: #fafafa;
+        height: 100vh;
+      }
+
+      .card {
+        background: white;
+        margin: 0 0 12px 0;
+        min-width: 300px;
+        max-width: 300p;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+      }
+
+      .profile_picture {
+        width: 72px;
+        height: 72px;
+        background-image: url(../images/profile.jpg);
+        background-position: 50% 50%;
+        background-size: cover;
+        border-radius: 50%;
+        border: 2px solid white;
+        margin: 0 auto 12px auto;
+
+      }
+
+      h2,
+      h3,
+      p {
+        font-weight: 400;
+        margin: 4px auto;
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      .level {
+        margin-top: 22px;
+        width: 100%;
+        border-radius: 6px;
+        height: 6px;
+        background: #ebebeb;
+        overflow: hidden;
+      }
+
+      .range {
+        width: 13%;
+        background: #4285f4;
+        height: 6px;
+      }
+
+      .profile {
+        padding: 24px;
+        border-bottom: 1px solid #d0d8dc
+      }
+
+      .profile-details {
+        padding: 12px 0;
+        color: rgba(0, 0, 0, .6)
+      }
+
+      .row {
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .column {
+        padding: 24px 12px;
+      }
+
+      .left.column {
+        max-width: 300px;
+      }
+
+      .right.column {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex: 1 1 60%;
+      }
+
+      .right.column .card {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 100%;
+        padding: 24px;
+        box-sizing: border-box;
+      }
+    </style>
+
+    <div class="row">
+      <div class="left column">
+        <div class="card">
+          <div class="profile">
+            <div class="profile_picture"></div>
+            <h2>Henry Lim</h2>
+            <p>Superhero &middot; Since Oct 2015</p>
+            <div class="level">
+              <div class="range"></div>
+            </div>
+            <p style="margin-top: 12px; color: #4285f4;">3,022 points &middot; Level 9</p>
+          </div>
+          <div class="profile-details">
+            Learn More
+          </div>
+        </div>
+      </div>
+
+      <div class="column right">
+        <div class="card">put something here</div>
+        <div class="card">but i dunno what to put <br> lol</div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    class GdgSettings extends Polymer.Element {
+      static get is() { return 'gdg-settings'; }
+    }
+
+    window.customElements.define(GdgSettings.is, GdgSettings);
+  </script>
+</dom-module>

@@ -1,0 +1,379 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gdg-events-home">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+            }
+
+            .header {
+                height: 300px;
+                width: 100%;
+                background-color: #3eaaf4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                flex-direction: column;
+            }
+
+            .header h2 {
+                font-weight: 400;
+                margin: 8px auto;
+                font-size: 26px;
+            }
+
+            .header p {
+                font-weight: 300;
+                margin: 0 auto;
+                font-size: 16px;
+            }
+
+            .subheader {
+                background: white;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12)
+            }
+
+            .subheader .filter-container {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                font-size: 14px;
+            }
+
+            .subheader .search input {
+                width: 100%;
+                outline: none;
+                border: 1px solid #d0d8dc;
+                height: 40px;
+                font-size: 14px;
+                padding: 0 15px;
+                margin-bottom: 16px;
+                box-sizing: border-box;
+            }
+
+            .subheader .filter p {
+                color: #9fb1c1;
+                margin-top: 0;
+                margin-bottom: 8px;
+            }
+
+            .filter-container .chip,
+            .events .card .chip {
+                text-transform: capitalize;
+                border-radius: 100px;
+                border: 1px solid rgba(0, 0, 0, .4);
+                color: rgba(0, 0, 0, .8);
+                margin: 2px 6px 4px 0;
+                padding: 4px 18px;
+                font-size: 14px;
+                text-align: center;
+                cursor: pointer;
+                transition: 80ms all linear;
+                user-select: none;
+            }
+
+            .filter-container .chip:hover {
+                border: 1px solid rgb(152, 193, 252);
+                background-color: rgb(152, 193, 252);
+                color: white;
+            }
+
+            .filter-container .chip.true {
+                border: 1px solid #4285F4;
+                background-color: #4285F4;
+                color: white;
+            }
+
+            .events .card .chip {
+                display: inline-block;
+                margin-left: 0;
+                margin-top: 8px;
+                font-size: 13px;
+                padding: 1px 18px;
+            }
+
+            .events {
+                padding-bottom: 32px;
+                margin-top: 2px;
+            }
+
+            .events .container h2 {
+                color: rgba(0, 0, 0, .4);
+                font-weight: 400;
+                font-size: 15px;
+                margin-top: 48px;
+                max-width: 720px;
+            }
+
+            .events .container h2:first-of-type {
+                margin-top: 12px;
+            }
+
+            .events .container .card {
+                display: block;
+                text-decoration: none;
+                cursor: pointer;
+                padding: 22px;
+                max-width: 720px;
+                background: white;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+            }
+
+            .events .container .card.error {
+                cursor: default;
+            }
+
+            .events .container .card h3 {
+                color: rgba(0, 0, 0, .95);
+                font-weight: 400;
+                margin: 0 0 4px 0;
+            }
+
+            .events .container .card h4 {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 400;
+                color: rgba(0, 0, 0, .6);
+            }
+
+            .events .container .card p {
+                max-width: 600px;
+                font-size: 14px;
+                color: rgba(0, 0, 0, .8);
+                margin-bottom: 0;
+                line-height: 24px;
+            }
+
+            @media screen and (max-width: 960px) {
+                .subheader .container {
+                    padding: 32px 24px;
+                }
+                .events {
+                    min-height: 300px;
+                    padding-bottom: 0;
+                }
+                .events .container {
+                    padding: 16px 0 0 0;
+                }
+                .events .container .card {
+                    margin: 0 auto;
+                }
+                .events .container h2 {
+                    margin-top: 32px;
+                    padding-left: 12px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+        </style>
+
+        <div class="subheader">
+            <div class="container">
+                <div class="filter">
+                    <p>FILTER:</p>
+                    <div class="filter-container">
+                        <template is="dom-repeat" items="{{filterType}}">
+                            <div class$="chip {{item.toggle}}" on-tap="toggleFilter" something$="{{item.toggle}}">
+                                [[item.name]]
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="events">
+            <div class="container">
+                <h2>Upcoming Events</h2>
+                <template is="dom-repeat" items="[[upcomingEvents]]">
+                    <a href$="events/[[item.id]]" class="card">
+                        <div class="info">
+                            <h3>[[item.title]]</h3>
+                            <h4>[[_parseDateTime(item.datetime)]] &middot; [[item.venue]]</h4>
+                            <div class="chip-container">
+                                <div class="chip">[[item.tag]]</div>
+                            </div>
+                            <p>[[item.description]]</p>
+                        </div>
+                    </a>
+                </template>
+                <template is="dom-if" if="[[!upcomingEvents]]">
+                    <div class="card error">
+                        <h3>Oops. No upcoming event found.</h3>
+                    </div>
+                </template>
+                <h2>Past Events</h2>
+                <template is="dom-repeat" items="[[pastEvents]]">
+                    <a href$="events/[[item.id]]" class="card">
+                        <div class="info">
+                            <h3>[[item.title]]</h3>
+                            <h4>[[_parseDateTime(item.datetime)]] &middot; [[item.venue]]</h4>
+                            <div class="chip-container">
+                                <div class="chip">[[item.tag]]</div>
+                            </div>
+                            <p>[[item.description]]</p>
+                        </div>
+                    </a>
+                </template>
+                <template is="dom-if" if="[[!pastEvents]]">
+                    <div class="card error">
+                        <h3>Oops. No past event found.</h3>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        class GdgEventsHome extends Polymer.Element {
+            static get is() { return 'gdg-events-home'; }
+
+            static get properties() {
+                return {
+                    pastEvents: {
+                        value: []
+                    },
+                    upcomingEvents: {
+                        value: []
+                    },
+                    filterType: {
+                        notify: true,
+                        reflectToAttribute: true
+                    }
+                }
+            }
+
+            _parseDateTime(datetime) {
+                return new Date(datetime).toLocaleString("en-us", { hour: "numeric", minute: "numeric", day: "numeric", month: "short", year: "numeric" });
+            }
+
+            _getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            toggleFilter(event) {
+                this.set('filterType.' + event.model.index + '.toggle', !event.model.item.toggle);
+                this.filterType.forEach((item, index) => {
+                    if (index != event.model.index) {
+                        this.set('filterType.' + index + '.toggle', false);
+                    }
+                })
+
+                if (event.model.item.toggle) {
+                    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?type=' + event.model.item.name.replace(/ /g, "_").toUpperCase();
+                }
+                else {
+                    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                }
+                window.history.pushState({ path: newurl }, '', newurl);
+
+                this.getEventData();
+            }
+
+            getEventData() {
+                var timestamp = new Date();
+                var selectedFilter = true;
+                if (this._getParameterByName('type')) {
+                    selectedFilter = this._getParameterByName('type')
+                        .replace(/_/g, " ")
+                        .toLowerCase();
+                    var upcomingEventsRef = this.db.collection("events")
+                        .where("datetime", ">=", timestamp)
+                        .where("tag", "==", selectedFilter)
+                    var pastEventsRef = this.db.collection("events")
+                        .where("datetime", "<", timestamp)
+                        .where("tag", "==", selectedFilter).orderBy("datetime", "desc")
+                }
+                else {
+                    var upcomingEventsRef = this.db.collection("events")
+                        .where("datetime", ">=", timestamp)
+                    var pastEventsRef = this.db.collection("events")
+                        .where("datetime", "<", timestamp)
+                        .orderBy("datetime", "desc")
+                }
+
+                upcomingEventsRef.get().then((querySnapshot) => {
+                    this.set('upcomingEvents', []);
+                    querySnapshot.forEach((doc) => {
+                        this.push('upcomingEvents', doc.data())
+                    });
+                    if (this.upcomingEvents.length <= 0) {
+                        this.set('upcomingEvents', null);
+                    }
+                });
+
+                pastEventsRef.get().then((querySnapshot) => {
+                    this.set('pastEvents', [])
+                    querySnapshot.forEach((doc) => {
+                        this.push('pastEvents', doc.data())
+                    });
+                    if (this.pastEvents.length <= 0) {
+                        this.set('pastEvents', null);
+                    }
+                });
+
+                // db.collection("events").doc("io17-live-viewing-party").set({
+                //     datetime: new Date('17 May 2017 22:00:00'),
+                //     description: "I/O Extended 2017 Kuala Lumpur Live Viewing Party is here once again! In this live viewing party, we will join up and watch the live keynote together, from night until dawn at the amazing iTrain office!",
+                //     tag: "live viewing party",
+                //     title: "I/O Extended 2017 Kuala Lumpur - Live Viewing Party",
+                //     url: "http://ioxkl17.peatix.com/",
+                //     venue: "iTrain Kuala Lumpur"
+                // })
+            }
+
+            loadData() {
+                this.db = firebase.firestore();
+                this.set('filterType', [{
+                    'name': 'meetup',
+                    'toggle': false
+                }, {
+                    'name': 'workshop',
+                    'toggle': false
+                }, {
+                    'name': 'live viewing party',
+                    'toggle': false
+                }, {
+                    'name': 'conference',
+                    'toggle': false
+                }, {
+                    'name': 'study jam',
+                    'toggle': false
+                }, {
+                    'name': 'extended event',
+                    'toggle': false
+                }])
+
+                if (this._getParameterByName('type')) {
+                    this.filterType.forEach(filter => {
+                        if (filter.name == this._getParameterByName('type').replace(/_/g, " ").toLowerCase()) {
+                            filter.toggle = true;
+                        }
+                    })
+                }
+
+                this.getEventData();
+            }
+        }
+
+        window.customElements.define(GdgEventsHome.is, GdgEventsHome);
+    </script>
+</dom-module>
