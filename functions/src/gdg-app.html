@@ -210,7 +210,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 20px;
       }
 
-
       @media screen and (max-width: 960px) {
         paper-toast {
           width: 100%;
@@ -257,7 +256,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a name="home" href="[[rootPath]]home/">HOME</a>
           <a name="events" href="[[rootPath]]events/">EVENTS</a>
           <a name="about" href="[[rootPath]]about/">ABOUT</a>
-          <a name="settings" href="[[rootPath]]settings/">SETTINGS</a>
         </iron-selector>
       </app-drawer>
 
@@ -280,7 +278,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <a name="home" href="[[rootPath]]home/">HOME</a>
               <a name="events" href="[[rootPath]]events/">EVENTS</a>
               <a name="about" href="[[rootPath]]about/">ABOUT</a>
-              <a name="settings" href="[[rootPath]]settings/">SETTINGS</a>
             </iron-selector>
             <div main-title></div>
           </app-toolbar>
@@ -290,7 +287,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <gdg-home name="home"></gdg-home>
           <gdg-events route="{{route}}" name="events"></gdg-events>
           <gdg-about name="about"></gdg-about>
-          <gdg-settings name="settings"></gdg-settings>
         </iron-pages>
 
         <div class="subfooter">
@@ -348,6 +344,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // This shouldn't be neccessary, but the Analyzer isn't picking up
           // Polymer.Element#rootPath
           rootPath: String,
+          user: Object
         };
       }
 

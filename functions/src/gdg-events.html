@@ -10,8 +10,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
-<link rel="import" href="gdg-events-home.html">
-<link rel="import" href="gdg-events-details.html">
+<link rel="lazy-import" href="gdg-events-home.html">
+<link rel="lazy-import" href="gdg-events-details.html">
 
 <dom-module id="gdg-events">
   <template>
@@ -21,7 +21,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background: #fafafa;
         border-bottom: 1px solid #cfcfcf;
       }
-
     </style>
 
     <app-route route="{{route}}" pattern="/events/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
@@ -42,35 +41,36 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           '_routePageChanged(routeData.page)'
         ];
       }
+      static get properties() {
+        return {
+          page: {
+            type: String,
+            reflectToAttribute: true,
+            observer: '_pageChanged',
+          }
+        };
+      }
 
       _routePageChanged(page) {
         if (page === undefined || page.length <= 0) {
           this.page = 'home';
-          this.$.home.loadData(page);
+          document.title = 'Events - GDG Kuala Lumpur';
         }
         else {
           this.page = 'details'
-          this.$.details.loadData(page);
         }
       }
 
-      // loadData(page) {
-      //   if (this.page == 'home') {
-          
-      //   }
-      //   else {
-      //     console.log('get data from details page:', page)
-      //     var dbRef = this.db.collection('events').doc(page);
-      //     dbRef.get().then((doc) => {
-      //       if (doc.exists) {
-      //         console.log("Document data:", doc.data());
-      //         dbRef.collection('details').doc('test').get().then((doc) => {
-      //           console.log("Document data:", doc.data());
-      //         })
-      //       }
-      //     })
-      //   }
-      // }
+      _pageChanged(page) {
+        var resolvedPageUrl = this.resolveUrl('gdg-events-' + page + '.html');
+        Polymer.importHref(
+            resolvedPageUrl,
+            () => {
+              this.$[page].loadData(this.routeData.page);
+            },
+            function(error){console.log(error)},
+            true);
+      }
     }
 
     window.customElements.define(GdgEvents.is, GdgEvents);

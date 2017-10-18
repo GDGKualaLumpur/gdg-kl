@@ -18,6 +18,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 display: block;
             }
 
+            a {
+                color: #4285F4;
+            }
+
             .container {
                 max-width: 1000px;
             }
@@ -35,7 +39,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             .event .cover {
-                background-image: url(https://firebasestorage.googleapis.com/v0/b/ioxkl17.appspot.com/o/images%2Fcover.jpg?alt=media);
+                border-bottom: 1px solid rgba(0, 0, 0, .12);
+                /* background-color: #4285F4; */
+                background-image: url(../images/gdgkl.jpg);
+                /* background-image: url(https://firebasestorage.googleapis.com/v0/b/ioxkl17.appspot.com/o/images%2Fcover.jpg?alt=media); */
                 height: 350px;
                 width: 100%;
                 background-position: 50% 50%;
@@ -76,19 +83,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 line-height: 24px;
             }
 
-            .event .details a {
-                color: #4285F4;
-            }
-
             .event .info {
                 box-sizing: border-box;
                 min-width: 350px;
-                margin-top: -48px;
-                margin-right: 32px;
+                margin: -48px 32px 24px 0;
                 flex: 1;
             }
 
             .event .info .card {
+                min-height: 200px;
                 padding: 24px;
                 box-sizing: border-box;
             }
@@ -110,6 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             .info .card .button,
             .button {
+                text-decoration: none;
                 cursor: pointer;
                 background: #4285F4;
                 color: white;
@@ -127,6 +131,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             .info .item {
                 font-weight: 500;
                 font-size: 14px;
+                display: flex;
+                flex-direction: row;
+            }
+
+            .info .item .row {
+                flex-direction: column;
+                width: auto;
+                flex: 1;
+                flex-wrap: nowrap;
+            }
+
+            .info .item .row.action {
+                color: #4285F4;
+                flex: 0;
+                margin-left: 16px;
+                justify-content: center;
+                text-transform: uppercase;
+                align-items: flex-end;
+            }
+
+            .info .item .row.action a {
+                text-decoration: none;
             }
 
             .info .item .title {
@@ -173,7 +199,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 .event .info {
                     display: none;
                 }
-                
+
                 .info.mobile {
                     display: flex;
                 }
@@ -182,6 +208,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
                 .info .item {
                     padding: 12px 24px 0 24px;
+                    flex-direction: column;
+                }
+                .info .divider {
+                    margin: 12px 0;
                 }
                 .button.mobile {
                     display: flex;
@@ -200,44 +230,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <div class="cover"></div>
                 <div class="content">
                     <div class="details">
-                        <h3>Google I/O 2017 Extended Kuala Lumpur</h3>
-                        <div class="chip-container">
-                            <div class="chip">Meetup</div>
-                        </div>
-                        <div class="description">
-                            <p>Google IO Extended Kuala Lumpur will once again happen on the 22nd of July 2017! We will be inviting
-                                speakers that are consists of local experts and Googlers to come and share about the experience
-                                in using Google technologies and best practices to propel your journey forward as a developer.
-                                <br>
-                                <br> Don't miss your chance to learn more about the latest and greatest Google technologies and
-                                1337 Dev skills from the dev experts! Seats will be limited, sign up now!
-                                <br>
-                                <br> Website:
-                                <a href="">https://ioxkl17.firebaseapp.com/</a>
-                                <br>
-                                <br> Note:
-                                <br> 1. GDGKL will send emails for attendees to confirm their attendance a few days before the
-                                event. The tickets belong to attendees who did not confirm their ticket via email will be
-                                forfeited.
-                                <br>
-                                <br> 2. Walk-ins are strictly not allowed
-                        </div>
+                        <template is="dom-if" if="[[eventData]]">
+                            <h3>[[eventData.title]]</h3>
+                            <div class="chip-container">
+                                <div class="chip">[[eventData.tag]]</div>
+                            </div>
+                            <div class="description">
+                                <p>[[eventData.description]]
+                            </div>
+                        </template>
                     </div>
                     <div class="info">
                         <div class="card">
-                            <div class="item">
-                                <div class="title">WHEN</div>
-                                <div class="text">Sat, Oct 7, 2017</div>
-                                <div class="subtext">2:00PM - 7:00PM</div>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="item">
-                                <div class="title">WHERE</div>
-                                <div class="text">Google Malaysia</div>
-                                <div class="subtext">Axiata Tower (Quill 7), 9, Jalan Stesen Sentral 5, Kuala Lumpur Sentral, 50470 Kuala Lumpur,
-                                    Wilayah Persekutuan Kuala Lumpur Malaysia</div>
-                            </div>
-                            <div class="button">Register</div>
+                            <template is="dom-if" if="[[eventData]]">
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="title">WHEN</div>
+                                        <div class="text">[[_parseDate(eventData.datetime)]]</div>
+                                        <div class="subtext">2:00PM - 7:00PM</div>
+                                    </div>
+                                    <!-- <div class="row action">
+                                    <a href="">+Calendar</a>
+                                </div> -->
+                                </div>
+                                <div class="divider"></div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="title">WHERE</div>
+                                        <div class="text">[[eventData.venue]]</div>
+                                        <div class="subtext">Axiata Tower (Quill 7), 9, Jalan Stesen Sentral 5, Kuala Lumpur Sentral, 50470 Kuala
+                                            Lumpur, Wilayah Persekutuan Kuala Lumpur Malaysia</div>
+                                    </div>
+                                    <!-- <div class="row action">
+                                    <a href="">Direction</a>
+                                </div> -->
+                                </div>
+                                <a href$="[[eventData.url]]" class="button">Visit Website</a>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -252,13 +281,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <div class="divider"></div>
                     <div class="item">
                         <div class="title">WHERE</div>
-                        <div class="text">Google Malaysia</div>
+                        <div class="text">[[eventData.venue]]</div>
                         <div class="subtext">Axiata Tower (Quill 7), 9, Jalan Stesen Sentral 5, Kuala Lumpur Sentral, 50470 Kuala Lumpur, Wilayah
                             Persekutuan Kuala Lumpur Malaysia</div>
                     </div>
                 </div>
             </div>
-            <div class="button mobile">Register</div>
+            <a href$="[[eventData.url]]" class="button mobile">Visit Website</a>
         </div>
     </template>
 
@@ -267,12 +296,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             static get is() { return 'gdg-events-details'; }
 
             loadData(page) {
+                this.set('eventData', false)
                 this.db = firebase.firestore();
-                console.log('get data from details page:', page)
                 var dbRef = this.db.collection('events').doc(page);
                 dbRef.get().then((doc) => {
                     if (doc.exists) {
-                        console.log("Document data:", doc.data());
+                        this.set('eventData', doc.data());
+                        console.log(this.eventData)
+                        document.title = doc.data().title + ' - GDG Kuala Lumpur';
                         dbRef.collection('details').doc('test').get().then((doc) => {
                             if (doc.exists) {
                                 console.log("Document data:", doc.data());
@@ -280,6 +311,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         })
                     }
                 })
+            }
+
+            _parseDate(datetime) {
+                if (datetime) {
+                    return new Date(datetime).toLocaleString("en-us", { day: "numeric", month: "short", year: "numeric" });
+                }
+                else {
+                    return ""
+                }
             }
         }
 

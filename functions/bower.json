@@ -15,7 +15,11 @@
     "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
     "polymer": "Polymer/polymer#^2.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
-    "paper-toast": "PolymerElements/paper-toast#^2.0.0"
+    "paper-toast": "PolymerElements/paper-toast#^2.0.0",
+    "vaadin-date-picker": "vaadin/vaadin-date-picker#^2.0.5",
+    "vaadin-material-theme": "vaadin/vaadin-material-theme#^0.3.0",
+    "vaadin-valo-theme": "vaadin/vaadin-valo-theme#^0.3.2",
+    "google-map": "GoogleWebComponents/google-map#^2.0.2"
   },
   "resolutions": {
     "polymer": "^2.0.0"
