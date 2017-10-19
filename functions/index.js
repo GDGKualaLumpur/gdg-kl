@@ -20,6 +20,9 @@ exports.test = functions.https.onRequest(
       db.collection('events').doc(req.params.eventid).get().then((doc) => {
         if (doc.exists) {
           var event_title = doc.data().title;
+          var short_description = doc.data().short_description;
+          var start_time = doc.data().start_time;
+          var end_time = doc.data().end_time;
           res.send(`
             <!DOCTYPE html>
             <html>
@@ -27,27 +30,35 @@ exports.test = functions.https.onRequest(
                 <!-- Facebook sharing meta data -->
                 <meta property="og:title" content="${event_title}">
                 <meta property="og:site_name" content="GDG Kuala Lumpur">
-                <meta property="og:type" content="website">
-                <meta property="og:url" content="https://gdg-kl-dev.firebaseapp.com/events/${req.params.eventid}">
-                <meta property="og:description" content="Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and many more.">
-                <meta property="og:image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
+                <meta property="og:type" content="Event">
+                <meta property="og:url" content="https://www.gdgkl.org/events/${req.params.eventid}">
+                <meta property="og:description" content="${short_description}">
+                <meta property="og:image" content="https://www.gdgkl.org/images/gdgkl.jpg">
                 <meta property="og:image:type" content="image/jpeg" />
+
+                <!-- G+ sharing meta data -->
+                <meta itemprop="name" content="${event_title}">
+                <meta itemprop="description" content="${short_description}">
+                <meta itemprop="image" content="https://www.gdgkl.org/images/gdgkl.jpg">
+                <meta itemprop="startDate" content="${start_time}">
+                <meta itemprop="endDate" content="${end_time}">
             
                 <!-- Twitter meta data -->
                 <meta name="twitter:card" content="summary_large_image">
                 <meta name="twitter:creator" content="@gdgkl">
                 <meta name="twitter:title" content="${event_title}">
-                <meta name="twitter:description" content="Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and many more.">
-                <meta name="twitter:image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
+                <meta name="twitter:description" content="${short_description}">
+                <meta name="twitter:image" content="https://www.gdgkl.org/images/gdgkl.jpg">
               </head>
               <body>
                 <h1>${event_title}</h1>
+                <p>${short_description}</p>
               </body>
             </html>
           `)
         }
         else {
-          res.send('browser, not ok: ' + req.params.eventid)
+          res.sendFile('./build/firebase/index.html', { root: '.' });
         }
       }).catch(error => {
         res.send('error')

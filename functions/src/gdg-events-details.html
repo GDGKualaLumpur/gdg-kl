@@ -39,14 +39,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             .event .cover {
+                position: relative;
                 border-bottom: 1px solid rgba(0, 0, 0, .12);
-                /* background-color: #4285F4; */
-                background-image: url(../images/gdgkl.jpg);
-                /* background-image: url(https://firebasestorage.googleapis.com/v0/b/ioxkl17.appspot.com/o/images%2Fcover.jpg?alt=media); */
                 height: 350px;
                 width: 100%;
                 background-position: 50% 50%;
                 background-size: cover;
+            }
+
+            .event .cover:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), transparent);
+                opacity: 0;
+                height: 92px;
             }
 
             .event .content {
@@ -76,6 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             .event .details p {
+                white-space: pre-wrap;
                 max-width: 600px;
                 font-size: 15px;
                 color: rgba(0, 0, 0, .85);
@@ -185,9 +196,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     position: absolute;
                     margin: 10px 16px;
                     color: white;
+                    z-index: 1;
                 }
                 .event .cover {
                     height: 250px;
+                }
+                .event .cover:before {
+                    opacity: .5;
+                    height: 72px;
                 }
                 .event .content {
                     flex-direction: column;
@@ -222,32 +238,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
         </style>
 
-        <div class="container">
+        <div class="container" id="test">
             <a href="../events/">
                 <paper-icon-button icon="gdg-icons:arrow-back"></paper-icon-button>
             </a>
             <div class="event card">
-                <div class="cover"></div>
+                <div class="cover" id="cover_pic"></div>
                 <div class="content">
                     <div class="details">
-                        <template is="dom-if" if="[[eventData]]">
-                            <h3>[[eventData.title]]</h3>
+                        <template is="dom-if" if="[[data]]">
+                            <h3>[[data.title]]</h3>
                             <div class="chip-container">
-                                <div class="chip">[[eventData.tag]]</div>
+                                <div class="chip" id$="[[_snakeCase(data.tag)]]">[[data.tag]]</div>
                             </div>
                             <div class="description">
-                                <p>[[eventData.description]]
+                                <p>[[data.description]]
                             </div>
                         </template>
                     </div>
                     <div class="info">
                         <div class="card">
-                            <template is="dom-if" if="[[eventData]]">
+                            <template is="dom-if" if="[[data]]">
                                 <div class="item">
                                     <div class="row">
                                         <div class="title">WHEN</div>
-                                        <div class="text">[[_parseDate(eventData.datetime)]]</div>
-                                        <div class="subtext">2:00PM - 7:00PM</div>
+                                        <div class="text">[[_parseDate(data.start_time)]]</div>
+                                        <div class="subtext">[[_parseTime(data.start_time)]] - [[_parseTime(data.end_time)]]</div>
                                     </div>
                                     <!-- <div class="row action">
                                     <a href="">+Calendar</a>
@@ -257,15 +273,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                 <div class="item">
                                     <div class="row">
                                         <div class="title">WHERE</div>
-                                        <div class="text">[[eventData.venue]]</div>
-                                        <div class="subtext">Axiata Tower (Quill 7), 9, Jalan Stesen Sentral 5, Kuala Lumpur Sentral, 50470 Kuala
-                                            Lumpur, Wilayah Persekutuan Kuala Lumpur Malaysia</div>
+                                        <div class="text">[[data.venue_name]]</div>
+                                        <div class="subtext">[[data.venue_address]]</div>
                                     </div>
                                     <!-- <div class="row action">
                                     <a href="">Direction</a>
                                 </div> -->
                                 </div>
-                                <a href$="[[eventData.url]]" class="button">Visit Website</a>
+                                <a target="_blank" href$="[[data.url]]" class="button">Visit Website</a>
                             </template>
                         </div>
                     </div>
@@ -275,47 +290,63 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <div class="card">
                     <div class="item">
                         <div class="title">WHEN</div>
-                        <div class="text">Sat, Oct 7, 2017</div>
-                        <div class="subtext">2:00PM - 7:00PM</div>
+                        <div class="text">[[_parseDate(data.start_time)]]</div>
+                        <div class="subtext">[[_parseTime(data.start_time)]] - [[_parseTime(data.end_time)]]</div>
                     </div>
                     <div class="divider"></div>
                     <div class="item">
                         <div class="title">WHERE</div>
-                        <div class="text">[[eventData.venue]]</div>
-                        <div class="subtext">Axiata Tower (Quill 7), 9, Jalan Stesen Sentral 5, Kuala Lumpur Sentral, 50470 Kuala Lumpur, Wilayah
-                            Persekutuan Kuala Lumpur Malaysia</div>
+                        <div class="text">[[data.venue_name]]</div>
+                        <div class="subtext">[[data.venue_address]]</div>
                     </div>
                 </div>
             </div>
-            <a href$="[[eventData.url]]" class="button mobile">Visit Website</a>
+            <a target="_blank" href$="[[data.url]]" class="button mobile">Visit Website</a>
         </div>
     </template>
 
     <script>
-        class GdgEventsDetails extends Polymer.Element {
+        class GdgEventsDetails extends Polymer.GestureEventListeners(Polymer.Element) {
             static get is() { return 'gdg-events-details'; }
 
             loadData(page) {
-                this.set('eventData', false)
-                this.db = firebase.firestore();
-                var dbRef = this.db.collection('events').doc(page);
-                dbRef.get().then((doc) => {
+                this.$.cover_pic.style.backgroundImage = '';
+                this.set('data', false);
+                firebase.firestore().collection('events').doc(page).get().then((doc) => {
                     if (doc.exists) {
-                        this.set('eventData', doc.data());
-                        console.log(this.eventData)
+                        if (doc.data().photoUrl) {
+                            this.$.cover_pic.style.backgroundImage = 'url(' + doc.data().photoUrl + ')'
+                        }
+                        else {
+                            this.$.cover_pic.style.backgroundImage = 'url(../images/gdgkl.jpg)';
+                        }
+                        this.set('data', doc.data());
                         document.title = doc.data().title + ' - GDG Kuala Lumpur';
-                        dbRef.collection('details').doc('test').get().then((doc) => {
-                            if (doc.exists) {
-                                console.log("Document data:", doc.data());
-                            }
-                        })
+                        console.log(this.$.test.scrollTop)
+                        document.body.scrollTop = 0;
+                        this.$.test.scrollTop = 0;
                     }
+                }).catch(error => {
+                    console.log(error)
                 })
             }
 
-            _parseDate(datetime) {
-                if (datetime) {
-                    return new Date(datetime).toLocaleString("en-us", { day: "numeric", month: "short", year: "numeric" });
+            _snakeCase(tag) {
+                return tag.replace(/\s+/g, '_').toLowerCase();
+            }
+
+            _parseTime(time) {
+                if (time) {
+                    return new Date(time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                }
+                else {
+                    return ""
+                }
+            }
+
+            _parseDate(date) {
+                if (date) {
+                    return new Date(date).toLocaleString("en-us", { day: "numeric", month: "short", year: "numeric" });
                 }
                 else {
                     return ""

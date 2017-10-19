@@ -83,6 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 cursor: pointer;
                 transition: 80ms all linear;
                 user-select: none;
+                -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
             }
 
             .filter-container .chip:hover {
@@ -132,6 +133,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
             }
 
+            .events .container .card:hover{
+                background: #fafafa;
+            }
+
             .events .container .card.error {
                 cursor: default;
             }
@@ -159,7 +164,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             @media screen and (max-width: 960px) {
                 .subheader .container {
-                    padding: 32px 24px;
+                    padding: 16px 24px;
                 }
                 .events {
                     min-height: 300px;
@@ -176,6 +181,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     padding-left: 12px;
                     margin-left: auto;
                     margin-right: auto;
+                }
+                .filter-container .chip:hover {
+                    border: 1px solid rgba(0, 0, 0, .4);
+                    color: rgba(0, 0, 0, .8);
+                    background-color: #fff;
+                }
+                .filter-container .chip.true {
+                    border: 1px solid #4285F4;
+                    background-color: #4285F4;
+                    color: white;
                 }
             }
         </style>
@@ -201,11 +216,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <a href$="events/[[item.id]]" class="card">
                         <div class="info">
                             <h3>[[item.title]]</h3>
-                            <h4>[[_parseDateTime(item.datetime)]] &middot; [[item.venue]]</h4>
+                            <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
                             <div class="chip-container">
-                                <div class="chip">[[item.tag]]</div>
+                                <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
                             </div>
-                            <p>[[item.description]]</p>
+                            <p>[[_parseDescription(item.short_description)]]</p>
                         </div>
                     </a>
                 </template>
@@ -219,11 +234,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <a href$="events/[[item.id]]" class="card">
                         <div class="info">
                             <h3>[[item.title]]</h3>
-                            <h4>[[_parseDateTime(item.datetime)]] &middot; [[item.venue]]</h4>
+                            <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
                             <div class="chip-container">
-                                <div class="chip">[[item.tag]]</div>
+                                <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
                             </div>
-                            <p>[[item.description]]</p>
+                            <p>[[_parseDescription(item.short_description)]]</p>
                         </div>
                     </a>
                 </template>
@@ -237,7 +252,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </template>
 
     <script>
-        class GdgEventsHome extends Polymer.Element {
+        class GdgEventsHome extends Polymer.GestureEventListeners(Polymer.Element) {
             static get is() { return 'gdg-events-home'; }
 
             static get properties() {
@@ -253,6 +268,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         reflectToAttribute: true
                     }
                 }
+            }
+
+            _snakeCase(tag) {
+                return tag.replace(/\s+/g, '_').toLowerCase();
+            }
+
+            _parseDescription(description) {
+                return description;
             }
 
             _parseDateTime(datetime) {
@@ -296,18 +319,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         .replace(/_/g, " ")
                         .toLowerCase();
                     var upcomingEventsRef = this.db.collection("events")
-                        .where("datetime", ">=", timestamp)
+                        .where("start_time", ">=", timestamp)
                         .where("tag", "==", selectedFilter)
                     var pastEventsRef = this.db.collection("events")
-                        .where("datetime", "<", timestamp)
-                        .where("tag", "==", selectedFilter).orderBy("datetime", "desc")
+                        .where("start_time", "<", timestamp)
+                        .where("tag", "==", selectedFilter).orderBy("start_time", "desc")
                 }
                 else {
                     var upcomingEventsRef = this.db.collection("events")
-                        .where("datetime", ">=", timestamp)
+                        .where("start_time", ">=", timestamp)
                     var pastEventsRef = this.db.collection("events")
-                        .where("datetime", "<", timestamp)
-                        .orderBy("datetime", "desc")
+                        .where("start_time", "<", timestamp)
+                        .orderBy("start_time", "desc")
                 }
 
                 upcomingEventsRef.get().then((querySnapshot) => {
@@ -329,15 +352,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         this.set('pastEvents', null);
                     }
                 });
-
-                // db.collection("events").doc("io17-live-viewing-party").set({
-                //     datetime: new Date('17 May 2017 22:00:00'),
-                //     description: "I/O Extended 2017 Kuala Lumpur Live Viewing Party is here once again! In this live viewing party, we will join up and watch the live keynote together, from night until dawn at the amazing iTrain office!",
-                //     tag: "live viewing party",
-                //     title: "I/O Extended 2017 Kuala Lumpur - Live Viewing Party",
-                //     url: "http://ioxkl17.peatix.com/",
-                //     venue: "iTrain Kuala Lumpur"
-                // })
             }
 
             loadData() {
@@ -346,19 +360,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     'name': 'meetup',
                     'toggle': false
                 }, {
-                    'name': 'workshop',
-                    'toggle': false
-                }, {
                     'name': 'live viewing party',
                     'toggle': false
                 }, {
                     'name': 'conference',
-                    'toggle': false
-                }, {
-                    'name': 'study jam',
-                    'toggle': false
-                }, {
-                    'name': 'extended event',
                     'toggle': false
                 }])
 

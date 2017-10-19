@@ -132,7 +132,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         align-items: center;
       }
 
-      #bottom_toolbar a {
+      #bottom_toolbar iron-selector a {
         box-sizing: border-box;
         align-items: center;
         height: 100%;
@@ -151,11 +151,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         letter-spacing: 2px;
       }
 
-      #bottom_toolbar a:hover {
+      #bottom_toolbar iron-selector a:hover {
         border-bottom: 3px solid #a0c0f8;
       }
 
-      #bottom_toolbar a.iron-selected {
+      #bottom_toolbar iron-selector a.iron-selected {
         border-bottom: 3px solid #4285F4;
       }
 
@@ -231,10 +231,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           display: inline-block;
         }
 
+        #bottom_toolbar #bottom_toolbar_logo_mobile_link {
+          margin-left: -40px;
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+
         #bottom_toolbar #bottom_toolbar_logo_mobile {
           display: inline-block;
           height: 24px;
-          margin-left: -40px;
         }
       }
     </style>
@@ -273,7 +279,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div main-title>
               <img id="bottom_toolbar_logo" src="../images/gdgkl_short.svg">
             </div>
-            <img id="bottom_toolbar_logo_mobile" src="../images/gdgkl_full.svg">
+            <a id="bottom_toolbar_logo_mobile_link" href="[[rootPath]]home/">
+              <img id="bottom_toolbar_logo_mobile" src="../images/gdgkl_full.svg">
+            </a>
             <iron-selector selected="[[page]]" attr-for-selected="name" role="navigation">
               <a name="home" href="[[rootPath]]home/">HOME</a>
               <a name="events" href="[[rootPath]]events/">EVENTS</a>
@@ -312,7 +320,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <a href="https://plus.google.com/+GdgMy" target="_blank" rel="noopener">Google+</a>
               </div>
               <div class="item">
-                <a href="https://gdgkl-slack.herokuapp.com" target="_blank" rel="noopener">Slack</a>
+                <a href="https://gdgmy-slack.herokuapp.com" target="_blank" rel="noopener">Slack</a>
                 <a href="https://meetup.com/GDGKualaLumpur" target="_blank" rel="noopener">Meetup</a>
                 <a href="http://gdgkl.peatix.com" target="_blank" rel="noopener">Peatix</a>
               </div>
@@ -439,12 +447,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         super.ready();
 
         var config = {
-          apiKey: "AIzaSyC6Wf7HE3cSKMpyI6f_XLmqfkY8qbR8sSg",
-          authDomain: "gdg-kl-dev.firebaseapp.com",
-          databaseURL: "https://gdg-kl-dev.firebaseio.com",
-          projectId: "gdg-kl-dev",
-          storageBucket: "gdg-kl-dev.appspot.com",
-          messagingSenderId: "315553708723"
+          apiKey: "AIzaSyD_B8LAxG-1IlfrlZwN5HAbncuwHrCZxU8",
+          authDomain: "gdg-kl.firebaseapp.com",
+          databaseURL: "https://gdg-kl.firebaseio.com",
+          projectId: "gdg-kl",
+          storageBucket: "gdg-kl.appspot.com",
+          messagingSenderId: "824291119922"
         };
 
         firebase.initializeApp(config);
