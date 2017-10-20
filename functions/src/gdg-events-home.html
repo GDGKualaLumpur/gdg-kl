@@ -83,7 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 cursor: pointer;
                 transition: 80ms all linear;
                 user-select: none;
-                -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
             }
 
             .filter-container .chip:hover {
@@ -133,7 +133,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
             }
 
-            .events .container .card:hover{
+            .events .container .card:hover {
                 background: #fafafa;
             }
 
@@ -164,8 +164,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             @media screen and (max-width: 960px) {
                 .subheader .container {
-                    padding: 16px 24px;
+                    padding: 16px 24px 8px 24px;
                 }
+
+                .filter {
+                    width: 100%;
+                    overflow-x: hidden;
+                }
+
+                .subheader .filter p {
+                    margin-bottom: 0;
+                }
+
+                .subheader .filter-container {
+                    white-space: nowrap;
+                    flex-wrap: nowrap;
+                    overflow-x: auto;
+                    padding: 8px 0;
+                }
+
+                .subheader .filter-container::-webkit-scrollbar {
+                    display: none;
+                }
+
                 .events {
                     min-height: 300px;
                     padding-bottom: 0;
@@ -181,6 +202,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     padding-left: 12px;
                     margin-left: auto;
                     margin-right: auto;
+                }
+                .events .container p {
+                    display: none;
                 }
                 .filter-container .chip:hover {
                     border: 1px solid rgba(0, 0, 0, .4);
@@ -357,13 +381,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             loadData() {
                 this.db = firebase.firestore();
                 this.set('filterType', [{
-                    'name': 'meetup',
+                    'name': 'conference',
                     'toggle': false
                 }, {
                     'name': 'live viewing party',
                     'toggle': false
                 }, {
-                    'name': 'conference',
+                    'name': 'meetup',
+                    'toggle': false
+                }, {
+                    'name': 'study jam',
+                    'toggle': false
+                }, {
+                    'name': 'workshop',
                     'toggle': false
                 }])
 

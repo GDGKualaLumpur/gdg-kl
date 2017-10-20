@@ -105,6 +105,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 min-height: 200px;
                 padding: 24px;
                 box-sizing: border-box;
+                position: relative;
             }
 
             .chip {
@@ -322,9 +323,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         }
                         this.set('data', doc.data());
                         document.title = doc.data().title + ' - GDG Kuala Lumpur';
-                        console.log(this.$.test.scrollTop)
-                        document.body.scrollTop = 0;
-                        this.$.test.scrollTop = 0;
+                    }
+                    else {
+                        window.history.pushState({}, null, '/events/');
+                        window.dispatchEvent(new CustomEvent('location-changed'));
                     }
                 }).catch(error => {
                     console.log(error)

@@ -266,7 +266,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </app-drawer>
 
       <!-- Main content -->
-      <app-header-layout>
+      <app-header-layout has-scrolling-region>
 
         <app-header slot="header" condenses fixed effects="waterfall" show-logo>
           <app-toolbar id="top_toolbar">
@@ -359,7 +359,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       static get observers() {
         return [
           '_routePageChanged(routeData.page)',
+          '_scrollToTop(routeData)'
         ];
+      }
+
+      _scrollToTop() {
+        this.shadowRoot.querySelector('app-header-layout').header.scroll(0, 0);
       }
 
       _routePageChanged(page) {
@@ -382,7 +387,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page, oldPage) {
         if (page != null) {
-          document.body.scrollTop = 0;
+          this.shadowRoot.querySelector('app-header-layout').header.scroll(0, 0);
           let cb = this._pageLoaded.bind(this, Boolean(oldPage));
           Polymer.importHref(
             this.resolveUrl('gdg-' + page + '.html'),
