@@ -243,9 +243,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-    <app-drawer-layout force-narrow fullbleed on-content-scroll="abu">
+    <app-drawer-layout force-narrow fullbleed>
       <!-- Drawer content -->
-      <app-drawer id="drawer" slot="drawer">
+      <app-drawer id="drawer" slot="drawer" swipe-open>
         <app-toolbar>
           <img id="drawer_logo" src="../images/gdgkl_short.svg">
         </app-toolbar>
@@ -302,7 +302,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <a href="https://plus.google.com/+GdgMy" target="_blank" rel="noopener">Google+</a>
               </div>
               <div class="item">
-                <a href="https://gdgkl-slack.herokuapp.com" target="_blank" rel="noopener">Slack</a>
+                <a href="https://gdgmy-slack.herokuapp.com" target="_blank" rel="noopener">Slack</a>
                 <a href="https://meetup.com/GDGKualaLumpur" target="_blank" rel="noopener">Meetup</a>
                 <a href="http://gdgkl.peatix.com" target="_blank" rel="noopener">Peatix</a>
               </div>
@@ -362,7 +362,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page, oldPage) {
         if (page != null) {
-          document.body.scrollTop = 0;
+          this.shadowRoot.querySelector('app-header-layout').header.scroll(0, 0);
           let cb = this._pageLoaded.bind(this, Boolean(oldPage));
           Polymer.importHref(
             this.resolveUrl('gdg-' + page + '.html'),
