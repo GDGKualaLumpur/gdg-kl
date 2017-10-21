@@ -252,9 +252,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-    <app-drawer-layout force-narrow fullbleed on-content-scroll="abu">
+    <app-drawer-layout force-narrow fullbleed>
       <!-- Drawer content -->
-      <app-drawer id="drawer" slot="drawer">
+      <app-drawer id="drawer" slot="drawer" swipe-open>
         <app-toolbar>
           <img id="drawer_logo" src="../images/gdgkl_short.svg">
         </app-toolbar>

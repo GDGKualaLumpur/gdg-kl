@@ -12,7 +12,7 @@ admin.initializeApp({
 var app = express();
 app.set('view engine', 'ejs')
 
-exports.test = functions.https.onRequest(
+exports.generateSharingMetadata = functions.https.onRequest(
   app.get("/events/:eventid*", (req, res) => {
     var userAgent = req.headers['user-agent'];
     var db = admin.firestore();
@@ -31,15 +31,15 @@ exports.test = functions.https.onRequest(
                 <meta property="og:title" content="${event_title}">
                 <meta property="og:site_name" content="GDG Kuala Lumpur">
                 <meta property="og:type" content="Event">
-                <meta property="og:url" content="https://www.gdgkl.org/events/${req.params.eventid}">
+                <meta property="og:url" content="https://gdg-kl-dev.firebaseapp.com/events/${req.params.eventid}">
                 <meta property="og:description" content="${short_description}">
-                <meta property="og:image" content="https://www.gdgkl.org/images/gdgkl.jpg">
+                <meta property="og:image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
                 <meta property="og:image:type" content="image/jpeg" />
 
                 <!-- G+ sharing meta data -->
                 <meta itemprop="name" content="${event_title}">
                 <meta itemprop="description" content="${short_description}">
-                <meta itemprop="image" content="https://www.gdgkl.org/images/gdgkl.jpg">
+                <meta itemprop="image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
                 <meta itemprop="startDate" content="${start_time}">
                 <meta itemprop="endDate" content="${end_time}">
             
@@ -48,7 +48,7 @@ exports.test = functions.https.onRequest(
                 <meta name="twitter:creator" content="@gdgkl">
                 <meta name="twitter:title" content="${event_title}">
                 <meta name="twitter:description" content="${short_description}">
-                <meta name="twitter:image" content="https://www.gdgkl.org/images/gdgkl.jpg">
+                <meta name="twitter:image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
               </head>
               <body>
                 <h1>${event_title}</h1>

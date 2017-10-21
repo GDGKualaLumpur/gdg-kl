@@ -336,24 +336,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             getEventData() {
+                console.log('?')
                 var timestamp = new Date();
                 var selectedFilter = true;
                 if (this._getParameterByName('type')) {
+                    console.log('filter')
                     selectedFilter = this._getParameterByName('type')
                         .replace(/_/g, " ")
                         .toLowerCase();
                     var upcomingEventsRef = this.db.collection("events")
                         .where("start_time", ">=", timestamp)
                         .where("tag", "==", selectedFilter)
+                        .where("visibility", "==", "public")
                     var pastEventsRef = this.db.collection("events")
                         .where("start_time", "<", timestamp)
-                        .where("tag", "==", selectedFilter).orderBy("start_time", "desc")
+                        .where("tag", "==", selectedFilter)
+                        .where("visibility", "==", "public")
+                        .orderBy("start_time", "desc")
                 }
                 else {
+                    console.log('show all')
                     var upcomingEventsRef = this.db.collection("events")
                         .where("start_time", ">=", timestamp)
+                        .where("visibility", "==", "public")
                     var pastEventsRef = this.db.collection("events")
                         .where("start_time", "<", timestamp)
+                        .where("visibility", "==", "public")
                         .orderBy("start_time", "desc")
                 }
 
@@ -370,9 +378,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 pastEventsRef.get().then((querySnapshot) => {
                     this.set('pastEvents', [])
                     querySnapshot.forEach((doc) => {
+                        console.log(doc.data())
                         this.push('pastEvents', doc.data())
                     });
                     if (this.pastEvents.length <= 0) {
+                        console.log('no data')
                         this.set('pastEvents', null);
                     }
                 });

@@ -281,7 +281,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                                     <a href="">Direction</a>
                                 </div> -->
                                 </div>
-                                <a target="_blank" href$="[[data.url]]" class="button">Visit Website</a>
+                                <template is="dom-if" if="[[data.url]]">
+                                    <a target="_blank" href$="[[data.url]]" class="button">Visit Website</a>
+                                </template>
                             </template>
                         </div>
                     </div>
@@ -302,7 +304,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     </div>
                 </div>
             </div>
-            <a target="_blank" href$="[[data.url]]" class="button mobile">Visit Website</a>
+            <template is="dom-if" if="[[data.url]]">
+                <a target="_blank" href$="[[data.url]]" class="button mobile">Visit Website</a>
+            </template>
         </div>
     </template>
 

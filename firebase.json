@@ -7,7 +7,7 @@
     "rewrites": [
       {
         "source": "/events/**",
-        "function": "test"
+        "function": "generateSharingMetadata"
       },
       {
         "source": "!/__/**",
