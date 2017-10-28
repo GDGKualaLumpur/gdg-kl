@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner-lite.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="gdg-events-details">
@@ -57,6 +58,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), transparent);
                 opacity: 0;
                 height: 92px;
+            }
+
+            .event .loading {
+                min-height: 400px;
+                display: flex;
+                justify-content: center;
+                margin-top: 36px;
             }
 
             .event .content {
@@ -206,6 +214,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     opacity: .5;
                     height: 72px;
                 }
+                .event .loading {
+                    min-height: 100vh;
+                    margin-top: 24px;
+                }
                 .event .content {
                     flex-direction: column;
                 }
@@ -245,67 +257,70 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </a>
             <div class="event card">
                 <div class="cover" id="cover_pic"></div>
-                <div class="content">
-                    <div class="details">
-                        <template is="dom-if" if="[[data]]">
-                            <h3>[[data.title]]</h3>
-                            <div class="chip-container">
-                                <div class="chip" id$="[[_snakeCase(data.tag)]]">[[data.tag]]</div>
-                            </div>
-                            <div class="description">
-                                <p>[[data.description]]
-                            </div>
-                        </template>
+                <template is="dom-if" if="[[!data]]">
+                    <div class="loading">
+                        <paper-spinner-lite active></paper-spinner-lite>
                     </div>
-                    <div class="info">
-                        <div class="card">
+                </template>
+                <template is="dom-if" if="[[data]]">
+                    <div class="content">
+                        <div class="details">
                             <template is="dom-if" if="[[data]]">
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="title">WHEN</div>
-                                        <div class="text">[[_parseDate(data.start_time)]]</div>
-                                        <div class="subtext">[[_parseTime(data.start_time)]] - [[_parseTime(data.end_time)]]</div>
-                                    </div>
-                                    <!-- <div class="row action">
-                                    <a href="">+Calendar</a>
-                                </div> -->
+                                <h3>[[data.title]]</h3>
+                                <div class="chip-container">
+                                    <div class="chip" id$="[[_snakeCase(data.tag)]]">[[data.tag]]</div>
                                 </div>
-                                <div class="divider"></div>
-                                <div class="item">
-                                    <div class="row">
-                                        <div class="title">WHERE</div>
-                                        <div class="text">[[data.venue_name]]</div>
-                                        <div class="subtext">[[data.venue_address]]</div>
-                                    </div>
-                                    <!-- <div class="row action">
-                                    <a href="">Direction</a>
-                                </div> -->
+                                <div class="description">
+                                    <p>[[data.description]]
                                 </div>
-                                <template is="dom-if" if="[[data.url]]">
-                                    <a target="_blank" href$="[[data.url]]" class="button">Visit Website</a>
-                                </template>
                             </template>
+                        </div>
+                        <div class="info">
+                            <div class="card">
+                                <template is="dom-if" if="[[data]]">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="title">WHEN</div>
+                                            <div class="text">[[_parseDate(data.start_time)]]</div>
+                                            <div class="subtext">[[_parseTime(data.start_time)]] - [[_parseTime(data.end_time)]]</div>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="title">WHERE</div>
+                                            <div class="text">[[data.venue_name]]</div>
+                                            <div class="subtext">[[data.venue_address]]</div>
+                                        </div>
+                                    </div>
+                                    <template is="dom-if" if="[[data.url]]">
+                                        <a target="_blank" href$="[[data.url]]" class="button">Visit Website</a>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <template is="dom-if" if="[[data]]">
+                <div class="info mobile">
+                    <div class="card">
+                        <div class="item">
+                            <div class="title">WHEN</div>
+                            <div class="text">[[_parseDate(data.start_time)]]</div>
+                            <div class="subtext">[[_parseTime(data.start_time)]] - [[_parseTime(data.end_time)]]</div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="item">
+                            <div class="title">WHERE</div>
+                            <div class="text">[[data.venue_name]]</div>
+                            <div class="subtext">[[data.venue_address]]</div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="info mobile">
-                <div class="card">
-                    <div class="item">
-                        <div class="title">WHEN</div>
-                        <div class="text">[[_parseDate(data.start_time)]]</div>
-                        <div class="subtext">[[_parseTime(data.start_time)]] - [[_parseTime(data.end_time)]]</div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="item">
-                        <div class="title">WHERE</div>
-                        <div class="text">[[data.venue_name]]</div>
-                        <div class="subtext">[[data.venue_address]]</div>
-                    </div>
-                </div>
-            </div>
-            <template is="dom-if" if="[[data.url]]">
-                <a target="_blank" href$="[[data.url]]" class="button mobile">Visit Website</a>
+                <template is="dom-if" if="[[data.url]]">
+                    <a target="_blank" href$="[[data.url]]" class="button mobile">Visit Website</a>
+                </template>
             </template>
         </div>
     </template>
