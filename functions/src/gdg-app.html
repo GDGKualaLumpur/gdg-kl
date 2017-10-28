@@ -18,6 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
@@ -210,6 +211,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         height: 20px;
       }
 
+      .bottom-nav {
+        display: none;
+      }
+
       @media screen and (max-width: 960px) {
         paper-toast {
           width: 100%;
@@ -232,15 +237,55 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         #bottom_toolbar #bottom_toolbar_logo_mobile_link {
-          margin-left: -40px;
           height: 100%;
           display: flex;
           align-items: center;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
 
         #bottom_toolbar #bottom_toolbar_logo_mobile {
           display: inline-block;
           height: 24px;
+        }
+
+        iron-pages {
+          margin-bottom: 56px;
+        }
+
+        .bottom-nav {
+          border-top: 1px solid rgba(0, 0, 0, 0.4);
+          position: fixed;
+          bottom: 0;
+          height: 56px;
+          width: 100%;
+          background: white;
+          display: flex;
+        }
+
+        .bottom-nav .item {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: 13px;
+          text-decoration: none;
+          color: rgba(0, 0, 0, 0.7);
+          -webkit-tap-highlight-color: rgba(0, 0, 0, .05);
+        }
+
+        .bottom-nav .item.iron-selected {
+          color: #2f6ace;
+        }
+
+        .bottom-nav .item iron-icon {
+          width: 24px;
+          height: 24px;
+        }
+
+        .footer, .subfooter {
+          display: none;
         }
       }
     </style>
@@ -254,7 +299,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <app-drawer-layout force-narrow fullbleed>
       <!-- Drawer content -->
-      <app-drawer id="drawer" slot="drawer" swipe-open>
+      <!-- <app-drawer id="drawer" slot="drawer" swipe-open>
         <app-toolbar>
           <img id="drawer_logo" src="../images/gdgkl_short.svg">
         </app-toolbar>
@@ -263,7 +308,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a name="events" href="[[rootPath]]events/">EVENTS</a>
           <a name="about" href="[[rootPath]]about/">ABOUT</a>
         </iron-selector>
-      </app-drawer>
+      </app-drawer> -->
 
       <!-- Main content -->
       <app-header-layout>
@@ -275,7 +320,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div main-title></div>
           </app-toolbar>
           <app-toolbar id="bottom_toolbar" sticky>
-            <paper-icon-button icon="gdg-icons:menu" drawer-toggle></paper-icon-button>
+            <!-- <paper-icon-button icon="gdg-icons:menu" drawer-toggle></paper-icon-button> -->
             <div main-title>
               <img id="bottom_toolbar_logo" src="../images/gdgkl_short.svg">
             </div>
@@ -332,6 +377,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <img src="../images/gdgkl_short.svg">
           </div>
         </div>
+
+        <iron-selector class="bottom-nav" selected="[[page]]" attr-for-selected="name" role="navigation">
+          <a class="item" href="[[rootPath]]home/" name="home">
+            <iron-icon icon="gdg-icons:home"></iron-icon>
+            <span>Home</span>
+          </a>
+          <a class="item" href="[[rootPath]]events/" name="events">
+            <iron-icon icon="gdg-icons:event"></iron-icon>
+            <span>Events</span>
+          </a>
+          <a class="item" href="[[rootPath]]about/" name="about">
+            <iron-icon icon="gdg-icons:info"></iron-icon>
+            <span>About</span>
+          </a>
+        </iron-selector>
       </app-header-layout>
     </app-drawer-layout>
   </template>
@@ -380,9 +440,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }[this.page] || 'GDG Kuala Lumpur'
 
         // Close a non-persistent drawer when the page & route are changed.
-        if (!this.$.drawer.persistent) {
-          this.$.drawer.close();
-        }
+        // if (!this.$.drawer.persistent) {
+        //   this.$.drawer.close();
+        // }
       }
 
       _pageChanged(page, oldPage) {

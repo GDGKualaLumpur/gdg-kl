@@ -14,18 +14,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="gdg-about">
   <template>
     <style include="shared-styles">
-       :host {
+      :host {
         display: block;
       }
 
       h1 {
         color: #212121;
         font-weight: 400;
-        margin-bottom: 48px;
+        margin-bottom: 28px;
+        font-size: 26px;
       }
 
       p {
-        font-size: 18px;
+        font-size: 16px;
         color: #616161;
         line-height: 34px;
         font-weight: 400;
@@ -41,6 +42,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         margin-bottom: 24px;
       }
 
+      a {
+        color: #2f6ace;
+      }
+
+      .social {
+        display: none;
+      }
+
       @media screen and (max-width: 960px) {
         h1,
         .text {
@@ -49,18 +58,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           box-sizing: border-box;
         }
         .image {
-          margin-bottom: 16px;
+          margin-bottom: 0;
         }
         h1 {
           font-size: 24px;
           margin: 24px 0;
         }
+        p {
+          font-size: 15px;
+          line-height: 28px;
+        }
+        .text {
+          padding: 0 24px 24px 24px;
+        }
+        .social {
+          display: block;
+        }
       }
     </style>
 
     <div class="container">
-      <h1>About GDG Kuala Lumpur</h1>
       <img class="image" src="../images/about.jpg">
+      <h1>About GDG Kuala Lumpur</h1>
       <div class="text">
         <p>Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences
           developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and many
@@ -70,6 +89,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           platform.
         </p>
         <p>We're based in Kuala Lumpur, Malaysia - the heart of South East Asia.</p>
+        <p class="social">Find us on:
+          <a href="https://fb.com/GDGKualaLumpur" target="_blank" rel="noopener">Facebook</a>,
+          <a href="https://www.facebook.com/groups/gtugkl" target="_blank" rel="noopener">Facebook Group</a>,
+          <a href="http://twitter.com/gdgkl" target="_blank" rel="noopener">Twitter</a>,
+          <a href="https://plus.google.com/+GdgMy" target="_blank" rel="noopener">Google+</a>,
+          <a href="https://gdgmy-slack.herokuapp.com" target="_blank" rel="noopener">Slack</a>,
+          <a href="https://meetup.com/GDGKualaLumpur" target="_blank" rel="noopener">Meetup</a> and
+          <a href="http://gdgkl.peatix.com" target="_blank" rel="noopener">Peatix</a>.
+        </p>
       </div>
     </div>
   </template>

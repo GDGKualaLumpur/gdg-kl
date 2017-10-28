@@ -196,6 +196,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
                 .events .container .card {
                     margin: 0 auto;
+                    -webkit-tap-highlight-color: rgba(0, 0, 0, .05);
                 }
                 .events .container h2 {
                     margin-top: 32px;
@@ -340,7 +341,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 var timestamp = new Date();
                 var selectedFilter = true;
                 if (this._getParameterByName('type')) {
-                    console.log('filter')
                     selectedFilter = this._getParameterByName('type')
                         .replace(/_/g, " ")
                         .toLowerCase();
@@ -355,7 +355,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         .orderBy("start_time", "desc")
                 }
                 else {
-                    console.log('show all')
                     var upcomingEventsRef = this.db.collection("events")
                         .where("start_time", ">=", timestamp)
                         .where("visibility", "==", "public")
@@ -378,11 +377,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 pastEventsRef.get().then((querySnapshot) => {
                     this.set('pastEvents', [])
                     querySnapshot.forEach((doc) => {
-                        console.log(doc.data())
                         this.push('pastEvents', doc.data())
                     });
                     if (this.pastEvents.length <= 0) {
-                        console.log('no data')
                         this.set('pastEvents', null);
                     }
                 });

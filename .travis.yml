@@ -7,11 +7,14 @@ cache:
   - "${NVM_PATH}_modules"
 before_script:
 - npm install -g bower polymer-cli firebase-tools
-- bower install
+- cd functions && bower install && npm install && cd ..
 script: 
-- polymer build
+- cd functions && polymer build && cd ..
 after_success:
-- firebase deploy --token $FIREBASE_TOKEN --non-interactive --only hosting
+- if [ "$TRAVIS_BRANCH" = "october-update" ]; then firebase use development; fi
+- if [ "$TRAVIS_BRANCH" = "master" ]; then firebase use default; fi
+- firebase deploy --token $FIREBASE_TOKEN --non-interactive --only hosting,functions
 branches:
   only:
-    - master
+   - master
+   - october-update
