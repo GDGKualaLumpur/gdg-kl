@@ -1,29 +1,47 @@
-# GDG Kuala Lumpur Landing Page
+# GDG Kuala Lumpur Progressive Web App
 
-### Setup
+![GDGKL PWA](https://i.imgur.com/q6l5KBi.png)
 
-##### Prerequisites
+> Created, developed and designed by [Henry Lim](https://twitter.com/henrylim96)
+from [GDG Kuala Lumpur](http://gdgkl.org/).
 
-First, install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
-[npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
+> *Do you :heart: it?* Show your support - please, :star: the project.
 
-    npm install -g polymer-cli
+:zap: Link: [www.gdgkl.org](https://www.gdgkl.org)
 
-Second, install [Bower](https://bower.io/) using [npm](https://www.npmjs.com)
+### Techs
+ - Polymer  
+ - Firebase Authentication  
+ - Firebase Cloud Functions  
+ - Firebase Realtime Database  
+ - Firebase Cloud Firestore  
 
-    npm install -g bower
+### Roadmap :rocket:
+#### Phase 1 - Launched (www.gdgkl.org)
+ :white_check_mark: Basic Feature (Routing, Setup)  
+ :white_check_mark: Home Page  
+ :white_check_mark: About Page  
+#### Phase 2 - In Development (Q4 2017, [beta.gdgkl.org](beta.gdgkl.org))
+ :white_check_mark: Admin Panel (For organizer only)  
+ :white_check_mark: Event Page (List of events + event detail info)  
+ :white_check_mark: Dynamic metadata for event page  
+#### Phase 3 (Q4 2017 - Q1 2018)
+ :x: Login Page  
+ :x: Meetup Integration  
+ :x: Profile Page  
+ :x: Push Notification (For new event, etc)  
+#### Phase 4 (2018)
+ :x: Event Registration System  
+ :x: Rewarding System  
+ 
+ :point_right: __Propose your feature or provide us your feedback by [creating an issue here](https://github.com/GDGKualaLumpur/gdg-kl/issues/new)__
 
-##### Install all the components
+### Contributors :sparkles:
+__Maintainer:__ [Henry Lim](https://github.com/limhenry).
+ 
+###### This Readme file is inspired by [Project Hoverboard](https://github.com/gdg-x/hoverboard) by GDG[X]
 
-    bower install
+### License
 
-### Start the development server
-
-This command serves the app at `http://127.0.0.1:8081` and provides basic URL
-routing for the app:
-
-    polymer serve
-
-### Build
-
-    polymer build
+Project is published under the [MIT license](https://github.com/GDGKualaLumpur/gdg-kl/blob/master/LICENSE.md).  
+Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
