@@ -3,11 +3,13 @@ const functions = require('firebase-functions');
 const express = require('express')
 var path = require("path");
 
-const serviceAccount = require('./service-account.json');
+// const serviceAccount = require('./service-account.json');
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
+
+admin.initializeApp(functions.config().firebase);
 
 var app = express();
 app.set('view engine', 'ejs')
