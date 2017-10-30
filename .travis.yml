@@ -18,6 +18,7 @@ deploy:
   keyfile: client-secret.json
   project: gdg-kl
   version: staging
+  no_promote: true
   on: app-engine
 
 branches:

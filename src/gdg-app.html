@@ -341,6 +341,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
+
+    Polymer.setPassiveTouchGestures(true);
+
     class GdgApp extends Polymer.GestureEventListeners(Polymer.Element) {
       static get is() { return 'gdg-app'; }
 
@@ -396,7 +399,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             this.loadComplete = true;
             this._pageLoaded();
             if ('serviceWorker' in navigator) {
-              navigator.serviceWorker.register('service-worker.js').then(reg => {
+              navigator.serviceWorker.register('service-worker.js', {scope: '/'}).then(reg => {
                 reg.onupdatefound = () => {
                   var installingWorker = reg.installing;
                   installingWorker.onstatechange = () => {
