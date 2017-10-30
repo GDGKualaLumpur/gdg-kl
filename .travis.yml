@@ -5,6 +5,9 @@ cache:
   - node_modules
   - bower_components
   - "${NVM_PATH}_modules"
+  
+before_script:
+ - chmod +x ./deploy.sh
 
 script: 
 - ./deploy.sh
