@@ -10,7 +10,8 @@ from [GDG Kuala Lumpur](http://gdgkl.org/).
 :zap: Link: [www.gdgkl.org](https://www.gdgkl.org)
 
 ### Techs
- - Polymer  
+ - Polymer 2.0  
+ - Firebase Hosting/App Engine    
  - Firebase Authentication  
  - Firebase Cloud Functions  
  - Firebase Realtime Database  
@@ -25,12 +26,16 @@ from [GDG Kuala Lumpur](http://gdgkl.org/).
  :white_check_mark: Admin Panel (For organizer only)  
  :white_check_mark: Event Page (List of events + event detail info)  
  :white_check_mark: Dynamic metadata for event page  
+ :x: Migrate from Firebase Hosting to App Engine (prpl-server-node)   
 #### Phase 3 (Q4 2017 - Q1 2018)
  :x: Login Page  
- :x: Meetup Integration  
  :x: Profile Page  
- :x: Push Notification (For new event, etc)  
+ :x: Meetup Integration  
+ :x: Push Notification (For new event, etc)   
+ :x: Improve Performance (Score 90+ on Lighthouse)  
 #### Phase 4 (2018)
+ :x: i18n Support  
+ :x: Migrate to Polymer 3.0
  :x: Event Registration System  
  :x: Rewarding System  
  

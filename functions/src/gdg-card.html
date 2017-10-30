@@ -51,7 +51,7 @@
 
       @media screen and (max-width: 960px) {
         .image {
-          height: 280px;
+          height: 220px;
         }
         .card {
           padding: 0 0 8px 0;
@@ -63,20 +63,23 @@
 
         .text {
           padding: 0 16px;
+          margin: 24px 0 8px 0;
         }
 
         .title {
           width: 100%;
+          font-size: 20px;
         }
 
         .subtitle {
           width: 90%;
+          font-size: 15px;
         }
       }
     </style>
 
     <div class="card">
-      <div class="image" style$="background-color: [[color]]; background-image: url('../images/[[image]]')"></div>
+      <div class="image" style$="background-color: [[color]]; background-image: url('[[rootPath]]images/[[image]]')"></div>
       <div class="text">
         <div class="title">[[header]]</div>
         <div class="subtitle">[[subtitle]]</div>

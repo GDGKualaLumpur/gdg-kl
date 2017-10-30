@@ -11,14 +11,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
 
-<dom-module id="gdg-settings">
+<dom-module id="gdg-profile">
   <template>
     <style include="shared-styles">
       :host {
-        padding-top: 36px;
         display: block;
         background: #fafafa;
-        height: 100vh;
+        min-height: 800px;
       }
 
       .card {
@@ -98,6 +97,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         flex-direction: column;
         width: 100%;
         flex: 1 1 60%;
+        box-sizing: border-box;
       }
 
       .right.column .card {
@@ -107,6 +107,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         max-width: 100%;
         padding: 24px;
         box-sizing: border-box;
+      }
+
+      @media screen and (max-width: 960px) {
+        .row {
+          flex-direction: column;
+        }
+        .column {
+          padding: 0;
+        }
+        .left.column {
+          max-width: 100%;
+        }
+        .right.column .card {
+          margin-bottom: 0;
+        }
       }
     </style>
 
@@ -136,10 +151,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 
   <script>
-    class GdgSettings extends Polymer.Element {
-      static get is() { return 'gdg-settings'; }
+    class GdgProfile extends Polymer.Element {
+      static get is() { return 'gdg-profile'; }
     }
 
-    window.customElements.define(GdgSettings.is, GdgSettings);
+    window.customElements.define(GdgProfile.is, GdgProfile);
   </script>
 </dom-module>

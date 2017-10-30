@@ -415,8 +415,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             loadData() {
-                this.db = firebase.firestore();
                 this.set('filterType', [{
+                    'name': 'codelabs',
+                    'toggle': false
+                }, {
                     'name': 'conference',
                     'toggle': false
                 }, {
@@ -432,6 +434,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     'name': 'workshop',
                     'toggle': false
                 }])
+
+                this.db = firebase.firestore();
 
                 if (this._getParameterByName('type')) {
                     this.filterType.forEach(filter => {

@@ -9,8 +9,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
@@ -20,7 +18,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="gdg-icons.html">
 
@@ -30,6 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="lazy-import" href="gdg-home.html">
 <link rel="lazy-import" href="gdg-events.html">
 <link rel="lazy-import" href="gdg-about.html">
+<!-- <link rel="lazy-import" href="gdg-profile.html"> -->
 
 <dom-module id="gdg-app">
   <template>
@@ -52,51 +50,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         @apply(--layout-self-center);
       }
 
-      app-drawer-layout:not([narrow]) [drawer-toggle] {
-        display: none;
-      }
-
       app-header {
         color: #000;
         background-color: var(--app-primary-color);
-      }
-
-      app-header paper-icon-button {
-        --paper-icon-button-ink-color: #000;
-      }
-
-      #drawer app-toolbar {
-        padding: 16px;
-      }
-
-      #drawer app-toolbar #drawer_logo {
-        max-width: 80%;
-        height: 24px;
-      }
-
-      .drawer-list {
-        margin: 0 20px;
-      }
-
-      .drawer-list a {
-        display: block;
-        padding: 0 16px;
-        text-decoration: none;
-        color: #414549;
-        line-height: 32px;
-        margin-bottom: 16px;
-        border-left: 4px solid transparent;
-        letter-spacing: 1px;
-        font-size: 14px;
-        font-weight: 500;
-      }
-
-      .drawer-list a.iron-selected {
-        border-left: 4px solid #4285F4;
-      }
-
-      .drawer-list a:focus {
-        outline: none;
       }
 
       #top_toolbar {
@@ -109,10 +65,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       #bottom_toolbar {
         border-bottom: 1px solid #CFCFCF;
-      }
-
-      #bottom_toolbar paper-icon-button {
-        display: none;
       }
 
       #bottom_toolbar #bottom_toolbar_logo {
@@ -220,7 +172,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           width: 100%;
           min-width: 0;
           border-radius: 0;
-          margin: 0;
+          margin: 0 0 56px 0;
         }
         .subfooter {
           flex-direction: column
@@ -230,10 +182,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         #bottom_toolbar_logo,
         #bottom_toolbar iron-selector {
           display: none;
-        }
-
-        #bottom_toolbar paper-icon-button {
-          display: inline-block;
         }
 
         #bottom_toolbar #bottom_toolbar_logo_mobile_link {
@@ -253,6 +201,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         .bottom-nav {
+          z-index: 9;
           border-top: 1px solid rgba(0, 0, 0, 0.4);
           position: fixed;
           bottom: 0;
@@ -284,7 +233,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           height: 24px;
         }
 
-        .footer, .subfooter {
+        .footer,
+        .subfooter {
           display: none;
         }
       }
@@ -297,103 +247,97 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-location route="{{route}}" url-space-regex="^[[rootPath]]"></app-location>
     <app-route route="{{route}}" pattern="[[rootPath]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
-    <app-drawer-layout force-narrow fullbleed>
-      <!-- Drawer content -->
-      <!-- <app-drawer id="drawer" slot="drawer" swipe-open>
-        <app-toolbar>
-          <img id="drawer_logo" src="../images/gdgkl_short.svg">
+    <app-header-layout>
+      <app-header slot="header" condenses fixed effects="waterfall" show-logo>
+        <app-toolbar id="top_toolbar">
+          <div main-title></div>
+          <img src="[[rootPath]]images/gdgkl_full.svg">
+          <div main-title></div>
         </app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="home" href="[[rootPath]]home/">HOME</a>
-          <a name="events" href="[[rootPath]]events/">EVENTS</a>
-          <a name="about" href="[[rootPath]]about/">ABOUT</a>
-        </iron-selector>
-      </app-drawer> -->
-
-      <!-- Main content -->
-      <app-header-layout>
-
-        <app-header slot="header" condenses fixed effects="waterfall" show-logo>
-          <app-toolbar id="top_toolbar">
-            <div main-title></div>
-            <img src="../images/gdgkl_full.svg">
-            <div main-title></div>
-          </app-toolbar>
-          <app-toolbar id="bottom_toolbar" sticky>
-            <!-- <paper-icon-button icon="gdg-icons:menu" drawer-toggle></paper-icon-button> -->
-            <div main-title>
-              <img id="bottom_toolbar_logo" src="../images/gdgkl_short.svg">
-            </div>
-            <a id="bottom_toolbar_logo_mobile_link" href="[[rootPath]]home/">
-              <img id="bottom_toolbar_logo_mobile" src="../images/gdgkl_full.svg">
+        <app-toolbar id="bottom_toolbar" sticky>
+          <!-- <template is="dom-if" if="[[]]">
+            <a href=".." style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+              <paper-icon-button icon="gdg-icons:arrow-back"></paper-icon-button>
             </a>
-            <iron-selector selected="[[page]]" attr-for-selected="name" role="navigation">
-              <a name="home" href="[[rootPath]]home/">HOME</a>
-              <a name="events" href="[[rootPath]]events/">EVENTS</a>
-              <a name="about" href="[[rootPath]]about/">ABOUT</a>
-            </iron-selector>
-            <div main-title></div>
-          </app-toolbar>
-        </app-header>
-
-        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="home" role="main">
-          <gdg-home name="home"></gdg-home>
-          <gdg-events route="{{route}}" name="events"></gdg-events>
-          <gdg-about name="about"></gdg-about>
-        </iron-pages>
-
-        <div class="subfooter">
-          <div class="content">
-            <p>
-              <b>Google Developer Group Kuala Lumpur</b>
-            </p>
-            <p>Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share
-              experiences developing applications using Google Developer technologies like Android, Google Maps, Google App
-              Engine and many more.</p>
-            <p>We organize conferences, meetups, talks &amp; workshops introducing developers and non-developers to the Google
-              Developer platform.</p>
+          </template> -->
+          <div main-title>
+            <img id="bottom_toolbar_logo" src="[[rootPath]]images/gdgkl_short.svg">
           </div>
-          <div class="content">
-            <p>
-              <b>Connect</b>
-            </p>
-            <div class="column">
-              <div class="item">
-                <a href="https://fb.com/GDGKualaLumpur" target="_blank" rel="noopener">Facebook</a>
-                <a href="https://www.facebook.com/groups/gtugkl" target="_blank" rel="noopener">Facebook Group</a>
-                <a href="http://twitter.com/gdgkl" target="_blank" rel="noopener">Twitter</a>
-                <a href="https://plus.google.com/+GdgMy" target="_blank" rel="noopener">Google+</a>
-              </div>
-              <div class="item">
-                <a href="https://gdgmy-slack.herokuapp.com" target="_blank" rel="noopener">Slack</a>
-                <a href="https://meetup.com/GDGKualaLumpur" target="_blank" rel="noopener">Meetup</a>
-                <a href="http://gdgkl.peatix.com" target="_blank" rel="noopener">Peatix</a>
-              </div>
+          <a id="bottom_toolbar_logo_mobile_link" href="[[rootPath]]home/">
+            <img id="bottom_toolbar_logo_mobile" src="[[rootPath]]images/gdgkl_full.svg">
+          </a>
+          <iron-selector selected="[[page]]" attr-for-selected="name" role="navigation">
+            <a name="home" href="[[rootPath]]home/">HOME</a>
+            <a name="events" href="[[rootPath]]events/">EVENTS</a>
+            <a name="about" href="[[rootPath]]about/">ABOUT</a>
+            <!-- <a name="profile" href="[[rootPath]]profile/">PROFILE</a> -->
+          </iron-selector>
+          <div main-title></div>
+        </app-toolbar>
+      </app-header>
+
+      <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="home" role="main">
+        <gdg-home name="home"></gdg-home>
+        <gdg-events route="{{route}}" name="events"></gdg-events>
+        <gdg-about name="about"></gdg-about>
+        <!-- <gdg-profile name="profile"></gdg-profile> -->
+      </iron-pages>
+
+      <div class="subfooter">
+        <div class="content">
+          <p>
+            <b>Google Developer Group Kuala Lumpur</b>
+          </p>
+          <p>Google Developer Group (GDG) Kuala Lumpur is an independent developer &amp; user group that discuss and share experiences
+            developing applications using Google Developer technologies like Android, Google Maps, Google App Engine and
+            many more.</p>
+          <p>We organize conferences, meetups, talks &amp; workshops introducing developers and non-developers to the Google
+            Developer platform.</p>
+        </div>
+        <div class="content">
+          <p>
+            <b>Connect</b>
+          </p>
+          <div class="column">
+            <div class="item">
+              <a href="https://fb.com/GDGKualaLumpur" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.facebook.com/groups/gtugkl" target="_blank" rel="noopener">Facebook Group</a>
+              <a href="http://twitter.com/gdgkl" target="_blank" rel="noopener">Twitter</a>
+              <a href="https://plus.google.com/+GdgMy" target="_blank" rel="noopener">Google+</a>
+            </div>
+            <div class="item">
+              <a href="https://gdgmy-slack.herokuapp.com" target="_blank" rel="noopener">Slack</a>
+              <a href="https://meetup.com/GDGKualaLumpur" target="_blank" rel="noopener">Meetup</a>
+              <a href="http://gdgkl.peatix.com" target="_blank" rel="noopener">Peatix</a>
             </div>
           </div>
         </div>
-        <div class="footer">
-          <div class="container">
-            <img src="../images/gdgkl_short.svg">
-          </div>
+      </div>
+      <div class="footer">
+        <div class="container">
+          <img src="[[rootPath]]images/gdgkl_short.svg">
         </div>
+      </div>
 
-        <iron-selector class="bottom-nav" selected="[[page]]" attr-for-selected="name" role="navigation">
-          <a class="item" href="[[rootPath]]home/" name="home">
-            <iron-icon icon="gdg-icons:home"></iron-icon>
-            <span>Home</span>
-          </a>
-          <a class="item" href="[[rootPath]]events/" name="events">
-            <iron-icon icon="gdg-icons:event"></iron-icon>
-            <span>Events</span>
-          </a>
-          <a class="item" href="[[rootPath]]about/" name="about">
-            <iron-icon icon="gdg-icons:info"></iron-icon>
-            <span>About</span>
-          </a>
-        </iron-selector>
-      </app-header-layout>
-    </app-drawer-layout>
+      <iron-selector class="bottom-nav" selected="[[page]]" attr-for-selected="name" role="navigation">
+        <a class="item" href="[[rootPath]]home/" name="home">
+          <iron-icon icon="gdg-icons:home"></iron-icon>
+          <span>Home</span>
+        </a>
+        <a class="item" href="[[rootPath]]events/" name="events">
+          <iron-icon icon="gdg-icons:event"></iron-icon>
+          <span>Events</span>
+        </a>
+        <a class="item" href="[[rootPath]]about/" name="about">
+          <iron-icon icon="gdg-icons:info"></iron-icon>
+          <span>About</span>
+        </a>
+        <!-- <a class="item" href="[[rootPath]]profile/" name="profile">
+          <iron-icon icon="gdg-icons:user"></iron-icon>
+          <span>Profile</span>
+        </a> -->
+      </iron-selector>
+    </app-header-layout>
   </template>
 
   <script>
@@ -409,8 +353,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           },
           routeData: Object,
           subroute: String,
-          // This shouldn't be neccessary, but the Analyzer isn't picking up
-          // Polymer.Element#rootPath
           rootPath: String,
           user: Object
         };
@@ -428,8 +370,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       _routePageChanged(page) {
-        // If no page was found in the route data, page will be an empty string.
-        // Deault to 'view1' in that case.
         this.page = page || 'home'
 
         document.title = {
@@ -438,11 +378,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           events: "Events - GDG Kuala Lumpur",
           settings: "Settings - GDG Kuala Lumpur"
         }[this.page] || 'GDG Kuala Lumpur'
-
-        // Close a non-persistent drawer when the page & route are changed.
-        // if (!this.$.drawer.persistent) {
-        //   this.$.drawer.close();
-        // }
       }
 
       _pageChanged(page, oldPage) {
@@ -520,7 +455,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           messagingSenderId: "824291119922"
         };
 
-        firebase.initializeApp(config);
+        try {
+          firebase.initializeApp(config);
+        }
+        catch (error) {
+          console.log(error)
+        }
 
         this._scrollHandler();
         addEventListener('scroll', e => this._scrollHandler());
