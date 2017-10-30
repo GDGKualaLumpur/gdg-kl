@@ -1,0 +1,942 @@
+{
+  "src/gdg-app.html": {
+    "bower_components/polymer/polymer-element.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/element-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/boot.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/settings.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/resolve-url.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/case-map.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/style-gather.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-module.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-effects.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/path.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-accessors.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/async.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/template-stamp.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-header/app-header.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/polymer.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/legacy-element-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/apply-shim.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/apply-shim.min.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/gesture-event-listeners.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/gestures.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/debounce.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/dir-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/import-href.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/render-status.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/unresolved.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/polymer.dom.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/flattened-nodes-observer.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/array-splice.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/flush.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/polymer-fn.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/class.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/templatizer-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/templatize.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/mutable-data.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-bind.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-repeat.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-if.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/array-selector.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/custom-style.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/custom-style-interface.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/custom-style-interface.min.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/mutable-data-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-flex-layout/iron-flex-layout.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-scroll-effects/app-scroll-effects-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-scroll-target-behavior/iron-scroll-target-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/helpers/helpers.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-layout-behavior/app-layout-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-resizable-behavior/iron-resizable-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-header-layout/app-header-layout.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-scroll-effects/app-scroll-effects.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-scroll-effects/effects/blend-background.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-scroll-effects/effects/fade-background.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-scroll-effects/effects/material.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-scroll-effects/effects/waterfall.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-scroll-effects/effects/resize-title.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-scroll-effects/effects/parallax-background.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-scroll-effects/effects/resize-snapped-title.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-layout/app-toolbar/app-toolbar.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-route/app-location.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-location/iron-location.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-location/iron-query-params.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-route/app-route-converter-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/app-route/app-route.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-pages/iron-pages.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-selector/iron-selectable.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-selector/iron-selection.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-icon/iron-icon.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-meta/iron-meta.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-selector/iron-selector.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-selector/iron-multi-selectable.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-toast/paper-toast.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-a11y-announcer/iron-a11y-announcer.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-overlay-behavior/iron-overlay-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-fit-behavior/iron-fit-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-overlay-behavior/iron-overlay-manager.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-overlay-behavior/iron-overlay-backdrop.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-overlay-behavior/iron-focusables-helper.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "src/gdg-icons.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-iconset-svg/iron-iconset-svg.html": {
+      "type": "document",
+      "weight": 1
+    }
+  },
+  "src/gdg-home.html": {
+    "bower_components/polymer/polymer-element.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/element-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/boot.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/settings.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/resolve-url.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/case-map.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/style-gather.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-module.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-effects.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/path.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-accessors.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/async.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/template-stamp.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "src/shared-styles.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "src/gdg-card.html": {
+      "type": "document",
+      "weight": 1
+    }
+  },
+  "src/gdg-about.html": {
+    "bower_components/polymer/polymer-element.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/element-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/boot.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/settings.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/resolve-url.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/case-map.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/style-gather.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-module.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-effects.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/path.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-accessors.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/async.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/template-stamp.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "src/shared-styles.html": {
+      "type": "document",
+      "weight": 1
+    }
+  },
+  "src/gdg-events.html": {
+    "bower_components/polymer/polymer-element.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/element-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/boot.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/settings.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/resolve-url.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/case-map.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/style-gather.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-module.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-effects.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/path.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-accessors.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/async.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/template-stamp.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "src/shared-styles.html": {
+      "type": "document",
+      "weight": 1
+    }
+  },
+  "src/gdg-events-home.html": {
+    "bower_components/polymer/polymer-element.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/element-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/boot.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/settings.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/resolve-url.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/case-map.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/style-gather.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-module.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-effects.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/path.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-accessors.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/async.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/template-stamp.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-spinner/paper-spinner-lite.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/polymer.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/legacy-element-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/apply-shim.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/apply-shim.min.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/gesture-event-listeners.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/gestures.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/debounce.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/dir-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/import-href.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/render-status.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/unresolved.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/polymer.dom.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/flattened-nodes-observer.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/array-splice.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/flush.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/polymer-fn.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/class.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/templatizer-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/templatize.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/mutable-data.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-bind.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-repeat.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-if.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/array-selector.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/custom-style.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/custom-style-interface.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/custom-style-interface.min.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/mutable-data-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-styles/color.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-spinner/paper-spinner-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-spinner/paper-spinner-styles.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "src/shared-styles.html": {
+      "type": "document",
+      "weight": 1
+    }
+  },
+  "src/gdg-events-details.html": {
+    "bower_components/polymer/polymer-element.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/element-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/boot.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/settings.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/resolve-url.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/case-map.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/style-gather.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-module.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-effects.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/path.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/property-accessors.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/async.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/template-stamp.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-spinner/paper-spinner-lite.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/polymer.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/legacy-element-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/apply-shim.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/apply-shim.min.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/gesture-event-listeners.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/gestures.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/debounce.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/dir-mixin.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/import-href.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/render-status.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/unresolved.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/polymer.dom.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/flattened-nodes-observer.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/array-splice.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/flush.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/polymer-fn.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/class.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/templatizer-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/utils/templatize.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/mixins/mutable-data.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-bind.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-repeat.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/dom-if.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/array-selector.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/elements/custom-style.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/custom-style-interface.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/shadycss/custom-style-interface.min.js": {
+      "type": "script",
+      "weight": 1
+    },
+    "bower_components/polymer/lib/legacy/mutable-data-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-styles/color.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-spinner/paper-spinner-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-spinner/paper-spinner-styles.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-icon-button/paper-icon-button.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-icon/iron-icon.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-meta/iron-meta.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-flex-layout/iron-flex-layout.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-behaviors/paper-inky-focus-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-behaviors/iron-button-state.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/iron-behaviors/iron-control-state.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-behaviors/paper-ripple-behavior.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-ripple/paper-ripple.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "bower_components/paper-styles/default-theme.html": {
+      "type": "document",
+      "weight": 1
+    },
+    "src/shared-styles.html": {
+      "type": "document",
+      "weight": 1
+    }
+  }
+}

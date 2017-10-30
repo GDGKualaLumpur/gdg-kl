@@ -10,6 +10,13 @@
     "lint": "npm run lint:javascript && polymer lint",
     "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "polymer test",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "test:integration": "polymer build # test that psk builds without error with the CLI",
+    "start": "prpl-server --root build/ --host 0.0.0.0 --https-redirect"
+  },
+  "dependencies": {
+    "prpl-server": "^0.7.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   }
 }

@@ -1,0 +1,403 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gdg-events-details">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+            }
+
+            a {
+                color: #4285F4;
+            }
+
+            .container {
+                max-width: 1000px;
+            }
+
+            paper-icon-button {
+                margin-bottom: 12px;
+                color: rgba(0, 0, 0, .5);
+            }
+
+            .card {
+                width: 100%;
+                background: white;
+                margin: 0 auto;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12)
+            }
+
+            .event .cover {
+                position: relative;
+                border-bottom: 1px solid rgba(0, 0, 0, .12);
+                height: 350px;
+                width: 100%;
+                background-position: 50% 50%;
+                background-size: cover;
+            }
+
+            .event .cover:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), transparent);
+                opacity: 0;
+                height: 92px;
+            }
+
+            .event .loading {
+                min-height: 400px;
+                display: flex;
+                justify-content: center;
+                margin-top: 36px;
+            }
+
+            .event .content {
+                display: flex;
+            }
+
+            .event .details {
+                width: 100%;
+                flex-direction: column;
+                display: flex;
+                flex: 1 1 60%;
+                padding: 24px 42px 48px 24px;
+            }
+
+            .event .details h3 {
+                color: rgba(0, 0, 0, .95);
+                font-weight: 400;
+                margin: 0 0 4px 0;
+                font-size: 26px;
+            }
+
+            .event .details h4 {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 400;
+                color: rgba(0, 0, 0, .6);
+            }
+
+            .event .details p {
+                white-space: pre-wrap;
+                max-width: 600px;
+                font-size: 15px;
+                color: rgba(0, 0, 0, .85);
+                margin-bottom: 0;
+                line-height: 24px;
+            }
+
+            .event .info {
+                box-sizing: border-box;
+                min-width: 350px;
+                margin: -48px 32px 24px 0;
+                flex: 1;
+            }
+
+            .event .info .card {
+                min-height: 200px;
+                padding: 24px;
+                box-sizing: border-box;
+                position: relative;
+            }
+
+            .chip {
+                display: inline-block;
+                margin: 8px 0 16px 0;
+                font-size: 13px;
+                padding: 1px 18px;
+                text-transform: capitalize;
+                border-radius: 100px;
+                border: 1px solid rgba(0, 0, 0, .4);
+                color: rgba(0, 0, 0, .8);
+                text-align: center;
+                cursor: pointer;
+                transition: 80ms all linear;
+                user-select: none;
+            }
+
+            .info .card .button,
+            .button {
+                text-decoration: none;
+                cursor: pointer;
+                background: #4285F4;
+                color: white;
+                text-transform: uppercase;
+                display: flex;
+                border-radius: 4px;
+                height: 40px;
+                justify-content: center;
+                align-items: center;
+                font-size: 14px;
+                margin-top: 32px;
+                box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+            }
+
+            .info .item {
+                font-weight: 500;
+                font-size: 14px;
+                display: flex;
+                flex-direction: row;
+            }
+
+            .info .item .row {
+                flex-direction: column;
+                width: auto;
+                flex: 1;
+                flex-wrap: nowrap;
+            }
+
+            .info .item .row.action {
+                color: #4285F4;
+                flex: 0;
+                margin-left: 16px;
+                justify-content: center;
+                text-transform: uppercase;
+                align-items: flex-end;
+            }
+
+            .info .item .row.action a {
+                text-decoration: none;
+            }
+
+            .info .item .title {
+                margin-bottom: 2px;
+                color: rgba(0, 0, 0, .35);
+            }
+
+            .info .item .text {
+                color: rgba(0, 0, 0, .85);
+                margin-bottom: 4px;
+                font-size: 15px;
+            }
+
+            .info .divider {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                margin: 16px 0;
+            }
+
+            .info .item .subtext {
+                color: rgba(0, 0, 0, .7);
+                font-weight: 400;
+            }
+
+            .mobile {
+                display: none;
+            }
+
+            @media screen and (max-width: 960px) {
+                paper-icon-button {
+                    position: absolute;
+                    margin: 10px 16px;
+                    color: white;
+                    z-index: 1;
+                }
+                .event .cover {
+                    height: 250px;
+                }
+                .event .cover:before {
+                    opacity: .5;
+                    height: 72px;
+                }
+                .event .loading {
+                    min-height: 100vh;
+                    margin-top: 24px;
+                }
+                .event .content {
+                    flex-direction: column;
+                }
+                .event .details {
+                    padding: 24px 42px 0 24px;
+                    box-sizing: border-box;
+                }
+
+                .event .info {
+                    margin: 0;
+                    min-width: 0;
+                }
+
+                .event .info .card {
+                    padding: 0 0 24px 0;
+                }
+
+                .info .item {
+                    padding: 16px 24px;
+                }
+
+                .info .divider {
+                    margin: 0;
+                }
+
+                .info .card .button {
+                    margin: 0 24px;
+
+                }
+                /* .event .info {
+                    display: none;
+                } */
+
+                /* .info.mobile {
+                    display: flex;
+                }
+                .info .card {
+                    padding-bottom: 96px;
+                }
+                .info .item {
+                    padding: 12px 24px 0 24px;
+                    flex-direction: column;
+                }
+                .info .divider {
+                    margin: 12px 0;
+                }
+                .button.mobile {
+                    display: flex;
+                    margin: -64px 24px 24px 24px;
+                    position: sticky;
+                    bottom: 78px;
+                }*/
+            }
+        </style>
+
+        <div class="container">
+            <a href="../events/" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+                <paper-icon-button icon="gdg-icons:arrow-back"></paper-icon-button>
+            </a>
+            <div class="event card">
+                <div class="cover" id="cover_pic"></div>
+                <template is="dom-if" if="[[!data]]">
+                    <div class="loading">
+                        <paper-spinner-lite active></paper-spinner-lite>
+                    </div>
+                </template>
+                <template is="dom-if" if="[[data]]">
+                    <div class="content">
+                        <div class="details">
+                            <template is="dom-if" if="[[data]]">
+                                <h3>[[data.title]]</h3>
+                                <div class="chip-container">
+                                    <div class="chip" id$="[[_snakeCase(data.tag)]]">[[data.tag]]</div>
+                                </div>
+                                <div class="description">
+                                    <p>[[data.description]]
+                                </div>
+                            </template>
+                        </div>
+                        <div class="info">
+                            <div class="card">
+                                <template is="dom-if" if="[[data]]">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="title">WHEN</div>
+                                            <div class="text">[[_parseDate(data.start_time)]]</div>
+                                            <div class="subtext">[[_parseTime(data.start_time)]] - [[_parseTime(data.end_time)]]</div>
+                                        </div>
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="title">WHERE</div>
+                                            <div class="text">[[data.venue_name]]</div>
+                                            <div class="subtext">[[data.venue_address]]</div>
+                                        </div>
+                                    </div>
+                                    <template is="dom-if" if="[[data.url]]">
+                                        <a target="_blank" href$="[[data.url]]" class="button">Visit Website</a>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <!-- <template is="dom-if" if="[[data]]">
+                <div class="info mobile">
+                    <div class="card">
+                        <div class="item">
+                            <div class="title">WHEN</div>
+                            <div class="text">[[_parseDate(data.start_time)]]</div>
+                            <div class="subtext">[[_parseTime(data.start_time)]] - [[_parseTime(data.end_time)]]</div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="item">
+                            <div class="title">WHERE</div>
+                            <div class="text">[[data.venue_name]]</div>
+                            <div class="subtext">[[data.venue_address]]</div>
+                        </div>
+                    </div>
+                </div>
+                <template is="dom-if" if="[[data.url]]">
+                    <a target="_blank" href$="[[data.url]]" class="button mobile">Visit Website</a>
+                </template>
+            </template> -->
+        </div>
+    </template>
+
+    <script>
+        class GdgEventsDetails extends Polymer.GestureEventListeners(Polymer.Element) {
+            static get is() { return 'gdg-events-details'; }
+
+            loadData(page) {
+                this.$.cover_pic.style.backgroundImage = '';
+                this.set('data', false);
+                firebase.firestore().collection('events').doc(page).get().then((doc) => {
+                    if (doc.exists) {
+                        if (doc.data().photoUrl) {
+                            this.$.cover_pic.style.backgroundImage = 'url(' + doc.data().photoUrl + ')'
+                        }
+                        else {
+                            this.$.cover_pic.style.backgroundImage = 'url(' + this.rootPath + 'images/gdgkl.jpg)';
+                        }
+                        this.set('data', doc.data());
+                        document.title = doc.data().title + ' - GDG Kuala Lumpur';
+                    }
+                    else {
+                        window.history.pushState({}, null, '/events/');
+                        window.dispatchEvent(new CustomEvent('location-changed'));
+                    }
+                }).catch(error => {
+                    console.log(error)
+                })
+            }
+
+            _snakeCase(tag) {
+                return tag.replace(/\s+/g, '_').toLowerCase();
+            }
+
+            _parseTime(time) {
+                if (time) {
+                    return new Date(time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+                }
+                else {
+                    return ""
+                }
+            }
+
+            _parseDate(date) {
+                if (date) {
+                    return new Date(date).toLocaleString("en-us", { day: "numeric", month: "short", year: "numeric" });
+                }
+                else {
+                    return ""
+                }
+            }
+        }
+
+        window.customElements.define(GdgEventsDetails.is, GdgEventsDetails);
+    </script>
+</dom-module>

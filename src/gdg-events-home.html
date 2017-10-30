@@ -1,0 +1,454 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="gdg-events-home">
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+            }
+
+            .container {
+                padding: 24px;
+            }
+
+            .header {
+                height: 300px;
+                width: 100%;
+                background-color: #3eaaf4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                flex-direction: column;
+            }
+
+            .header h2 {
+                font-weight: 400;
+                margin: 8px auto;
+                font-size: 26px;
+            }
+
+            .header p {
+                font-weight: 300;
+                margin: 0 auto;
+                font-size: 16px;
+            }
+
+            .subheader {
+                background: white;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12)
+            }
+
+            .subheader .filter-container {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                font-size: 14px;
+            }
+
+            .subheader .search input {
+                width: 100%;
+                outline: none;
+                border: 1px solid #d0d8dc;
+                height: 40px;
+                font-size: 14px;
+                padding: 0 15px;
+                margin-bottom: 16px;
+                box-sizing: border-box;
+            }
+
+            .subheader .filter p {
+                color: #9fb1c1;
+                margin-top: 0;
+                margin-bottom: 8px;
+            }
+
+            .filter-container .chip,
+            .events .card .chip {
+                text-transform: capitalize;
+                border-radius: 100px;
+                border: 1px solid rgba(0, 0, 0, .4);
+                color: rgba(0, 0, 0, .8);
+                margin: 2px 6px 4px 0;
+                padding: 4px 18px;
+                font-size: 14px;
+                text-align: center;
+                cursor: pointer;
+                transition: 80ms all linear;
+                user-select: none;
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            }
+
+            .filter-container .chip:hover {
+                border: 1px solid rgb(152, 193, 252);
+                background-color: rgb(152, 193, 252);
+                color: white;
+            }
+
+            .filter-container .chip.true {
+                border: 1px solid #4285F4;
+                background-color: #4285F4;
+                color: white;
+            }
+
+            .loading {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-top: 24px;
+            }
+
+            .events .card .chip {
+                display: inline-block;
+                margin-left: 0;
+                margin-top: 8px;
+                font-size: 13px;
+                padding: 1px 18px;
+            }
+
+            .events {
+                padding-bottom: 32px;
+                margin-top: 2px;
+            }
+
+            .events .container h2 {
+                color: rgba(0, 0, 0, .4);
+                font-weight: 400;
+                font-size: 15px;
+                margin-top: 36px;
+                max-width: 720px;
+            }
+
+            .events .container .card {
+                display: block;
+                text-decoration: none;
+                cursor: pointer;
+                padding: 22px;
+                max-width: 720px;
+                background: white;
+                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+            }
+
+            .events .container .card:hover {
+                background: #fafafa;
+            }
+
+            .events .container .card.error {
+                cursor: default;
+            }
+
+            .events .container .card h3 {
+                color: rgba(0, 0, 0, .95);
+                font-weight: 400;
+                margin: 0 0 4px 0;
+            }
+
+            .events .container .card h4 {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 400;
+                color: rgba(0, 0, 0, .6);
+            }
+
+            .events .container .card p {
+                max-width: 600px;
+                font-size: 14px;
+                color: rgba(0, 0, 0, .8);
+                margin-bottom: 0;
+                line-height: 24px;
+            }
+
+            @media screen and (max-width: 960px) {
+                .events .container {
+                    padding: 0px !important;
+                }
+                .subheader .container {
+                    padding: 16px 24px 8px 24px;
+                }
+
+                .filter {
+                    width: 100%;
+                    overflow-x: hidden;
+                }
+
+                .subheader .filter p {
+                    margin-bottom: 0;
+                }
+
+                .subheader .filter-container {
+                    white-space: nowrap;
+                    flex-wrap: nowrap;
+                    overflow-x: auto;
+                    padding: 8px 0;
+                }
+
+                .subheader .filter-container::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .events {
+                    min-height: 300px;
+                    padding-bottom: 0;
+                }
+                .events .container {
+                    padding: 16px 0 0 0;
+                }
+                .events .container .card {
+                    margin: 0 auto;
+                    -webkit-tap-highlight-color: rgba(0, 0, 0, .05);
+                }
+                .events .container h2 {
+                    margin-top: 24px;
+                    padding-left: 12px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                .events .container p {
+                    display: none;
+                }
+                .filter-container .chip:hover {
+                    border: 1px solid rgba(0, 0, 0, .4);
+                    color: rgba(0, 0, 0, .8);
+                    background-color: #fff;
+                }
+                .filter-container .chip.true {
+                    border: 1px solid #4285F4;
+                    background-color: #4285F4;
+                    color: white;
+                }
+            }
+        </style>
+
+        <div class="subheader">
+            <div class="container">
+                <div class="filter">
+                    <p>FILTER:</p>
+                    <div class="filter-container">
+                        <template is="dom-repeat" items="{{filterType}}">
+                            <div class$="chip {{item.toggle}}" on-tap="toggleFilter" something$="{{item.toggle}}">
+                                [[item.name]]
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="events">
+            <div class="container">
+                <template is="dom-if" if="[[dataLoading]]">
+                    <div class="loading">
+                        <paper-spinner-lite active></paper-spinner-lite>
+                    </div>
+                </template>
+                <template is="dom-if" if="[[!dataLoading]]">
+                    <template is="dom-if" if="[[upcomingEvents]]">
+                        <h2>Upcoming Events</h2>
+                        <template is="dom-repeat" items="[[upcomingEvents]]">
+                            <a href$="/events/[[item.id]]" class="card">
+                                <div class="info">
+                                    <h3>[[item.title]]</h3>
+                                    <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
+                                    <div class="chip-container">
+                                        <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                                    </div>
+                                    <p>[[_parseDescription(item.short_description)]]</p>
+                                </div>
+                            </a>
+                        </template>
+                    </template>
+                    <!-- <template is="dom-if" if="[[!upcomingEvents]]">
+                        <div class="card error">
+                            <h3>Oops. No upcoming event found.</h3>
+                        </div>
+                    </template> -->
+                    <template is="dom-if" if="[[pastEvents]]">
+                        <h2>Past Events</h2>
+                        <template is="dom-repeat" items="[[pastEvents]]">
+                            <a href$="/events/[[item.id]]" class="card">
+                                <div class="info">
+                                    <h3>[[item.title]]</h3>
+                                    <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
+                                    <div class="chip-container">
+                                        <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                                    </div>
+                                    <p>[[_parseDescription(item.short_description)]]</p>
+                                </div>
+                            </a>
+                        </template>
+                    </template>
+                    <!-- <template is="dom-if" if="[[!pastEvents]]">
+                        <div class="card error">
+                            <h3>Oops. No past event found.</h3>
+                        </div>
+                    </template> -->
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        class GdgEventsHome extends Polymer.GestureEventListeners(Polymer.Element) {
+            static get is() { return 'gdg-events-home'; }
+
+            static get properties() {
+                return {
+                    dataLoading: {
+                        type: Boolean,
+                        value: true
+                    },
+                    pastEvents: Array,
+                    upcomingEvents: Array,
+                    filterType: {
+                        notify: true,
+                        reflectToAttribute: true
+                    }
+                }
+            }
+
+            _snakeCase(tag) {
+                return tag.replace(/\s+/g, '_').toLowerCase();
+            }
+
+            _parseDescription(description) {
+                return description;
+            }
+
+            _parseDateTime(datetime) {
+                return new Date(datetime).toLocaleString("en-us", { hour: "numeric", minute: "numeric", day: "numeric", month: "short", year: "numeric" });
+            }
+
+            _getParameterByName(name, url) {
+                if (!url) url = window.location.href;
+                name = name.replace(/[\[\]]/g, "\\$&");
+                var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                    results = regex.exec(url);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+
+            toggleFilter(event) {
+                this.set('filterType.' + event.model.index + '.toggle', !event.model.item.toggle);
+                this.filterType.forEach((item, index) => {
+                    if (index != event.model.index) {
+                        this.set('filterType.' + index + '.toggle', false);
+                    }
+                })
+
+                if (event.model.item.toggle) {
+                    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?type=' + event.model.item.name.replace(/ /g, "_").toUpperCase();
+                }
+                else {
+                    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+                }
+                window.history.pushState({ path: newurl }, '', newurl);
+
+                this.getEventData();
+            }
+
+            getEventData() {
+                var timestamp = new Date();
+                var selectedFilter = true;
+                if (this._getParameterByName('type')) {
+                    selectedFilter = this._getParameterByName('type')
+                        .replace(/_/g, " ")
+                        .toLowerCase();
+                    var upcomingEventsRef = this.db.collection("events")
+                        .where("start_time", ">=", timestamp)
+                        .where("tag", "==", selectedFilter)
+                        .where("visibility", "==", "public")
+                    var pastEventsRef = this.db.collection("events")
+                        .where("start_time", "<", timestamp)
+                        .where("tag", "==", selectedFilter)
+                        .where("visibility", "==", "public")
+                        .orderBy("start_time", "desc")
+                }
+                else {
+                    var upcomingEventsRef = this.db.collection("events")
+                        .where("start_time", ">=", timestamp)
+                        .where("visibility", "==", "public")
+                    var pastEventsRef = this.db.collection("events")
+                        .where("start_time", "<", timestamp)
+                        .where("visibility", "==", "public")
+                        .orderBy("start_time", "desc")
+                }
+
+                upcomingEventsRef.get().then((querySnapshot) => {
+                    this.set('upcomingEvents', []);
+                    querySnapshot.forEach((doc) => {
+                        this.push('upcomingEvents', doc.data());
+                    });
+                    this.checkData('upcoming');
+                    if (this.upcomingEvents.length <= 0) {
+                        this.set('upcomingEvents', null);
+                    }
+                });
+
+                pastEventsRef.get().then((querySnapshot) => {
+                    this.set('pastEvents', []);
+                    querySnapshot.forEach((doc) => {
+                        this.push('pastEvents', doc.data());
+                    });
+                    this.checkData('past');
+                    if (this.pastEvents.length <= 0) {
+                        this.set('pastEvents', null);
+                    }
+                });
+            }
+
+            checkData() {
+                if (this.get('pastEvents') !== undefined && this.get('upcomingEvents') !== undefined && this.get('dataLoading') == true){
+                    this.set('dataLoading', false);
+                }
+            }
+
+            loadData() {
+                this.set('filterType', [{
+                    'name': 'codelabs',
+                    'toggle': false
+                }, {
+                    'name': 'conference',
+                    'toggle': false
+                }, {
+                    'name': 'live viewing party',
+                    'toggle': false
+                }, {
+                    'name': 'meetup',
+                    'toggle': false
+                }, {
+                    'name': 'study jam',
+                    'toggle': false
+                }, {
+                    'name': 'workshop',
+                    'toggle': false
+                }])
+
+                this.db = firebase.firestore();
+
+                if (this._getParameterByName('type')) {
+                    this.filterType.forEach(filter => {
+                        if (filter.name == this._getParameterByName('type').replace(/_/g, " ").toLowerCase()) {
+                            filter.toggle = true;
+                        }
+                    })
+                }
+
+                this.getEventData();
+            }
+        }
+
+        window.customElements.define(GdgEventsHome.is, GdgEventsHome);
+    </script>
+</dom-module>
