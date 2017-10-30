@@ -4,19 +4,25 @@
 <dom-module id="gdg-card">
   <template>
     <style include="shared-styles">
-       :host {
+      :host {
         display: block;
         width: 100%;
       }
 
       .card {
+        -webkit-box-sizing: border-box;
         box-sizing: border-box;
         border-radius: 2px;
         padding: 24px 32px;
+        -webkit-transition: 150ms -webkit-box-shadow ease-in-out;
+        transition: 150ms -webkit-box-shadow ease-in-out;
+        -o-transition: 150ms box-shadow ease-in-out;
         transition: 150ms box-shadow ease-in-out;
+        transition: 150ms box-shadow ease-in-out, 150ms -webkit-box-shadow ease-in-out;
       }
 
       .card:hover {
+        -webkit-box-shadow: 0 3px 3px -2px rgba(0, 0, 0, .2), 0 3px 4px 0 rgba(0, 0, 0, .14), 0 1px 8px 0 rgba(0, 0, 0, .12);
         box-shadow: 0 3px 3px -2px rgba(0, 0, 0, .2), 0 3px 4px 0 rgba(0, 0, 0, .14), 0 1px 8px 0 rgba(0, 0, 0, .12);
       }
 
@@ -29,6 +35,7 @@
       }
 
       .text {
+        -webkit-box-sizing: border-box;
         box-sizing: border-box;
         margin: 24px 0;
       }
@@ -58,6 +65,7 @@
         }
 
         .card:hover {
+          -webkit-box-shadow: none;
           box-shadow: none;
         }
 
@@ -74,6 +82,7 @@
         .subtitle {
           width: 90%;
           font-size: 15px;
+          margin-bottom: 16px;
         }
       }
     </style>

@@ -10,10 +10,9 @@ from [GDG Kuala Lumpur](http://gdgkl.org/).
 :zap: Link: [www.gdgkl.org](https://www.gdgkl.org)
 
 ### Techs
- - Polymer 2.0  
- - Firebase Hosting/App Engine    
+ - Polymer 2.0 ([Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit), [prpl-server-node](https://github.com/Polymer/prpl-server-node))   
+ - App Engine Flexible Environment (Node.js)  
  - Firebase Authentication  
- - Firebase Cloud Functions  
  - Firebase Realtime Database  
  - Firebase Cloud Firestore  
 
@@ -23,10 +22,10 @@ from [GDG Kuala Lumpur](http://gdgkl.org/).
  :white_check_mark: Home Page  
  :white_check_mark: About Page  
 #### Phase 2 - In Development (Q4 2017, [beta.gdgkl.org](beta.gdgkl.org))
- :white_check_mark: Admin Panel (For organizer only)  
+ :white_check_mark: [Admin Panel](https://github.com/GDGKualaLumpur/admin-gdgkl) (For organizer only)  
  :white_check_mark: Event Page (List of events + event detail info)  
- :white_check_mark: Dynamic metadata for event page  
- :x: Migrate from Firebase Hosting to App Engine (prpl-server-node)   
+ :white_check_mark: Migrate from Firebase Hosting to App Engine (prpl-server-node)   
+ :x: Dynamic metadata for event page  
 #### Phase 3 (Q4 2017 - Q1 2018)
  :x: Login Page  
  :x: Profile Page  
@@ -35,7 +34,7 @@ from [GDG Kuala Lumpur](http://gdgkl.org/).
  :x: Improve Performance (Score 90+ on Lighthouse)  
 #### Phase 4 (2018)
  :x: i18n Support  
- :x: Migrate to Polymer 3.0
+ :x: Migrate to Polymer 3.0  
  :x: Event Registration System  
  :x: Rewarding System  
  

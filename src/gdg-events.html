@@ -24,6 +24,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
+    <paper-toast id="toast" duration="3000"></paper-toast>
+
     <app-route route="{{route}}" pattern="/events/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
     <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="home">
@@ -62,15 +64,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
 
-      _pageChanged(page) {
+      _loadEventComponents(page, oldPage) {
         var resolvedPageUrl = this.resolveUrl('gdg-events-' + page + '.html');
         Polymer.importHref(
-            resolvedPageUrl,
-            () => {
-              this.$[page].loadData(this.routeData.page);
-            },
-            function(error){console.log(error)},
-            true);
+          resolvedPageUrl,
+          () => {
+            this.$[page].loadData(this.routeData.page);
+            this.shadowRoot.querySelector('gdg-events-details').addEventListener('showToast', e => {
+              this.$.toast.open();
+              this.$.toast.text = e.detail.text;
+            })
+          },
+          function (error) { console.log(error) },
+          true);
+      }
+
+      showToast() {
+        console.log('?')
+      }
+
+      _pageChanged(page, oldPage) {
+        if (!this.firestore_persistence) {
+          this.firestore_persistence = firebase.firestore().enablePersistence()
+            .then(() => {
+              this._loadEventComponents(page, oldPage);
+            })
+            .catch((err) => {
+              if (err.code == 'failed-precondition') {
+                this._loadEventComponents(page, oldPage);
+              } else if (err.code == 'unimplemented') {
+                this._loadEventComponents(page, oldPage);
+              }
+            });
+        }
+        else {
+          this._loadEventComponents(page, oldPage);
+        }
       }
     }
 

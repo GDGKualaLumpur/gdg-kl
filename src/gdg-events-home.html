@@ -27,10 +27,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 height: 300px;
                 width: 100%;
                 background-color: #3eaaf4;
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
                 justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
                 align-items: center;
                 color: white;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
                 flex-direction: column;
             }
 
@@ -48,12 +57,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             .subheader {
                 background: white;
+                -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
                 box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12)
             }
 
             .subheader .filter-container {
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
+                -ms-flex-wrap: wrap;
                 flex-wrap: wrap;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
                 align-items: center;
                 font-size: 14px;
             }
@@ -66,6 +81,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 font-size: 14px;
                 padding: 0 15px;
                 margin-bottom: 16px;
+                -webkit-box-sizing: border-box;
                 box-sizing: border-box;
             }
 
@@ -86,7 +102,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 font-size: 14px;
                 text-align: center;
                 cursor: pointer;
+                -webkit-transition: 80ms all linear;
+                -o-transition: 80ms all linear;
                 transition: 80ms all linear;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
                 user-select: none;
                 -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
             }
@@ -105,7 +126,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             .loading {
                 width: 100%;
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
                 justify-content: center;
                 margin-top: 24px;
             }
@@ -138,6 +163,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 padding: 22px;
                 max-width: 720px;
                 background: white;
+                -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
                 box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
             }
 
@@ -189,6 +215,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 .subheader .filter-container {
                     white-space: nowrap;
+                    -ms-flex-wrap: nowrap;
                     flex-wrap: nowrap;
                     overflow-x: auto;
                     padding: 8px 0;
@@ -268,11 +295,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             </a>
                         </template>
                     </template>
-                    <!-- <template is="dom-if" if="[[!upcomingEvents]]">
-                        <div class="card error">
-                            <h3>Oops. No upcoming event found.</h3>
-                        </div>
-                    </template> -->
                     <template is="dom-if" if="[[pastEvents]]">
                         <h2>Past Events</h2>
                         <template is="dom-repeat" items="[[pastEvents]]">
@@ -288,11 +310,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             </a>
                         </template>
                     </template>
-                    <!-- <template is="dom-if" if="[[!pastEvents]]">
-                        <div class="card error">
-                            <h3>Oops. No past event found.</h3>
-                        </div>
-                    </template> -->
                 </template>
             </div>
         </div>
@@ -409,7 +426,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             checkData() {
-                if (this.get('pastEvents') !== undefined && this.get('upcomingEvents') !== undefined && this.get('dataLoading') == true){
+                if (this.get('pastEvents') !== undefined && this.get('upcomingEvents') !== undefined && this.get('dataLoading') == true) {
                     this.set('dataLoading', false);
                 }
             }
