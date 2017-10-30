@@ -6,9 +6,9 @@ npm install -g bower polymer-cli firebase-tools
 # For Branch: app-engine 
 if [ "$TRAVIS_BRANCH" = "app-engine" ]; then
     # Setup Google Cloud
-    - openssl aes-256-cbc -K $encrypted_e27920ef8557_key -iv $encrypted_e27920ef8557_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
-    - tar -xzf credentials.tar.gz
-    - mkdir -p lib
+    openssl aes-256-cbc -K $encrypted_e27920ef8557_key -iv $encrypted_e27920ef8557_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
+    tar -xzf credentials.tar.gz
+    mkdir -p lib
 
     # Install, Setup and Build
     bower install
