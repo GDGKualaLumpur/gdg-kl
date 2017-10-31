@@ -29,18 +29,19 @@ elif [ "$TRAVIS_BRANCH" = "master" ]; then
     firebase use default
     firebase deploy --token $FIREBASE_TOKEN --non-interactive --only hosting
 
-# For Branch: october-update (Firebase Hosting)
-elif [ "$TRAVIS_BRANCH" = "october-update" ]; then
+# For Branch: firebase-hosting (Firebase Hosting)
+elif [ "$TRAVIS_BRANCH" = "firebase-hosting" ]; then
     # Install, Setup and Build
-    echo "October-update: Install, Setup and Build"
-    cd functions
+    echo "Firebase-hosting: Install, Setup and Build"
     bower install
     npm install
     polymer build
+    cd functions
+    npm install
     cd ..
 
     # Deploy to Firebase Hosting and Cloud Functions for Firebase
-    echo "October-update: Deploy to Firebase Hosting and Cloud Functions for Firebase"
+    echo "Firebase-hosting: Deploy to Firebase Hosting and Cloud Functions for Firebase"
     firebase use development
     firebase deploy --token $FIREBASE_TOKEN --non-interactive --only hosting,functions
 else
