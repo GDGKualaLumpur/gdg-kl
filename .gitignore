@@ -1,4 +1,6 @@
 bower_components/
 node_modules/
 build/
+cert.pem
+key.pem
 .DS_Store

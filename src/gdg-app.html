@@ -19,15 +19,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app-script.html">
 <link rel="import" href="gdg-icons.html">
 
-<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase-firestore.js"></script>
-
-<link rel="lazy-import" href="gdg-home.html">
+<link rel="import" href="gdg-home.html">
 <link rel="lazy-import" href="gdg-events.html">
 <link rel="lazy-import" href="gdg-about.html">
-<!-- <link rel="lazy-import" href="gdg-profile.html"> -->
 
 <dom-module id="gdg-app">
   <template>
@@ -445,6 +442,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           Polymer.RenderStatus.afterNextRender(this, () => {
             this.loadComplete = true;
             this._pageLoaded();
+
             if ('serviceWorker' in navigator) {
               navigator.serviceWorker.register('service-worker.js', { scope: '/' }).then(reg => {
                 reg.onupdatefound = () => {
@@ -495,6 +493,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       ready() {
         super.ready();
+        this.removeAttribute('unresolved');
+
+        this._scrollHandler();
+        addEventListener('scroll', e => this._scrollHandler());
 
         var config = {
           apiKey: "AIzaSyD_B8LAxG-1IlfrlZwN5HAbncuwHrCZxU8",
@@ -511,9 +513,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         catch (error) {
           console.log(error)
         }
-
-        this._scrollHandler();
-        addEventListener('scroll', e => this._scrollHandler());
       }
     }
 

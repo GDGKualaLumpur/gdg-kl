@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="gdg-card">
@@ -27,8 +28,6 @@
       }
 
       .image {
-        background-position: center center;
-        background-size: cover;
         height: 420px;
         width: 100%;
         margin-bottom: 12px;
@@ -88,7 +87,7 @@
     </style>
 
     <div class="card">
-      <div class="image" style$="background-color: [[color]]; background-image: url('[[rootPath]]images/[[image]]')"></div>
+      <iron-image class="image" style$="background-color: [[placeholder]];" src$="[[rootPath]]images/[[image]]" preload fade sizing="cover"></iron-image>
       <div class="text">
         <div class="title">[[header]]</div>
         <div class="subtitle">[[subtitle]]</div>
@@ -106,7 +105,8 @@
           header: String,
           subtitle: String,
           color: String,
-          image: String
+          image: String,
+          placeholder: String
         }
       }
     }
