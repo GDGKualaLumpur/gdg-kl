@@ -33,10 +33,11 @@ elif [ "$TRAVIS_BRANCH" = "master" ]; then
 elif [ "$TRAVIS_BRANCH" = "firebase-hosting" ]; then
     # Install, Setup and Build
     echo "Firebase-hosting: Install, Setup and Build"
-    cd functions
     bower install
     npm install
     polymer build
+    cd functions
+    npm install
     cd ..
 
     # Deploy to Firebase Hosting and Cloud Functions for Firebase
