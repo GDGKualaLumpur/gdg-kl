@@ -19,12 +19,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-<link rel="import" href="../bower_components/polymerfire/firebase-app-script.html">
 <link rel="import" href="gdg-icons.html">
-
 <link rel="import" href="gdg-home.html">
 <link rel="lazy-import" href="gdg-events.html">
 <link rel="lazy-import" href="gdg-about.html">
+
+<link rel="import" href="../bower_components/polymerfire/firebase-app-script.html">
 
 <dom-module id="gdg-app">
   <template>
@@ -182,7 +182,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: none;
       }
 
+      paper-toast span {
+        padding: 12px;
+        color: #64B5F6;
+        text-transform: uppercase;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        @apply(--layout-self-center);
+      }
+
       @media screen and (max-width: 960px) {
+        paper-toast {
+          width: 100%;
+          min-width: 0;
+          border-radius: 0;
+          margin: 0 0 56px 0;
+        }
+
         .subfooter {
           -webkit-box-orient: vertical;
           -webkit-box-direction: normal;
