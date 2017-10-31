@@ -21,6 +21,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .container .row {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
         width: 100%;
       }
@@ -67,9 +69,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: white;
       }
 
+      paper-toast span {
+        padding: 12px;
+        color: #64B5F6;
+        text-transform: uppercase;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        @apply(--layout-self-center);
+      }
+
       @media screen and (max-width: 960px) {
         .container {
           padding: 0;
+        }
+
+        paper-toast {
+          width: 100%;
+          min-width: 0;
+          border-radius: 0;
+          margin: 0 0 56px 0;
         }
       }
     </style>

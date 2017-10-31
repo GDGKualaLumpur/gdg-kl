@@ -5,16 +5,24 @@ cache:
   - node_modules
   - bower_components
   - "${NVM_PATH}_modules"
+  
 before_script:
-- npm install -g bower polymer-cli firebase-tools
-- cd functions && bower install && npm install && cd ..
+ - chmod +x ./deploy.sh
+
 script: 
-- cd functions && polymer build && cd ..
-after_success:
-- if [ "$TRAVIS_BRANCH" = "october-update" ]; then firebase use development; fi
-- if [ "$TRAVIS_BRANCH" = "master" ]; then firebase use default; fi
-- firebase deploy --token $FIREBASE_TOKEN --non-interactive --only hosting,functions
+- ./deploy.sh
+
+deploy:
+  provider: gae
+  skip_cleanup: true
+  keyfile: client-secret.json
+  project: gdg-kl
+  version: staging
+  no_promote: true
+  on: app-engine
+
 branches:
   only:
    - master
-   - october-update
+   - firebase-hosting
+   - app-engine

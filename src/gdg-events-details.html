@@ -37,6 +37,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 width: 100%;
                 background: white;
                 margin: 0 auto;
+                -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
                 box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12)
             }
 
@@ -56,6 +57,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 right: 0;
                 bottom: 0;
                 left: 0;
+                background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .75)), to(transparent));
+                background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .75), transparent);
+                background-image: -o-linear-gradient(top, rgba(0, 0, 0, .75), transparent);
                 background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), transparent);
                 opacity: 0;
                 height: 92px;
@@ -63,19 +67,54 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             .event .loading {
                 min-height: 400px;
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
-                justify-content: center;
                 margin-top: 36px;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                text-align: center;
+                color: #757575
+            }
+
+            .event .loading iron-icon {
+                width: 30px;
+                height: 30px;
+                margin: 12px 0 24px 0;
+            }
+
+            .event .loading h2 {
+                font-weight: 400;
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+
+            .event .loading p {
+                font-size: 13px;
             }
 
             .event .content {
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
             }
 
             .event .details {
                 width: 100%;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
                 flex-direction: column;
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
+                -webkit-box-flex: 1;
+                -ms-flex: 1 1 60%;
                 flex: 1 1 60%;
                 padding: 24px 42px 48px 24px;
             }
@@ -104,15 +143,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             .event .info {
+                -webkit-box-sizing: border-box;
                 box-sizing: border-box;
                 min-width: 350px;
                 margin: -48px 32px 24px 0;
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
                 flex: 1;
             }
 
             .event .info .card {
                 min-height: 200px;
                 padding: 24px;
+                -webkit-box-sizing: border-box;
                 box-sizing: border-box;
                 position: relative;
             }
@@ -128,7 +171,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 color: rgba(0, 0, 0, .8);
                 text-align: center;
                 cursor: pointer;
+                -webkit-transition: 80ms all linear;
+                -o-transition: 80ms all linear;
                 transition: 80ms all linear;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
                 user-select: none;
             }
 
@@ -139,36 +187,60 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background: #4285F4;
                 color: white;
                 text-transform: uppercase;
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
                 border-radius: 4px;
                 height: 40px;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
                 justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
                 align-items: center;
                 font-size: 14px;
                 margin-top: 32px;
+                -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
                 box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
             }
 
             .info .item {
                 font-weight: 500;
                 font-size: 14px;
+                display: -webkit-box;
+                display: -ms-flexbox;
                 display: flex;
+                -webkit-box-orient: horizontal;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: row;
                 flex-direction: row;
             }
 
             .info .item .row {
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
                 flex-direction: column;
                 width: auto;
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
                 flex: 1;
+                -ms-flex-wrap: nowrap;
                 flex-wrap: nowrap;
             }
 
             .info .item .row.action {
                 color: #4285F4;
+                -webkit-box-flex: 0;
+                -ms-flex: 0;
                 flex: 0;
                 margin-left: 16px;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
                 justify-content: center;
                 text-transform: uppercase;
+                -webkit-box-align: end;
+                -ms-flex-align: end;
                 align-items: flex-end;
             }
 
@@ -203,10 +275,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             @media screen and (max-width: 960px) {
                 paper-icon-button {
-                    position: absolute;
-                    margin: 10px 16px;
-                    color: white;
-                    z-index: 1;
+                    display: none;
                 }
                 .event .cover {
                     height: 250px;
@@ -220,10 +289,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     margin-top: 24px;
                 }
                 .event .content {
+                    -webkit-box-orient: vertical;
+                    -webkit-box-direction: normal;
+                    -ms-flex-direction: column;
                     flex-direction: column;
                 }
                 .event .details {
-                    padding: 24px 42px 0 24px;
+                    padding: 24px 42px 24px 24px;
+                    -webkit-box-sizing: border-box;
                     box-sizing: border-box;
                 }
 
@@ -248,29 +321,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     margin: 0 24px;
 
                 }
-                /* .event .info {
-                    display: none;
-                } */
-
-                /* .info.mobile {
-                    display: flex;
-                }
-                .info .card {
-                    padding-bottom: 96px;
-                }
-                .info .item {
-                    padding: 12px 24px 0 24px;
-                    flex-direction: column;
-                }
-                .info .divider {
-                    margin: 12px 0;
-                }
-                .button.mobile {
-                    display: flex;
-                    margin: -64px 24px 24px 24px;
-                    /* position: sticky; */
-                    bottom: 78px;
-                } */
             }
         </style>
 
@@ -281,9 +331,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class="event card">
                 <div class="cover" id="cover_pic"></div>
                 <template is="dom-if" if="[[!data]]">
-                    <div class="loading">
-                        <paper-spinner-lite active></paper-spinner-lite>
-                    </div>
+                    <template is="dom-if" if="[[!noInternet]]">
+                        <div class="loading">
+                            <paper-spinner-lite active></paper-spinner-lite>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="[[noInternet]]">
+                        <div class="loading">
+                            <iron-icon icon="gdg-icons:perm-scan-wifi"></iron-icon>
+                            <h2>No internet connection</h2>
+                            <p>Check if your device is connected to a mobile network or WiFi.</p>
+                        </div>
+                    </template>
                 </template>
                 <template is="dom-if" if="[[data]]">
                     <div class="content">
@@ -325,26 +384,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     </div>
                 </template>
             </div>
-            <!-- <template is="dom-if" if="[[data]]">
-                <div class="info mobile">
-                    <div class="card">
-                        <div class="item">
-                            <div class="title">WHEN</div>
-                            <div class="text">[[_parseDate(data.start_time)]]</div>
-                            <div class="subtext">[[_parseTime(data.start_time)]] - [[_parseTime(data.end_time)]]</div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="item">
-                            <div class="title">WHERE</div>
-                            <div class="text">[[data.venue_name]]</div>
-                            <div class="subtext">[[data.venue_address]]</div>
-                        </div>
-                    </div>
-                </div>
-                <template is="dom-if" if="[[data.url]]">
-                    <a target="_blank" href$="[[data.url]]" class="button mobile">Visit Website</a>
-                </template>
-            </template> -->
         </div>
     </template>
 
@@ -355,6 +394,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             loadData(page) {
                 this.$.cover_pic.style.backgroundImage = '';
                 this.set('data', false);
+                this.set('noInternet', false);
                 firebase.firestore().collection('events').doc(page).get().then((doc) => {
                     if (doc.exists) {
                         if (doc.data().photoUrl) {
@@ -367,11 +407,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         document.title = doc.data().title + ' - GDG Kuala Lumpur';
                     }
                     else {
+                        this.dispatchEvent(new CustomEvent('showToast', { detail: { text: 'Event not found. Please try again.' } }));
                         window.history.pushState({}, null, '/events/');
                         window.dispatchEvent(new CustomEvent('location-changed'));
                     }
                 }).catch(error => {
-                    console.log(error)
+                    if (error.code == 'aborted') {
+                        this.set('noInternet', true);
+                        this.$.cover_pic.style.backgroundImage = 'url(' + this.rootPath + 'images/gdgkl.jpg)';
+                    }
+                    else {
+                        this.dispatchEvent(new CustomEvent('showToast', { detail: { text: 'Event not found. Please try again.' } }));
+                        window.history.pushState({}, null, '/events/');
+                        window.dispatchEvent(new CustomEvent('location-changed'));
+                    }
                 })
             }
 

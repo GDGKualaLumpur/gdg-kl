@@ -20,7 +20,8 @@
     "vaadin-material-theme": "vaadin/vaadin-material-theme#^0.3.0",
     "vaadin-valo-theme": "vaadin/vaadin-valo-theme#^0.3.2",
     "google-map": "GoogleWebComponents/google-map#^2.0.2",
-    "paper-spinner": "PolymerElements/paper-spinner#^2.0.0"
+    "paper-spinner": "PolymerElements/paper-spinner#^2.0.0",
+    "iron-image": "PolymerElements/iron-image#^2.1.2"
   },
   "resolutions": {
     "polymer": "^2.0.0"

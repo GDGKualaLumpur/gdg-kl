@@ -1,77 +1,46 @@
-const admin = require('firebase-admin');
 const functions = require('firebase-functions');
-const express = require('express')
-var path = require("path");
+const capabilities = require('browser-capabilities');
+const rp = require('request-promise');
+const request = require('request');
 
-// const serviceAccount = require('./service-account.json');
+exports.serve = functions.https.onRequest((req, res) => {
+    const baseUrl = 'https://' + functions.config().firebase.authDomain;
 
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount)
-// });
+    // Fetch the hosted polymer.json to read the build configuration
+    return rp({
+        uri: baseUrl + '/polymer.json',
+        json: true,
+    }).then((config) => {
+        // Find a build that matches the client browser capabilities
+        const client = capabilities.browserCapabilities(req.headers['user-agent']);
+        var builds = config.builds.filter((build) => {
+            if (!build.browserCapabilities) {
+                return true;
+            }
+            for (const c of build.browserCapabilities) {
+                if (!client.has(c)) {
+                    return false;
+                }
+            }
+            return true;
+        });
 
-admin.initializeApp(functions.config().firebase);
+        // Sort the builds so that the one with most requirements,
+        // which is assumed to be "best" build, is served first.
+        builds.sort((build1, build2) => {
+            const size1 = (build1.browserCapabilities || []).length;
+            const size2 = (build2.browserCapabilities || []).length;
+            return size2 - size1;
+        });
 
-var app = express();
-app.set('view engine', 'ejs')
-
-exports.generateSharingMetadata = functions.https.onRequest(
-  app.get("/events/:eventid*", (req, res) => {
-    var userAgent = req.headers['user-agent'];
-    var db = admin.firestore();
-    if (/^(facebookexternalhit)|(Twitterbot)|(Pinterest)/gi.test(userAgent)) {
-      db.collection('events').doc(req.params.eventid).get().then((doc) => {
-        if (doc.exists) {
-          var event_title = doc.data().title;
-          var short_description = doc.data().short_description;
-          var start_time = doc.data().start_time;
-          var end_time = doc.data().end_time;
-          res.send(`
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <!-- Facebook sharing meta data -->
-                <meta property="og:title" content="${event_title}">
-                <meta property="og:site_name" content="GDG Kuala Lumpur">
-                <meta property="og:type" content="Event">
-                <meta property="og:url" content="https://gdg-kl-dev.firebaseapp.com/events/${req.params.eventid}">
-                <meta property="og:description" content="${short_description}">
-                <meta property="og:image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
-                <meta property="og:image:type" content="image/jpeg" />
-
-                <!-- G+ sharing meta data -->
-                <meta itemprop="name" content="${event_title}">
-                <meta itemprop="description" content="${short_description}">
-                <meta itemprop="image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
-                <meta itemprop="startDate" content="${start_time}">
-                <meta itemprop="endDate" content="${end_time}">
-            
-                <!-- Twitter meta data -->
-                <meta name="twitter:card" content="summary_large_image">
-                <meta name="twitter:creator" content="@gdgkl">
-                <meta name="twitter:title" content="${event_title}">
-                <meta name="twitter:description" content="${short_description}">
-                <meta name="twitter:image" content="https://gdg-kl-dev.firebaseapp.com/images/gdgkl.jpg">
-              </head>
-              <body>
-                <h1>${event_title}</h1>
-                <p>${short_description}</p>
-              </body>
-            </html>
-          `)
-        }
-        else {
-          res.sendFile('./build/firebase/index.html', { root: '.' });
-        }
-      }).catch(error => {
-        res.send('error')
-      })
-    }
-    else {
-      res.sendFile('./build/firebase/index.html', { root: '.' });
-    }
-  }),
-
-  app.get("/events", (req, res) => {
-    res.sendFile('./build/firebase/index.html', { root: '.' });
-  })
-)
+        // Fetch the appropriate index.html for the chosen build
+        request(
+            baseUrl + '/' + builds[0].name + '/index.html'
+        ).on('response', (res) => {
+            // Tell Firebase Hosting to cache the result based on user-agent
+            // Unfortunately this is the only way so far to make sure each
+            // user gets served the appropriate version
+            res.headers['Vary'] = 'user-agent';
+        }).pipe(res);
+    });
+});

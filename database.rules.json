@@ -1,10 +1,10 @@
 {
-  "rules": {
-    "admin": {
-    	"$uid": {
-        ".read": "$uid === auth.uid",
-        ".write": false
+    "rules": {
+      "admin": {
+          "$uid": {
+          ".read": "$uid === auth.uid",
+          ".write": false
+        }
       }
     }
   }
-}

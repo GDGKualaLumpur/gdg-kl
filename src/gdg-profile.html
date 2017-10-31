@@ -27,6 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         max-width: 300p;
         width: 100%;
         text-align: center;
+        -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
       }
 
@@ -79,6 +80,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .row {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
         max-width: 1200px;
         margin: 0 auto;
@@ -93,24 +96,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .right.column {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
         width: 100%;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 60%;
         flex: 1 1 60%;
+        -webkit-box-sizing: border-box;
         box-sizing: border-box;
       }
 
       .right.column .card {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
         flex-direction: column;
         width: 100%;
         max-width: 100%;
         padding: 24px;
+        -webkit-box-sizing: border-box;
         box-sizing: border-box;
       }
 
       @media screen and (max-width: 960px) {
         .row {
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -ms-flex-direction: column;
           flex-direction: column;
         }
         .column {
@@ -145,7 +165,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <div class="column right">
         <div class="card">put something here</div>
-        <div class="card">but i dunno what to put <br> lol</div>
+        <div class="card">but i dunno what to put
+          <br> lol</div>
       </div>
     </div>
   </template>
