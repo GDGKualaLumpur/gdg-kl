@@ -34,6 +34,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             .card {
+                overflow: hidden;
+                border-radius: 8px;
                 width: 100%;
                 background: white;
                 margin: 0 auto;
@@ -168,7 +170,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 text-transform: capitalize;
                 border-radius: 100px;
                 border: 1px solid rgba(0, 0, 0, .4);
-                color: rgba(0, 0, 0, .8);
+                color: white;
                 text-align: center;
                 cursor: pointer;
                 -webkit-transition: 80ms all linear;
@@ -274,6 +276,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             @media screen and (max-width: 960px) {
+                .card {
+                    border-radius: 0;
+                }
                 paper-icon-button {
                     display: none;
                 }

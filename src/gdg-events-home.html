@@ -91,12 +91,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-bottom: 8px;
             }
 
-            .filter-container .chip,
+            .filter-container .filter-chip,
             .events .card .chip {
                 text-transform: capitalize;
                 border-radius: 100px;
                 border: 1px solid rgba(0, 0, 0, .4);
-                color: rgba(0, 0, 0, .8);
                 margin: 2px 6px 4px 0;
                 padding: 4px 18px;
                 font-size: 14px;
@@ -157,22 +156,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             }
 
             .events .container .card {
+                overflow: hidden;
+                border-radius: 8px;
                 display: block;
                 text-decoration: none;
                 cursor: pointer;
-                padding: 22px;
                 max-width: 720px;
+                box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+            }
+
+            .events .container .card a {
+                display: block;
+                padding: 22px;
+                text-decoration: none;
                 background: white;
-                -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
-                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+                border-bottom: 1px solid #f1f1f1;
             }
 
-            .events .container .card:hover {
+            .events .container .card a:last-child {
+                border-bottom: none;
+            }
+
+            .events .container .card a:hover {
                 background: #fafafa;
-            }
-
-            .events .container .card.error {
-                cursor: default;
             }
 
             .events .container .card h3 {
@@ -233,7 +239,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     padding: 16px 0 0 0;
                 }
                 .events .container .card {
-                    margin: 0 auto;
+                    margin: 0 12px;
                     -webkit-tap-highlight-color: rgba(0, 0, 0, .05);
                 }
                 .events .container h2 {
@@ -264,7 +270,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <p>FILTER:</p>
                     <div class="filter-container">
                         <template is="dom-repeat" items="{{filterType}}">
-                            <div class$="chip {{item.toggle}}" on-tap="toggleFilter" something$="{{item.toggle}}">
+                            <div class$="filter-chip {{item.toggle}}" id$="[[_snakeCase(item.name)]]" on-tap="toggleFilter" something$="{{item.toggle}}">
                                 [[item.name]]
                             </div>
                         </template>
@@ -282,33 +288,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <template is="dom-if" if="[[!dataLoading]]">
                     <template is="dom-if" if="[[upcomingEvents]]">
                         <h2>Upcoming Events</h2>
-                        <template is="dom-repeat" items="[[upcomingEvents]]">
-                            <a href$="/events/[[item.id]]" class="card">
-                                <div class="info">
-                                    <h3>[[item.title]]</h3>
-                                    <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
-                                    <div class="chip-container">
-                                        <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                        <div class="card">
+                            <template is="dom-repeat" items="[[upcomingEvents]]">
+                                <a href$="/events/[[item.id]]">
+                                    <div class="info">
+                                        <h3>[[item.title]]</h3>
+                                        <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
+                                        <div class="chip-container">
+                                            <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                                        </div>
+                                        <p>[[_parseDescription(item.short_description)]]</p>
                                     </div>
-                                    <p>[[_parseDescription(item.short_description)]]</p>
-                                </div>
-                            </a>
-                        </template>
+                                </a>
+                            </template>
+                        </div>
                     </template>
                     <template is="dom-if" if="[[pastEvents]]">
                         <h2>Past Events</h2>
-                        <template is="dom-repeat" items="[[pastEvents]]">
-                            <a href$="/events/[[item.id]]" class="card">
-                                <div class="info">
-                                    <h3>[[item.title]]</h3>
-                                    <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
-                                    <div class="chip-container">
-                                        <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                        <div class="card">
+                            <template is="dom-repeat" items="[[pastEvents]]">
+                                <a href$="/events/[[item.id]]">
+                                    <div class="info">
+                                        <h3>[[item.title]]</h3>
+                                        <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
+                                        <div class="chip-container">
+                                            <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                                        </div>
+                                        <p>[[_parseDescription(item.short_description)]]</p>
                                     </div>
-                                    <p>[[_parseDescription(item.short_description)]]</p>
-                                </div>
-                            </a>
-                        </template>
+                                </a>
+                            </template>
+                        </div>
                     </template>
                 </template>
             </div>

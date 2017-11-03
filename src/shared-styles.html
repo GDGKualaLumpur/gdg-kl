@@ -14,6 +14,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="shared-styles">
   <template>
     <style>
+
+h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Product Sans", "Roboto", sans-serif;
+      }
+
       .container {
         max-width: 1200px;
         padding: 32px 24px;
@@ -27,46 +37,114 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         width: 100%;
       }
 
+      .chip {
+        color: white;
+      }
+
+      .filter-chip {
+        background: #fff;
+      }
+
+      .filter-chip.true {
+        color: #fff !important;
+      }
+
       .chip#meetup {
         border-color: #ed3941;
         background: #ed3941;
-        color: white;
+      }
+
+      .filter-chip#meetup {
+        border-color: #ed3941;
+        color: #ed3941;
+      }
+
+      .filter-chip.true#meetup {
+        background: #ed3941;
       }
 
       .chip#conference {
         border-color: #528ef4;
         background: #528ef4;
-        color: white;
+      }
+
+      .filter-chip#conference {
+        border-color: #528ef4;
+        color: #528ef4;
+      }
+
+      .filter-chip.true#conference {
+        background: #528ef4;
       }
 
       .chip#live_viewing_party {
-        border-color: #f8c346;
-        background: #f8c346;
-        color: #000;
+        border-color: #ffa326;
+        background: #ffa326;
+      }
+
+      .filter-chip#live_viewing_party {
+        border-color: #ffa326;
+        color: #ffa326;
+      }
+
+      .filter-chip.true#live_viewing_party {
+        background: #ffa326;
       }
 
       .chip#bootcamp {
         border-color: #FF5722;
         background: #FF5722;
-        color: #fff;
+      }
+
+      .filter-chip#bootcamp {
+        border-color: #FF5722;
+        color: #FF5722;
+      }
+
+      .filter-chip.true#bootcamp {
+        background: #FF5722;
       }
 
       .chip#workshop {
         background: #469b5b;
         border-color: #469b5b;
-        color: white;
+      }
+
+      .filter-chip#workshop {
+        border-color: #469b5b;
+        color: #469b5b;
+      }
+
+      .filter-chip.true#workshop {
+        background: #469b5b;
       }
 
       .chip#study_jam {
         background: #9C27B0;
         border-color: #9C27B0;
-        color: white;
+      }
+
+      .filter-chip#study_jam {
+        border-color: #9C27B0;
+        color: #9C27B0;
+      }
+
+      .filter-chip.true#study_jam {
+        background: #9C27B0;
       }
 
       .chip#codelabs {
         background: #00BCD4;
         border-color: #00BCD4;
-        color: white;
+      }
+
+      .filter-chip#codelabs {
+        border-color: #00BCD4;
+        color: #00BCD4;
+      }
+
+      .filter-chip.true#codelabs {
+        background: #00BCD4;
       }
 
       paper-toast span {
