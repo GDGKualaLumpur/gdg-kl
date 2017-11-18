@@ -19,28 +19,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             :host {
                 display: block;
             }
-
             a {
                 color: #4285F4;
             }
-
             .container {
                 max-width: 1000px;
             }
-
             paper-icon-button {
                 margin-bottom: 12px;
                 color: rgba(0, 0, 0, .5);
             }
-
             .card {
+                overflow: hidden;
+                border-radius: 8px;
                 width: 100%;
                 background: white;
                 margin: 0 auto;
                 -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
                 box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12)
             }
-
             .event .cover {
                 position: relative;
                 border-bottom: 1px solid rgba(0, 0, 0, .12);
@@ -49,7 +46,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 background-position: 50% 50%;
                 background-size: cover;
             }
-
             .event .cover:before {
                 content: '';
                 position: absolute;
@@ -64,7 +60,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 opacity: 0;
                 height: 92px;
             }
-
             .event .loading {
                 min-height: 400px;
                 display: -webkit-box;
@@ -81,29 +76,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 text-align: center;
                 color: #757575
             }
-
             .event .loading iron-icon {
                 width: 30px;
                 height: 30px;
                 margin: 12px 0 24px 0;
             }
-
             .event .loading h2 {
                 font-weight: 400;
                 font-size: 20px;
                 margin-bottom: 8px;
             }
-
             .event .loading p {
                 font-size: 13px;
             }
-
             .event .content {
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
             }
-
             .event .details {
                 width: 100%;
                 -webkit-box-orient: vertical;
@@ -118,21 +108,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 flex: 1 1 60%;
                 padding: 24px 42px 48px 24px;
             }
-
             .event .details h3 {
                 color: rgba(0, 0, 0, .95);
                 font-weight: 400;
                 margin: 0 0 4px 0;
                 font-size: 26px;
             }
-
             .event .details h4 {
                 margin: 0;
                 font-size: 14px;
                 font-weight: 400;
                 color: rgba(0, 0, 0, .6);
             }
-
             .event .details p {
                 white-space: pre-wrap;
                 max-width: 600px;
@@ -141,7 +128,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-bottom: 0;
                 line-height: 24px;
             }
-
             .event .info {
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
@@ -151,7 +137,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 -ms-flex: 1;
                 flex: 1;
             }
-
             .event .info .card {
                 min-height: 200px;
                 padding: 24px;
@@ -159,7 +144,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 box-sizing: border-box;
                 position: relative;
             }
-
             .chip {
                 display: inline-block;
                 margin: 8px 0 16px 0;
@@ -168,7 +152,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 text-transform: capitalize;
                 border-radius: 100px;
                 border: 1px solid rgba(0, 0, 0, .4);
-                color: rgba(0, 0, 0, .8);
+                color: white;
                 text-align: center;
                 cursor: pointer;
                 -webkit-transition: 80ms all linear;
@@ -179,7 +163,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 -ms-user-select: none;
                 user-select: none;
             }
-
             .info .card .button,
             .button {
                 text-decoration: none;
@@ -203,7 +186,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
                 box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
             }
-
             .info .item {
                 font-weight: 500;
                 font-size: 14px;
@@ -215,7 +197,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 -ms-flex-direction: row;
                 flex-direction: row;
             }
-
             .info .item .row {
                 -webkit-box-orient: vertical;
                 -webkit-box-direction: normal;
@@ -228,7 +209,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 -ms-flex-wrap: nowrap;
                 flex-wrap: nowrap;
             }
-
             .info .item .row.action {
                 color: #4285F4;
                 -webkit-box-flex: 0;
@@ -243,37 +223,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 -ms-flex-align: end;
                 align-items: flex-end;
             }
-
             .info .item .row.action a {
                 text-decoration: none;
             }
-
             .info .item .title {
                 margin-bottom: 2px;
                 color: rgba(0, 0, 0, .35);
             }
-
             .info .item .text {
                 color: rgba(0, 0, 0, .85);
                 margin-bottom: 4px;
                 font-size: 15px;
             }
-
             .info .divider {
                 border-bottom: 1px solid rgba(0, 0, 0, 0.12);
                 margin: 16px 0;
             }
-
             .info .item .subtext {
                 color: rgba(0, 0, 0, .7);
                 font-weight: 400;
             }
-
             .mobile {
                 display: none;
             }
-
             @media screen and (max-width: 960px) {
+                .card {
+                    border-radius: 0;
+                }
                 paper-icon-button {
                     display: none;
                 }
@@ -299,27 +275,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     -webkit-box-sizing: border-box;
                     box-sizing: border-box;
                 }
-
                 .event .info {
                     margin: 0;
                     min-width: 0;
                 }
-
                 .event .info .card {
                     padding: 0 0 24px 0;
                 }
-
                 .info .item {
                     padding: 16px 24px;
                 }
-
                 .info .divider {
                     margin: 0;
                 }
-
                 .info .card .button {
                     margin: 0 24px;
-
                 }
             }
         </style>
@@ -390,7 +360,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script>
         class GdgEventsDetails extends Polymer.GestureEventListeners(Polymer.Element) {
             static get is() { return 'gdg-events-details'; }
-
             loadData(page) {
                 this.$.cover_pic.style.backgroundImage = '';
                 this.set('data', false);
@@ -423,11 +392,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     }
                 })
             }
-
             _snakeCase(tag) {
                 return tag.replace(/\s+/g, '_').toLowerCase();
             }
-
             _parseTime(time) {
                 if (time) {
                     return new Date(time).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
@@ -436,7 +403,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     return ""
                 }
             }
-
             _parseDate(date) {
                 if (date) {
                     return new Date(date).toLocaleString("en-us", { day: "numeric", month: "short", year: "numeric" });
@@ -446,7 +412,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
             }
         }
-
         window.customElements.define(GdgEventsDetails.is, GdgEventsDetails);
     </script>
 </dom-module>

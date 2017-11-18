@@ -18,11 +18,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             :host {
                 display: block;
             }
-
             .container {
                 padding: 24px;
             }
-
             .header {
                 height: 300px;
                 width: 100%;
@@ -42,25 +40,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 -ms-flex-direction: column;
                 flex-direction: column;
             }
-
             .header h2 {
                 font-weight: 400;
                 margin: 8px auto;
                 font-size: 26px;
             }
-
             .header p {
                 font-weight: 300;
                 margin: 0 auto;
                 font-size: 16px;
             }
-
             .subheader {
                 background: white;
                 -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
                 box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12)
             }
-
             .subheader .filter-container {
                 display: -webkit-box;
                 display: -ms-flexbox;
@@ -72,7 +66,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 align-items: center;
                 font-size: 14px;
             }
-
             .subheader .search input {
                 width: 100%;
                 outline: none;
@@ -84,19 +77,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
             }
-
             .subheader .filter p {
                 color: #9fb1c1;
                 margin-top: 0;
                 margin-bottom: 8px;
             }
-
-            .filter-container .chip,
+            .filter-container .filter-chip,
             .events .card .chip {
                 text-transform: capitalize;
                 border-radius: 100px;
                 border: 1px solid rgba(0, 0, 0, .4);
-                color: rgba(0, 0, 0, .8);
                 margin: 2px 6px 4px 0;
                 padding: 4px 18px;
                 font-size: 14px;
@@ -111,19 +101,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 user-select: none;
                 -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
             }
-
             .filter-container .chip:hover {
                 border: 1px solid rgb(152, 193, 252);
                 background-color: rgb(152, 193, 252);
                 color: white;
             }
-
             .filter-container .chip.true {
                 border: 1px solid #4285F4;
                 background-color: #4285F4;
                 color: white;
             }
-
             .loading {
                 width: 100%;
                 display: -webkit-box;
@@ -134,7 +121,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 justify-content: center;
                 margin-top: 24px;
             }
-
             .events .card .chip {
                 display: inline-block;
                 margin-left: 0;
@@ -142,12 +128,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 font-size: 13px;
                 padding: 1px 18px;
             }
-
             .events {
                 padding-bottom: 32px;
                 margin-top: 2px;
             }
-
             .events .container h2 {
                 color: rgba(0, 0, 0, .4);
                 font-weight: 400;
@@ -155,39 +139,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-top: 36px;
                 max-width: 720px;
             }
-
             .events .container .card {
+                overflow: hidden;
+                border-radius: 8px;
                 display: block;
                 text-decoration: none;
                 cursor: pointer;
-                padding: 22px;
                 max-width: 720px;
-                background: white;
-                -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
-                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 2px 1px -1px rgba(0, 0, 0, .12);
+                box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
             }
-
-            .events .container .card:hover {
+            .events .container .card a {
+                display: block;
+                padding: 22px;
+                text-decoration: none;
+                background: white;
+                border-bottom: 1px solid #f1f1f1;
+            }
+            .events .container .card a:last-child {
+                border-bottom: none;
+            }
+            .events .container .card a:hover {
                 background: #fafafa;
             }
-
-            .events .container .card.error {
-                cursor: default;
-            }
-
             .events .container .card h3 {
                 color: rgba(0, 0, 0, .95);
                 font-weight: 400;
                 margin: 0 0 4px 0;
             }
-
             .events .container .card h4 {
                 margin: 0;
                 font-size: 14px;
                 font-weight: 400;
                 color: rgba(0, 0, 0, .6);
             }
-
             .events .container .card p {
                 max-width: 600px;
                 font-size: 14px;
@@ -195,7 +179,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 margin-bottom: 0;
                 line-height: 24px;
             }
-
             @media screen and (max-width: 960px) {
                 .events .container {
                     padding: 0px !important;
@@ -203,16 +186,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 .subheader .container {
                     padding: 16px 24px 8px 24px;
                 }
-
                 .filter {
                     width: 100%;
                     overflow-x: hidden;
                 }
-
                 .subheader .filter p {
                     margin-bottom: 0;
                 }
-
                 .subheader .filter-container {
                     white-space: nowrap;
                     -ms-flex-wrap: nowrap;
@@ -220,11 +200,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     overflow-x: auto;
                     padding: 8px 0;
                 }
-
                 .subheader .filter-container::-webkit-scrollbar {
                     display: none;
                 }
-
                 .events {
                     min-height: 300px;
                     padding-bottom: 0;
@@ -233,7 +211,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     padding: 16px 0 0 0;
                 }
                 .events .container .card {
-                    margin: 0 auto;
+                    margin: 0 12px;
                     -webkit-tap-highlight-color: rgba(0, 0, 0, .05);
                 }
                 .events .container h2 {
@@ -264,7 +242,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <p>FILTER:</p>
                     <div class="filter-container">
                         <template is="dom-repeat" items="{{filterType}}">
-                            <div class$="chip {{item.toggle}}" on-tap="toggleFilter" something$="{{item.toggle}}">
+                            <div class$="filter-chip {{item.toggle}}" id$="[[_snakeCase(item.name)]]" on-tap="toggleFilter" something$="{{item.toggle}}">
                                 [[item.name]]
                             </div>
                         </template>
@@ -282,33 +260,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <template is="dom-if" if="[[!dataLoading]]">
                     <template is="dom-if" if="[[upcomingEvents]]">
                         <h2>Upcoming Events</h2>
-                        <template is="dom-repeat" items="[[upcomingEvents]]">
-                            <a href$="/events/[[item.id]]" class="card">
-                                <div class="info">
-                                    <h3>[[item.title]]</h3>
-                                    <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
-                                    <div class="chip-container">
-                                        <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                        <div class="card">
+                            <template is="dom-repeat" items="[[upcomingEvents]]">
+                                <a href$="/events/[[item.id]]">
+                                    <div class="info">
+                                        <h3>[[item.title]]</h3>
+                                        <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
+                                        <div class="chip-container">
+                                            <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                                        </div>
+                                        <p>[[_parseDescription(item.short_description)]]</p>
                                     </div>
-                                    <p>[[_parseDescription(item.short_description)]]</p>
-                                </div>
-                            </a>
-                        </template>
+                                </a>
+                            </template>
+                        </div>
                     </template>
                     <template is="dom-if" if="[[pastEvents]]">
                         <h2>Past Events</h2>
-                        <template is="dom-repeat" items="[[pastEvents]]">
-                            <a href$="/events/[[item.id]]" class="card">
-                                <div class="info">
-                                    <h3>[[item.title]]</h3>
-                                    <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
-                                    <div class="chip-container">
-                                        <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                        <div class="card">
+                            <template is="dom-repeat" items="[[pastEvents]]">
+                                <a href$="/events/[[item.id]]">
+                                    <div class="info">
+                                        <h3>[[item.title]]</h3>
+                                        <h4>[[_parseDateTime(item.start_time)]] &middot; [[item.venue_name]]</h4>
+                                        <div class="chip-container">
+                                            <div class="chip" id$="[[_snakeCase(item.tag)]]">[[item.tag]]</div>
+                                        </div>
+                                        <p>[[_parseDescription(item.short_description)]]</p>
                                     </div>
-                                    <p>[[_parseDescription(item.short_description)]]</p>
-                                </div>
-                            </a>
-                        </template>
+                                </a>
+                            </template>
+                        </div>
                     </template>
                 </template>
             </div>
@@ -318,7 +300,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script>
         class GdgEventsHome extends Polymer.GestureEventListeners(Polymer.Element) {
             static get is() { return 'gdg-events-home'; }
-
             static get properties() {
                 return {
                     dataLoading: {
@@ -333,19 +314,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     }
                 }
             }
-
             _snakeCase(tag) {
                 return tag.replace(/\s+/g, '_').toLowerCase();
             }
-
             _parseDescription(description) {
                 return description;
             }
-
             _parseDateTime(datetime) {
                 return new Date(datetime).toLocaleString("en-us", { hour: "numeric", minute: "numeric", day: "numeric", month: "short", year: "numeric" });
             }
-
             _getParameterByName(name, url) {
                 if (!url) url = window.location.href;
                 name = name.replace(/[\[\]]/g, "\\$&");
@@ -355,7 +332,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (!results[2]) return '';
                 return decodeURIComponent(results[2].replace(/\+/g, " "));
             }
-
             toggleFilter(event) {
                 this.set('filterType.' + event.model.index + '.toggle', !event.model.item.toggle);
                 this.filterType.forEach((item, index) => {
@@ -363,7 +339,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         this.set('filterType.' + index + '.toggle', false);
                     }
                 })
-
                 if (event.model.item.toggle) {
                     var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?type=' + event.model.item.name.replace(/ /g, "_").toUpperCase();
                 }
@@ -371,10 +346,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname;
                 }
                 window.history.pushState({ path: newurl }, '', newurl);
-
                 this.getEventData();
             }
-
             getEventData() {
                 var timestamp = new Date();
                 var selectedFilter = true;
@@ -401,7 +374,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         .where("visibility", "==", "public")
                         .orderBy("start_time", "desc")
                 }
-
                 upcomingEventsRef.get().then((querySnapshot) => {
                     this.set('upcomingEvents', []);
                     querySnapshot.forEach((doc) => {
@@ -412,7 +384,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         this.set('upcomingEvents', null);
                     }
                 });
-
                 pastEventsRef.get().then((querySnapshot) => {
                     this.set('pastEvents', []);
                     querySnapshot.forEach((doc) => {
@@ -424,13 +395,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     }
                 });
             }
-
             checkData() {
                 if (this.get('pastEvents') !== undefined && this.get('upcomingEvents') !== undefined && this.get('dataLoading') == true) {
                     this.set('dataLoading', false);
                 }
             }
-
             loadData() {
                 this.set('filterType', [{
                     'name': 'codelabs',
@@ -451,9 +420,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     'name': 'workshop',
                     'toggle': false
                 }])
-
                 this.db = firebase.firestore();
-
                 if (this._getParameterByName('type')) {
                     this.filterType.forEach(filter => {
                         if (filter.name == this._getParameterByName('type').replace(/_/g, " ").toLowerCase()) {
@@ -461,11 +428,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         }
                     })
                 }
-
                 this.getEventData();
             }
         }
-
         window.customElements.define(GdgEventsHome.is, GdgEventsHome);
     </script>
 </dom-module>

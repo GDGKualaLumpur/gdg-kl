@@ -20,7 +20,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         min-height: calc(100vh - 120px);
         display: block;
-        background: #fafafa;
         border-bottom: 1px solid #cfcfcf;
       }
     </style>
@@ -39,7 +38,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     class GdgEvents extends Polymer.LegacyElementMixin(Polymer.Element) {
       static get is() { return 'gdg-events'; }
-
       static get observers() {
         return [
           '_routePageChanged(routeData.page)'
@@ -54,7 +52,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }
         };
       }
-
       _routePageChanged(page) {
         if (page === undefined || page.length <= 0) {
           this.page = 'home';
@@ -64,7 +61,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           this.page = 'details'
         }
       }
-
       _loadEventComponents(page, oldPage) {
         var resolvedPageUrl = this.resolveUrl('gdg-events-' + page + '.html');
         Polymer.importHref(
@@ -79,11 +75,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           function (error) { console.log(error) },
           true);
       }
-
       showToast() {
         console.log('?')
       }
-
       _pageChanged(page, oldPage) {
         if (!this.firestore_persistence) {
           this.firestore_persistence = firebase.firestore().enablePersistence()
@@ -103,7 +97,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       }
     }
-
     window.customElements.define(GdgEvents.is, GdgEvents);
   </script>
 </dom-module>

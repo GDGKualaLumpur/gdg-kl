@@ -9,11 +9,11 @@
         display: block;
         width: 100%;
       }
-
       .card {
+        height: 100%;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-        border-radius: 2px;
+        border-radius: 8px;
         padding: 24px 32px;
         -webkit-transition: 150ms -webkit-box-shadow ease-in-out;
         transition: 150ms -webkit-box-shadow ease-in-out;
@@ -21,32 +21,27 @@
         transition: 150ms box-shadow ease-in-out;
         transition: 150ms box-shadow ease-in-out, 150ms -webkit-box-shadow ease-in-out;
       }
-
       .card:hover {
         -webkit-box-shadow: 0 3px 3px -2px rgba(0, 0, 0, .2), 0 3px 4px 0 rgba(0, 0, 0, .14), 0 1px 8px 0 rgba(0, 0, 0, .12);
         box-shadow: 0 3px 3px -2px rgba(0, 0, 0, .2), 0 3px 4px 0 rgba(0, 0, 0, .14), 0 1px 8px 0 rgba(0, 0, 0, .12);
       }
-
       .image {
         height: 420px;
         width: 100%;
-        margin-bottom: 12px;
       }
-
       .text {
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         margin: 24px 0;
       }
-
       .title {
+        font-family: "Product Sans", "Roboto", sans-serif;
         color: #424242;
         font-size: 24px;
         margin: 12px 0;
         width: 90%;
         max-width: 720px;
       }
-
       .subtitle {
         color: #757575;
         font-size: 16px;
@@ -54,7 +49,6 @@
         width: 80%;
         max-width: 720px;
       }
-
       @media screen and (max-width: 960px) {
         .image {
           height: 220px;
@@ -62,22 +56,18 @@
         .card {
           padding: 0 0 8px 0;
         }
-
         .card:hover {
           -webkit-box-shadow: none;
           box-shadow: none;
         }
-
         .text {
           padding: 0 16px;
-          margin: 24px 0 8px 0;
+          margin: 8px 0;
         }
-
         .title {
           width: 100%;
           font-size: 20px;
         }
-
         .subtitle {
           width: 90%;
           font-size: 15px;
@@ -99,7 +89,6 @@
   <script>
     class GdgCard extends Polymer.Element {
       static get is() { return 'gdg-card'; }
-
       static get properties() {
         return {
           header: String,
@@ -110,7 +99,6 @@
         }
       }
     }
-
     window.customElements.define(GdgCard.is, GdgCard);
   </script>
 </dom-module>

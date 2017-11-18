@@ -22,11 +22,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!--
       The `<base>` tag below is present to support two advanced deployment options:
       1) Differential serving. 2) Serving from a non-root path.
-
       Instead of manually editing the `<base>` tag yourself, you should generally either:
       a) Add a `basePath` property to the build configuration in your `polymer.json`.
       b) Use the `--base-path` command-line option for `polymer build`.
-
       Note: If you intend to serve from a non-root path, see [polymer-root-path] below.
     -->
   <base href="/">
@@ -82,22 +80,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <meta name="twitter:image" content="https://www.gdgkl.org/images/gdgkl.jpg">
 
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
-    <link rel="dns-prefetch" href="https://apis.google.com">
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+  <link rel="dns-prefetch" href="https://apis.google.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link rel="preload" as="image" href="images/gdgkl_full.svg">
   <link rel="preload" as="image" href="images/gdgkl_short.svg">
-
-  <!-- Global Site Tag (gtag.js) - Google Analytics -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-76843776-6" async></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments)};
-      gtag('js', new Date());
-
-      gtag('config', 'UA-76843776-6');
-    </script> -->
 
   <style>
     body {
@@ -107,13 +95,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       min-height: 100vh;
       background-color: #ffffff;
     }
-
     gdg-app[unresolved] {
       display: block;
       min-height: 101vh;
       overflow: visible;
     }
-
     gdg-app[unresolved] .toolbar {
       height: 195px;
       width: 100%;
@@ -123,18 +109,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       padding-top: 52px;
       box-sizing: border-box;
     }
-
     gdg-app[unresolved] .toolbar img {
       height: 42px;
     }
-
     @media screen and (max-width: 960px) {
       gdg-app[unresolved] .toolbar {
         height: 65px;
         align-items: center;
         padding-top: 0;
       }
-
       gdg-app[unresolved] .toolbar img {
         height: 24px;
       }
@@ -145,7 +128,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body>
   <gdg-app unresolved>
     <div class="toolbar">
-      <img src="images/gdgkl_full.svg">
+      <img src="images/gdgkl_full.svg" alt="GDGKL Logo">
     </div>
   </gdg-app>
 
